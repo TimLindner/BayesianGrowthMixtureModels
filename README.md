@@ -1,2 +1,3 @@
 # Bayesian growth mixture models
-HI :sunglasses:
+Hi :sunglasses:\
+My name is Tim, and this repository 
