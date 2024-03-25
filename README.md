@@ -1,2 +1,2 @@
 # Introduction
-Hi :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models ( or GMMs for short ), which I developed in coorporation with Dr. Nalan Basturk as a research assistant in econometrics at Maastricht University.
+Hi :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models ( or GMMs for short ). The work has been developed in coorporation with Dr. Nalan Basturk, in my position as a research assistant econometrics at Maastricht University.
