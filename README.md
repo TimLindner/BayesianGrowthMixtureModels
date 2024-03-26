@@ -8,7 +8,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 ### Repository structure
 Work in progress
 
-### Software references
+### References
 Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package].
 
 
