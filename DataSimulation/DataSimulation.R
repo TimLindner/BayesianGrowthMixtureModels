@@ -19,14 +19,45 @@ library(openxlsx)
 library(readxl)
 
 
-# model 1 two classes ####
+# model 1 general ####
 # number of individuals
 N <- 30
 
-# number of periods
+# time periods
 p <- 0:9
+
+# number of time periods
 number_of_periods <- length(p)
 
+
+# model 1 baseline ####
+# constant
+beta_0 <- -2
+
+# linear trend
+beta_1 <- -0.5
+
+# standard deviation for Normal distributions
+sigma <- 1
+
+# simulated dependent variable
+Y_sim <- matrix(data = 0, nrow = N, ncol = number_of_periods)
+for (n in 1:N) {
+  for (t in 1:number_of_periods) {
+    mu <- beta_0 + beta_1 * p[t]  # means for Normal distributions
+    Y_sim[n,t] <- rnorm(n = 1, mean = mu, sd = sigma)
+  }
+}
+
+# save simulated dependent variable
+write.xlsx(Y_sim, "Model1_Baseline_Y.xlsx")
+
+# load simulated dependent variable
+Y_sim <- read_excel("DataSimulation/Model1_TwoClasses_Y.xlsx",
+                    sheet = "Sheet 1")
+
+
+# model 1 two classes ####
 # number of latent classes
 C <- 2
 
@@ -61,7 +92,7 @@ for (n in 1:N) {
 }
 
 # save simulated dependent variable
-write.xlsx(R_act, "Model1_TwoClasses_Y.xlsx")
+write.xlsx(Y_sim, "Model1_TwoClasses_Y.xlsx")
 
 # load simulated dependent variable
 Y_sim <- read_excel("DataSimulation/Model1_TwoClasses_Y.xlsx",
