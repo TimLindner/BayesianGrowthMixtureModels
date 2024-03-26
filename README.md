@@ -9,6 +9,6 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 Work in progress
 
 ### Software references
-Stan Development Team (2024): *rstan: R interface to Stan*, R package version 2.32.6.
+Stan Development Team. (2024). *rstan: R interface to Stan* (version 2.32.6) [R package].
 
 
