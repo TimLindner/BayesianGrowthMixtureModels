@@ -1,6 +1,7 @@
-### Introduction
-Hi there :sunglasses: This repository contains my work on Bayesian growth mixture models ( or GMMs for short ) and their application to terrorism data. The work has been developed in coorporation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.\
-\
+# Introduction
+Hi there :sunglasses: This repository contains my work on Bayesian growth mixture models ( or GMMs for short ) and their application to terrorism data. The work has been developed in coorporation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
+
+# Work developed
 Please note that the repository is work in progress.
 
 
