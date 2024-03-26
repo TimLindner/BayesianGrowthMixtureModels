@@ -9,5 +9,5 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 Work in progress
 
 ### Software references
-
+Stan Development Team (): *R Interface to Stan*, R package version 2.26.22.
 
