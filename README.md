@@ -11,6 +11,15 @@ Work in progress
 ### References
 * Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package].
 
+{{- $p := .Page -}}
+{{- range (split .Inner "\n") -}}
+  {{- if gt (len .) 0 }}
+  <p class="p2">
+    {{ . | $p.RenderString }}
+  </p>
+  {{- end }}
+{{- end -}}
+
 {{< biblio-ref >}}
 Hugo, Victor. *The Hunchback of Notre-Dame*. Unknown publisher, 1831.
 Hugo, Victor. *Les Misérables*. Unknown publisher, 1862.
