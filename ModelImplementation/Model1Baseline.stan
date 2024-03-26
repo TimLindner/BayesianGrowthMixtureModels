@@ -6,13 +6,13 @@ data {
   // number of individuals
   int N;
   
-  // number of periods
+  // number of time periods
   int T;
   
   // observed dependent variable ( simulated or actual data )
   matrix[N,T] Y_obs;
   
-  // periods
+  // time periods
   row_vector[T] p;
   
 }
