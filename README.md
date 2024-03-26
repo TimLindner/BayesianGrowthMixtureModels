@@ -11,3 +11,4 @@ Work in progress
 ### Software references
 Stan Development Team (2024): *rstan: R interface to Stan*, R package version 2.32.6.
 
+
