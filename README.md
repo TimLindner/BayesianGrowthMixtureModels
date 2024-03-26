@@ -3,7 +3,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 
 ## Work developed
 * The models have been implemented and estimated using the Stan probabilistic programming language and its built-in No-U-Turn Sampler ( or NUTS for short ).
-Work in progress
+* Work in progress
 
 ## Repository structure
 Work in progress
