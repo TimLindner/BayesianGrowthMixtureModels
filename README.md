@@ -11,4 +11,9 @@ Work in progress
 ### References
 * Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package].
 
-
+{{< biblio-ref >}}
+Hugo, Victor. *The Hunchback of Notre-Dame*. Unknown publisher, 1831.
+Hugo, Victor. *Les Misérables*. Unknown publisher, 1862.
+Hugo, Victor. *Les Travailleurs de la Mer*. Unknown publisher, 1866.
+Hugo, Victor. *Quatre-vingt-treize*. Unknown publisher, 1874.
+{{< /biblio-ref >}}
