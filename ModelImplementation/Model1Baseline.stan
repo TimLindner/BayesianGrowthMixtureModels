@@ -1,6 +1,3 @@
-// baseline ( i.e., one class )
-
-
 data {
   
   // number of individuals
@@ -13,7 +10,24 @@ data {
   matrix[N,T] Y_obs;
   
   // time periods
-  row_vector[T] p;
+  matrix[N,T] X;
+  
+}
+
+
+transformed data {
+  
+  // size of Y_obs
+  int Y_obs_size;
+  Y_obs_size = size(Y_obs);
+  
+  // transform Y_obs to column vector in column-major order
+  vector[Y_obs_size] y_obs_vec;
+  y_obs_vec = to_vector(Y_obs);
+  
+  // transform X to column vector in column-major order
+  vector[Y_obs_size] x_vec;
+  x_vec = to_vector(X);
   
 }
 
@@ -35,8 +49,8 @@ parameters {
 transformed parameters {
   
   // means for Normal distributions
-  row_vector[T] mu;
-  mu = beta_0 + beta_1 * p;
+  vector[Y_obs_size] mu;
+  mu = beta_0 + beta_1 * x_vec;
   
 }
 
@@ -53,11 +67,7 @@ model {
   sigma ~ normal(0,1);
   
   // likelihood function
-  for (n in 1:N) {
-    for (t in 1:T) {
-      Y_obs[n,t] ~ normal(mu[t],sigma);
-    }
-  }
+  y_obs_vec ~ normal(mu,sigma);
   
 }
 
@@ -65,14 +75,10 @@ model {
 generated quantities {
   
   // predicted dependent variable
-  matrix[N,T] Y_pred;
+  array[Y_obs_size] real y_pred;
   
-  // simulations
-  for (n in 1:N) {
-    for (t in 1:T) {
-      Y_sim[n,t] = normal_rng(mu[t],sigma);
-    }
-  }
+  // prediction
+  y_pred = normal_rng(mu,sigma);
   
 }
 
