@@ -10,7 +10,7 @@ data {
   matrix[N,T] Y_obs;
   
   // time periods
-  matrix[N,T] X;
+  matrix[N,T] x_vec;
   
 }
 
