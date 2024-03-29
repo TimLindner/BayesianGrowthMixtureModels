@@ -23,7 +23,7 @@ parameters {
   // linear trend
   real beta_1;
   
-  // standard deviation for Normal distributions
+  // standard deviation for Normal pdfs
   real<lower=0> sigma;
   
 }
@@ -31,7 +31,7 @@ parameters {
 
 transformed parameters {
   
-  // means for Normal distributions
+  // means for Normal pdfs
   array[T] vector[N] M;
   for (t in 1:T) {
     M[t] = beta_0 + beta_1 * X[t];
@@ -42,16 +42,16 @@ transformed parameters {
 
 model {
   
-  // prior distribution for beta_0
+  // prior for beta_0
   beta_0 ~ normal(0,5);
   
-  // prior distribution for beta_1
+  // prior for beta_1
   beta_1 ~ normal(0,1);
   
-  // prior distribution for sigma
+  // prior for sigma
   sigma ~ normal(0,1);
   
-  // likelihood function
+  // likelihood
   for (t in 1:T) {
     Y_obs[t] ~ normal(M[t],sigma);
   }
