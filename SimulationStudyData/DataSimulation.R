@@ -3,7 +3,7 @@
 
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance/DataSimulation")
+setwd("C:/Users/Diiim/Documents/ResearchAssistance/SimulationStudyData")
 
 # clean workspace
 rm(list = ls())
@@ -48,7 +48,7 @@ for (t in 1:no_periods) {
 sigma_sim <- 0.75
 
 # simulated dependent variable
-Y_sim <- matrix(data = 0, nrow = N, ncol = no_perios)
+Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (t in 1:no_periods) {
   Y_sim[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim)
 }
@@ -57,8 +57,8 @@ for (t in 1:no_periods) {
 write.xlsx(data.frame(Y_sim), "Model1Baseline_Ysim.xlsx")
 
 # load Y_sim
-Y_sim <- read_excel("Model1Baseline_Ysim.xlsx",
-                    sheet = "Sheet 1")
+Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
+                               sheet = "Sheet 1"))
 
 
 # model 1 two classes ####
@@ -66,15 +66,15 @@ Y_sim <- read_excel("Model1Baseline_Ysim.xlsx",
 C <- 2
 
 # constants
-beta_0 <- c(-5,5)
+beta_0_sim <- c(-5,5)
 
 # linear trends
-beta_1 <- c(-0.5,0.5)
+beta_1_sim <- c(-0.5,0.5)
 
 # means for Normal distributions step 1
 M_sim_mtx <- matrix(data = 0, nrow = N, ncol = C)
 M_sim <- list()
-for (t in 1:T) {
+for (t in 1:no_periods) {
   M_sim[[t]] <- M_sim_mtx
 }
 
@@ -112,7 +112,7 @@ for (t in 1:no_periods) {
 write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
 
 # load Y_sim
-Y_sim <- read_excel("Model1TwoClasses_Ysim.xlsx",
-                    sheet = "Sheet 1")
+Y_sim <- data.frame(read_excel("Model1TwoClasses_Ysim.xlsx",
+                               sheet = "Sheet 1"))
 
 
