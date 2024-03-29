@@ -51,6 +51,10 @@ m1_mult <- stan_model("Model1MultipleClasses.stan")
 # number of latent classes
 C <- 2
 
+# alpha parameter for Dirichlet distributions,
+# which serve as prior distributions for mixture proportions
+alpha <- rep(3, times = C)
+
 job::job({
   
   fit_m1_mult <- sampling(m1_mult,
@@ -58,7 +62,8 @@ job::job({
                                       T = no_periods,
                                       Y_obs = Y_sim,
                                       X = X,
-                                      C = C),
+                                      C = C,
+                                      alpha = alpha),
                           chains = 4,  # default
                           iter = 2000,  # default
                           warmup = floor(iter/2),  # default
