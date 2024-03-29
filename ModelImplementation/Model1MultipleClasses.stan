@@ -15,7 +15,7 @@ data {
   // number of latent classes
   int C;
   
-  // alpha parameter for Dirichlet distributions,
+  // alpha parameter for Dirichlet pdfs,
   // which serve as prior distributions for mixture proportions
   vector[C] alpha;
   
@@ -31,7 +31,7 @@ parameters {
   // linear trends
   row_vector[C] beta_1;
   
-  // standard deviations for Normal distributions
+  // standard deviations for Normal pdfs
   row_vector<lower=0>[C] sigma;
   
   // mixture proportions
@@ -42,7 +42,7 @@ parameters {
 
 transformed parameters {
   
-  // means for Normal distributions
+  // means for Normal pdfs
   array[T,C] vector[N] M;
   for (t in 1:T) {
     for (c in 1:C) {
@@ -70,19 +70,19 @@ transformed parameters {
 
 model {
   
-  // prior distributions for beta_0
+  // prior for beta_0
   beta_0 ~ normal(0,5);
   
-  // prior distributions for beta_1
+  // prior for beta_1
   beta_1 ~ normal(0,1);
   
-  // prior distributions for sigma
+  // prior for sigma
   sigma ~ normal(0,1);
   
-  // prior distributions for Pi
+  // prior for Pi
   Pi ~ dirichlet(alpha);
   
-  // likelihood function step 1
+  // likelihood step 1
   array[T] matrix[N,C] lp;  // log posterior
   for (t in 1:T) {
     for (c in 1:C) {
@@ -90,7 +90,7 @@ model {
     }
   }
   
-  // likelihood function step 2
+  // likelihood step 2
   for (t in 1:T) {
     for (n in 1:N) {
       target += log_sum_exp(lp[t,n]);
