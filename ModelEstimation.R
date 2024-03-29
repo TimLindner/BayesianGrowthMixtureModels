@@ -51,7 +51,7 @@ m1_mult <- stan_model("Model1MultipleClasses.stan")
 # number of latent classes
 C <- 2
 
-# alpha parameter for Dirichlet distributions,
+# alpha parameter for Dirichlet pdfs,
 # which serve as prior distributions for mixture proportions
 alpha <- rep(3, times = C)
 
