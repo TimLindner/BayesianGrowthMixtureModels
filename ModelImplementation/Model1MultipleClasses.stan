@@ -7,30 +7,35 @@ data {
   int T;
   
   // observed dependent variable ( simulated or actual data )
-  matrix[N,T] Y_obs;
+  array[T] vector[N] Y_obs;
   
   // time periods
-  row_vector[T] p;
+  array[T] vector[N] X;
   
   // number of latent classes
   int C;
   
+  // alpha parameter for Dirichlet distributions,
+  // which serve as prior distributions for mixture proportions
+  vector[C] alpha;
+  
 }
+
 
 
 parameters {
   
   // constants
-  vector[C] beta_0;
+  row_vector[C] beta_0;
   
   // linear trends
-  vector[C] beta_1;
+  row_vector[C] beta_1;
   
   // standard deviations for Normal distributions
-  vector<lower=0>[C] sigma;
+  row_vector<lower=0>[C] sigma;
   
   // mixture proportions
-  matrix<lower=0,upper=1>[N,C] Pi;
+  array[N] simplex[C] Pi;
   
 }
 
@@ -38,18 +43,27 @@ parameters {
 transformed parameters {
   
   // means for Normal distributions
-  matrix[C,T] MU;
-  for (c in 1:C) {
-    MU[c] = beta_0[c] + beta_1[c] * p;
-  }
-  
-  // log transformation for phi
-  matrix[N,C] log_Pi;
-  for (n in 1:N) {
+  array[T,C] vector[N] M;
+  for (t in 1:T) {
     for (c in 1:C) {
-     log_Pi[n,c] = log(Pi[n,c]); 
+      M[t,c] = beta_0[c] + beta_1[c] * X[t];
     }
   }
+  
+  // transpose Pi
+  array[C] vector[N] Pi_transp;
+  for (c in 1:C) {
+    for (n in 1:N) {
+      Pi_transp[c,n] = Pi[n,c];
+    }
+  }
+  
+  // log transform Pi_transp
+  array[C] vector[N] Pi_log;
+  for (c in 1:C) {
+    Pi_log[c] = log(Pi_transp[c]);
+  }
+  
   
 }
 
@@ -57,7 +71,7 @@ transformed parameters {
 model {
   
   // prior distributions for beta_0
-  beta_0 ~ normal(0,1);
+  beta_0 ~ normal(0,5);
   
   // prior distributions for beta_1
   beta_1 ~ normal(0,1);
@@ -66,22 +80,20 @@ model {
   sigma ~ normal(0,1);
   
   // prior distributions for Pi
-  for (n in 1:N) {
-    Pi[n,1] ~ uniform(0,1);
-    for (c in 2:C) {
-      Pi[n,c] ~ uniform(0,Pi[n,c-1]);
+  Pi ~ dirichlet(alpha);
+  
+  // likelihood function step 1
+  array[T] matrix[N,C] lp;  // log posterior
+  for (t in 1:T) {
+    for (c in 1:C) {
+      lp[t,,c] = Pi_log[c] + normal_lpdf(Y_obs[t] | M[t,c], sigma[c]);
     }
   }
   
-  // likelihood function
-  row_vector[C] lp;
-  for (n in 1:N) {
-    for (t in 1:T) {
-      lp = log_Pi[n];
-      for (c in 1:C) {
-        lp[c] += normal_lpdf(Y_obs[n,t] | MU[c,t], sigma[c]);
-      }
-      target += log_sum_exp(lp);
+  // likelihood function step 2
+  for (t in 1:T) {
+    for (n in 1:N) {
+      target += log_sum_exp(lp[t,n]);
     }
   }
   
@@ -90,15 +102,17 @@ model {
 
 generated quantities {
   
-  // predicted dependent variable
-  matrix[N,T] Y_pred;
+  // temp variables
+  array[N] real temp_arr;
+  vector[N] temp_vec;
   
-  // simulations
-  for (n in 1:N) {
-    for (t in 1:T) {
-      for (c in 1:C) {
-        Y_pred[n,t] += Pi[n,c] * normal_rng(MU[c,t], sigma[c]);
-      }
+  // predicted dependent variable
+  array[T] vector[N] Y_pred;
+  for (t in 1:T) {
+    for (c in 1:C) {
+      temp_arr = normal_rng(M[t,c],sigma[c]);
+      temp_vec = to_vector(temp_arr);  // transform temp_arr to column vector
+      Y_pred[t] += Pi_transp[c] + temp_vec;
     }
   }
   
