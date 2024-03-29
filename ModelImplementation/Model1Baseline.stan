@@ -7,27 +7,10 @@ data {
   int T;
   
   // observed dependent variable ( simulated or actual data )
-  matrix[N,T] Y_obs;
+  array[T] vector[N] Y_obs;
   
   // time periods
-  matrix[N,T] x_vec;
-  
-}
-
-
-transformed data {
-  
-  // size of Y_obs
-  int Y_obs_size;
-  Y_obs_size = size(Y_obs);
-  
-  // transform Y_obs to column vector in column-major order
-  vector[Y_obs_size] y_obs_vec;
-  y_obs_vec = to_vector(Y_obs);
-  
-  // transform X to column vector in column-major order
-  vector[Y_obs_size] x_vec;
-  x_vec = to_vector(X);
+  array[T] vector[N] X;
   
 }
 
@@ -49,8 +32,10 @@ parameters {
 transformed parameters {
   
   // means for Normal distributions
-  vector[Y_obs_size] mu;
-  mu = beta_0 + beta_1 * x_vec;
+  array[T] vector[N] M;
+  for (t in 1:T) {
+    M[t] = beta_0 + beta_1 * X[t];
+  }
   
 }
 
@@ -58,7 +43,7 @@ transformed parameters {
 model {
   
   // prior distribution for beta_0
-  beta_0 ~ normal(0,1);
+  beta_0 ~ normal(0,5);
   
   // prior distribution for beta_1
   beta_1 ~ normal(0,1);
@@ -67,7 +52,9 @@ model {
   sigma ~ normal(0,1);
   
   // likelihood function
-  y_obs_vec ~ normal(mu,sigma);
+  for (t in 1:T) {
+    Y_obs[t] ~ normal(M[t],sigma);
+  }
   
 }
 
@@ -75,10 +62,10 @@ model {
 generated quantities {
   
   // predicted dependent variable
-  array[Y_obs_size] real y_pred;
-  
-  // prediction
-  y_pred = normal_rng(mu,sigma);
+  array[N,T] real Y_pred;
+  for (t in 1:T) {
+    Y_pred[,t] = normal_rng(M[t], sigma);
+  }
   
 }
 
