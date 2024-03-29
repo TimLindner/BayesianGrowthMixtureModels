@@ -23,37 +23,44 @@ library(readxl)
 # number of individuals
 N <- 30
 
-# time periods
-p <- 0:9
-
 # number of time periods
-number_of_periods <- length(p)
+no_periods <- 10
+
+# time periods
+time_periods <- 0:(no_periods - 1)
+X <- matrix(time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# transform X to vector in column-major order
+x_vec <- c(X)
 
 
 # model 1 baseline ####
 # constant
-beta_0 <- -2
+beta_0_sim <- 2
 
 # linear trend
-beta_1 <- -0.5
+beta_1_sim <- 1
+
+# means for Normal distributions
+mu_sim <- beta_0_sim + beta_1_sim * x_vec
+
+# size of mu_sim
+mu_sim_size <- length(mu_sim)
 
 # standard deviation for Normal distributions
-sigma <- 1
+sigma_sim <- 0.5
 
 # simulated dependent variable
-Y_sim <- matrix(data = 0, nrow = N, ncol = number_of_periods)
-for (n in 1:N) {
-  for (t in 1:number_of_periods) {
-    mu <- beta_0 + beta_1 * p[t]  # means for Normal distributions
-    Y_sim[n,t] <- rnorm(n = 1, mean = mu, sd = sigma)
-  }
-}
+y_sim <- rnorm(n = mu_sim_size, mean = mu_sim, sd = sigma_sim)
 
-# save simulated dependent variable
-write.xlsx(Y_sim, "Model1_Baseline_Y.xlsx")
+# transform y_sim to matrix in column-major order
+Y_sim <- matrix(y_sim, nrow = N)
 
-# load simulated dependent variable
-Y_sim <- read_excel("DataSimulation/Model1_TwoClasses_Y.xlsx",
+# save Y_sim ( transformed to data frame beforehand )
+write.xlsx(data.frame(Y_sim), "Model1_Baseline_Ysim.xlsx")
+
+# load Y_sim
+Y_sim <- read_excel("Model1_Baseline_Ysim.xlsx",
                     sheet = "Sheet 1")
 
 
@@ -62,13 +69,13 @@ Y_sim <- read_excel("DataSimulation/Model1_TwoClasses_Y.xlsx",
 C <- 2
 
 # constants
-beta_0 <- c(-2,2)
+beta_0 <- c(-5,5)
 
 # linear trends
-beta_1 <- c(-0.5,0.5)
+beta_1 <- c(-0.5,1)
 
 # standard deviations for Normal distributions
-sigma <- c(1,1)
+sigma <- c(0.25,0.75)
 
 # mixture proportions
 Pi <- matrix(data = NA, nrow = N, ncol = C)
@@ -91,11 +98,11 @@ for (n in 1:N) {
   }
 }
 
-# save simulated dependent variable
-write.xlsx(Y_sim, "Model1_TwoClasses_Y.xlsx")
+# save Y_sim ( transformed to data frame beforehand )
+write.xlsx(data.frame(Y_sim), "Model1_TwoClasses_Ysim.xlsx")
 
-# load simulated dependent variable
-Y_sim <- read_excel("DataSimulation/Model1_TwoClasses_Y.xlsx",
+# load Y_sim
+Y_sim <- read_excel("Model1_TwoClasses_Ysim.xlsx",
                     sheet = "Sheet 1")
 
 
