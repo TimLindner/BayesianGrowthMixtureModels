@@ -27,8 +27,8 @@ N <- 30
 no_periods <- 10
 
 # time periods
-time_periods <- 0:(no_periods - 1)
-X <- matrix(time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = no_periods, ncol = N, byrow = FALSE)
 
 
 # model 1 baseline ####
@@ -39,23 +39,24 @@ beta_0_sim <- 5
 beta_1_sim <- 0.5
 
 # means for Normal distributions
-M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
+M_sim <- matrix(data = 0, nrow = no_periods, ncol = N) 
 for (t in 1:no_periods) {
-  M_sim[,t] <- beta_0_sim + beta_1_sim * X[,t]
+  M_sim[t,] <- beta_0_sim + beta_1_sim * X[t,]
 }
 
 # standard deviation for Normal distributions
 sigma_sim <- 0.75
 
 # simulated dependent variable
-Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (t in 1:no_periods) {
-  Y_sim[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim)
-}
+# uncomment next lines to run the lines
+#Y_sim <- matrix(data = 0, nrow = no_periods, ncol = N)
+#for (t in 1:no_periods) {
+  #Y_sim[t,] <- rnorm(n = N, mean = M_sim[t,], sd = sigma_sim)
+#}
 
 # save Y_sim ( transformed to data frame beforehand )
 # uncomment next line to run the line
-# write.xlsx(data.frame(Y_sim), "Model1Baseline_Ysim.xlsx")
+#write.xlsx(data.frame(Y_sim), "Model1Baseline_Ysim.xlsx")
 
 # load Y_sim
 Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
@@ -73,16 +74,16 @@ beta_0_sim <- c(-5,5)
 beta_1_sim <- c(-0.5,0.5)
 
 # means for Normal distributions step 1
-M_sim_mtx <- matrix(data = 0, nrow = N, ncol = C)
+M_sim_mtx <- matrix(data = 0, nrow = C, ncol = N)
 M_sim <- list()
 for (t in 1:no_periods) {
   M_sim[[t]] <- M_sim_mtx
 }
 
-# means for Normal distributions step 1
+# means for Normal distributions step 2
 for (t in 1:no_periods) {
   for (c in 1:C) {
-    M_sim[[t]][,c] <- beta_0_sim[c] + beta_1_sim[c] * X[,t]
+    M_sim[[t]][c,] <- beta_0_sim[c] + beta_1_sim[c] * X[t,]
   }
 }
 
@@ -90,24 +91,25 @@ for (t in 1:no_periods) {
 sigma <- c(0.25,0.75)
 
 # mixture proportions step 1
-Pi <- matrix(data = 0, nrow = N, ncol = C)
+Pi <- matrix(data = 0, nrow = C, ncol = N)
 for (n in 1:round(N/2)) {
-  Pi[n,] <- c(0.9,0.1)
+  Pi[,n] <- c(0.9,0.1)
 }
 
 # mixture proportions step 2
 for (n in (round(N/2)+1):N) {
-  Pi[n,] <- c(0.1,0.9)
+  Pi[,n] <- c(0.1,0.9)
 }
 
 # simulated dependent variable
-Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (t in 1:no_periods) {
-  for (c in 1:C) {
-    Y_sim[,t] <-
-      Y_sim[,t] + Pi[,c] * rnorm(n = N, mean = M_sim[[t]][,c], sd = sigma[c])
-  }
-}
+# uncomment next lines to run the lines
+#Y_sim <- matrix(data = 0, nrow = no_periods, ncol = N)
+#for (t in 1:no_periods) {
+  #for (c in 1:C) {
+    #Y_sim[t,] <-
+      #Y_sim[t,] + Pi[c,] * rnorm(n = N, mean = M_sim[[t]][c,], sd = sigma[c])
+  #}
+#}
 
 # save Y_sim ( transformed to data frame beforehand )
 # uncomment next line to run the line
