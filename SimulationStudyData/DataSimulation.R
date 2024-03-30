@@ -54,7 +54,8 @@ for (t in 1:no_periods) {
 }
 
 # save Y_sim ( transformed to data frame beforehand )
-write.xlsx(data.frame(Y_sim), "Model1Baseline_Ysim.xlsx")
+# uncomment next line to run the line
+# write.xlsx(data.frame(Y_sim), "Model1Baseline_Ysim.xlsx")
 
 # load Y_sim
 Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
@@ -109,7 +110,8 @@ for (t in 1:no_periods) {
 }
 
 # save Y_sim ( transformed to data frame beforehand )
-write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
+# uncomment next line to run the line
+# write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
 
 # load Y_sim
 Y_sim <- data.frame(read_excel("Model1TwoClasses_Ysim.xlsx",
