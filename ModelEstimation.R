@@ -5,17 +5,6 @@
 # set working directory
 setwd("C:/Users/Diiim/Documents/ResearchAssistance")
 
-# clean workspace
-# uncomment next line to run the line
-# rm(list = ls())
-
-# clean garbage
-# uncomment next line to run the line
-# gc()
-
-# set decimals to digits instead of scientific
-options(scipen = 999)
-
 # load packages
 library(rstan)
 options(mc.cores = parallel::detectCores())
