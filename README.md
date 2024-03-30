@@ -3,12 +3,13 @@
 Hi there :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models ( or GMMs for short ), including their application to country-level terrorism data. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
 
 ### Work developed
-* The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan, the R interface to Stan (Stan Development Team, 2024).
+* The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan, the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024).
 
 ### Repository structure
 Placeholder
 
 ### References
-* Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (n.d.). *Stan User’s Guide, Version 2.34*. Stan. https://mc-stan.org/docs/stan-users-guide/
+* Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
+
 
