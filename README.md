@@ -5,7 +5,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 ### Work developed
 Placeholder
 
-### Software
+### Statistical computing
 The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan, the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024).
 
 ### Repository structure
