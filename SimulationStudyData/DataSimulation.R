@@ -39,18 +39,19 @@ beta_0_sim <- 5
 beta_1_sim <- 0.5
 
 # means for Normal distributions
-M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
-for (t in 1:no_periods) {
-  for (n in 1:N) {
-    M_sim[n,t] <- beta_0_sim + beta_1_sim * X[n,t]
-  }
-}
+# uncomment the following lines to run the lines
+#M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
+#for (t in 1:no_periods) {
+  #for (n in 1:N) {
+    #M_sim[n,t] <- beta_0_sim + beta_1_sim * X[n,t]
+  #}
+#}
 
 # standard deviation for Normal distributions
 sigma_sim <- 0.75
 
 # simulated dependent variable
-# uncomment next lines to run the lines
+# uncomment the following lines to run the lines
 #Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
 #for (t in 1:no_periods) {
   #for (n in 1:N) {
@@ -59,7 +60,7 @@ sigma_sim <- 0.75
 #}
 
 # save Y_sim ( transformed to data frame beforehand )
-# uncomment next line to run the line
+# uncomment the next line to run the line
 #write.xlsx(data.frame(Y_sim), "Model1Baseline_Ysim.xlsx")
 
 # load Y_sim
@@ -78,20 +79,22 @@ beta_0_sim <- c(-5,5)
 beta_1_sim <- c(-0.5,0.5)
 
 # means for Normal distributions step 1
-M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
-M_sim <- list()
-for (c in 1:C) {
-  M_sim[[c]] <- M_sim_mtx
-}
+# uncomment the following lines to run the lines
+#M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
+#M_sim <- list()
+#for (c in 1:C) {
+  #M_sim[[c]] <- M_sim_mtx
+#}
 
 # means for Normal distributions step 2
-for (c in 1:C) {
-  for (t in 1:no_periods) {
-    for (n in 1:N) {
-      M_sim[[c]][n,t] <- beta_0_sim[c] + beta_1_sim[c] * X[n,t]
-    }
-  }
-}
+# uncomment the following lines to run the lines
+#for (c in 1:C) {
+  #for (t in 1:no_periods) {
+    #for (n in 1:N) {
+      #M_sim[[c]][n,t] <- beta_0_sim[c] + beta_1_sim[c] * X[n,t]
+    #}
+  #}
+#}
 
 # standard deviations for Normal distributions
 sigma <- c(0.25,0.75)
@@ -108,7 +111,7 @@ for (n in (round(N/2)+1):N) {
 }
 
 # simulated dependent variable
-# uncomment next lines to run the lines
+# uncomment the following lines to run the lines
 #Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
 #for (c in 1:C) {
   #for (t in 1:no_periods) {
@@ -120,7 +123,7 @@ for (n in (round(N/2)+1):N) {
 #}
 
 # save Y_sim ( transformed to data frame beforehand )
-# uncomment next line to run the line
+# uncomment the next line to run the line
 #write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
 
 # load Y_sim
