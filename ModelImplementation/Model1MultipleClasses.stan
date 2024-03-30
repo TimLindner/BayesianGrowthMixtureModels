@@ -28,7 +28,7 @@ parameters {
   // constants
   row_vector[C] beta_0;
   
-  // linear trends
+  // linear trend components
   row_vector[C] beta_1;
   
   // standard deviations for Normal pdfs
