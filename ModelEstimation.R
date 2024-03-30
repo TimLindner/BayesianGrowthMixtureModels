@@ -33,12 +33,12 @@ warmup <- floor(iter/2)  # default
 # computation with NUTS in STAN
 m1_base <- stan_model("ModelImplementation/Model1Baseline.stan")
 
-# model-specific NUTS parameter
-init <- "random"
+# Model-specific NUTS parameter
+m1_base_init <- "random"
 
 job::job({
   
-  fit_m1_base <- sampling(m1_base,
+  m1_base_fit <- sampling(m1_base,
                           data = list(N = N,
                                       T = no_periods,
                                       Y_obs = Y_sim,
@@ -46,12 +46,12 @@ job::job({
                           chains = chains,
                           iter = iter,
                           warmup = warmup,
-                          init = init,
+                          init = m1_base_init,
                           algorithm = algorithm)
   
-  # save fit_m1_base
-  saveRDS(fit_m1_base,
-          "SimulationStudyResults/Fit_Model1Baseline.rds")
+  # save m1_base_fit
+  saveRDS(m1_base_fit,
+          "SimulationStudyResults/Model1Baseline_Fit.rds")
   
 })
 
@@ -72,7 +72,7 @@ alpha <- rep(3, times = C)
 
 job::job({
   
-  fit_m1_mult <- sampling(m1_mult,
+  m1_mult_fit <- sampling(m1_mult,
                           data = list(N = N,
                                       T = no_periods,
                                       Y_obs = Y_sim,
@@ -85,9 +85,9 @@ job::job({
                           init = init,
                           algorithm = algorithm)
   
-  # save fit_m1_mult
-  saveRDS(fit_m1_mult,
-          "SimulationStudyResults/Fit_Model1TwoClasses.rds")
+  # save m1_mult_fit
+  saveRDS(m1_mult_fit,
+          "SimulationStudyResults/Model1TwoClasses_Fit.rds")
   
 })
 
