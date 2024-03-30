@@ -79,7 +79,7 @@ green_transp <- rgb(red = 0,
 ```
 
 
-# NUTS trace plots
+# Trace plots
 ## Constant
 ```{r}
 plot(m1_base_fit_params$beta_0,
@@ -208,7 +208,7 @@ hist(m1_base_fit_params$sigma,
      border = FALSE,
      main = "Standard deviation for Normal pdfs",
      sub = "( the orange line shows the simulated parameter value )",
-     xlab = "beta_1")
+     xlab = "sigma")
 abline(v = sigma_sim,
        lwd = 2,
        col = "orange")
