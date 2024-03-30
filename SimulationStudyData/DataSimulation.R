@@ -117,7 +117,7 @@ for (n in (round(N/2)+1):N) {
   #for (t in 1:no_periods) {
     #for (n in 1:N) {
       #Y_sim[n,t] <-
-        #Y_sim[n,t] + Pi[n,c] * rnorm(1, mean = M_sim[[c]][n,t], sd = sigma[c])
+        #Y_sim[n,t] + Pi[n,c] * rnorm(n=1, mean=M_sim[[c]][n,t], sd=sigma[c])
     #}
   #}
 #}
