@@ -7,7 +7,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 
 ### Repository structure
 * :file_folder: ResultsSimulationStudy
-* :file: ModelEstimation
+* :page_facing_up: ModelEstimation
 
 ### References
 * Stan Development Team. (n.d.). *Stan Documentation, Version 2.34*. Stan. https://mc-stan.org/docs/
