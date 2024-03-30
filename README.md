@@ -10,7 +10,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 * :file_folder: SimulationStudyData
 * :file_folder: SimulationStudyResult
 * :page_facing_up: ModelEstimation.stan
-* * :page_facing_up: ModelSpecification.pdf
+* :page_facing_up: ModelSpecification.pdf
 
 ### References
 * Stan Development Team. (n.d.). *Stan Documentation, Version 2.34*. Stan. https://mc-stan.org/docs/
