@@ -69,12 +69,12 @@ Y_obs <- Y_sim  # change Y_sim to Y_act for actual data
 # number of latent classes
 C <- 2
 
-# model-specific NUTS parameter
-init <- "random"
-
 # alpha parameter for Dirichlet pdfs,
 # which serve as prior distributions for mixture proportions
 alpha <- rep(3, times = C)
+
+# model-specific NUTS parameter
+init <- "random"
 
 job::job({
   
