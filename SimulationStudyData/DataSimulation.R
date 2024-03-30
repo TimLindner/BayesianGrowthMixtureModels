@@ -35,7 +35,7 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 # constant
 beta_0_sim <- 5
 
-# linear trend
+# linear trend component
 beta_1_sim <- 0.5
 
 # means for Normal distributions
@@ -74,7 +74,7 @@ C <- 2
 # constants
 beta_0_sim <- c(-5,5)
 
-# linear trends
+# linear trend components
 beta_1_sim <- c(-0.5,0.5)
 
 # means for Normal distributions step 1
