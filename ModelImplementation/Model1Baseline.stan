@@ -7,10 +7,10 @@ data {
   int T;
   
   // observed dependent variable ( simulated or actual data )
-  array[T] vector[N] Y_obs;
+  matrix[N,T] Y_obs;
   
   // time periods
-  array[T] vector[N] X;
+  matrix[N,T] X;
   
 }
 
@@ -32,9 +32,11 @@ parameters {
 transformed parameters {
   
   // means for Normal pdfs
-  array[T] vector[N] M;
+  matrix[N,T] M;
   for (t in 1:T) {
-    M[t] = beta_0 + beta_1 * X[t];
+    for (n in 1:N) {
+      M[n,t] = beta_0 + beta_1 * X[n,t];
+    }
   }
   
 }
@@ -53,7 +55,9 @@ model {
   
   // likelihood
   for (t in 1:T) {
-    Y_obs[t] ~ normal(M[t],sigma);
+    for (n in 1:N) {
+      Y_obs[n,t] ~ normal(M[n,t],sigma);
+    }
   }
   
 }
@@ -62,9 +66,11 @@ model {
 generated quantities {
   
   // predicted dependent variable
-  array[N,T] real Y_pred;
+  matrix[N,T] Y_pred;
   for (t in 1:T) {
-    Y_pred[,t] = normal_rng(M[t], sigma);
+    for (n in 1:N) {
+      Y_pred[n,t] = normal_rng(M[n,t], sigma);
+    }
   }
   
 }
