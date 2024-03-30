@@ -33,6 +33,9 @@ warmup <- floor(iter/2)  # default
 # computation with NUTS in STAN
 m1_base <- stan_model("ModelImplementation/Model1Baseline.stan")
 
+# observed dependent variable
+Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
+
 # Model-specific NUTS parameter
 m1_base_init <- "random"
 
@@ -41,7 +44,7 @@ job::job({
   m1_base_fit <- sampling(m1_base,
                           data = list(N = N,
                                       T = no_periods,
-                                      Y_obs = Y_sim,
+                                      Y_obs = Y_obs,
                                       X = X),
                           chains = chains,
                           iter = iter,
@@ -60,6 +63,9 @@ job::job({
 # computation with NUTS in STAN
 m1_mult <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
+# observed dependent variable
+Y_obs <- Y_sim  # change Y_sim to Y_act for actual data
+
 # number of latent classes
 C <- 2
 
@@ -75,7 +81,7 @@ job::job({
   m1_mult_fit <- sampling(m1_mult,
                           data = list(N = N,
                                       T = no_periods,
-                                      Y_obs = Y_sim,
+                                      Y_obs = Y_obs,
                                       X = X,
                                       C = C,
                                       alpha = alpha),
