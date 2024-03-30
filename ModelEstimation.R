@@ -6,10 +6,12 @@
 setwd("C:/Users/Diiim/Documents/ResearchAssistance/ModelImplementation")
 
 # clean workspace
-rm(list = ls())
+# uncomment next line to run the line
+# rm(list = ls())
 
 # clean garbage
-gc()
+# uncomment next line to run the line
+# gc()
 
 # set decimals to digits instead of scientific
 options(scipen = 999)
