@@ -3,7 +3,7 @@
 
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance/ModelImplementation")
+setwd("C:/Users/Diiim/Documents/ResearchAssistance")
 
 # clean workspace
 # uncomment next line to run the line
@@ -24,7 +24,7 @@ rstan_options(auto_write = TRUE)
 
 # model 1 baseline - estimation ####
 # computation with NUTS in STAN
-m1_base <- stan_model("Model1Baseline.stan")
+m1_base <- stan_model("ModelImplementation/Model1Baseline.stan")
 
 job::job({
   
@@ -41,14 +41,14 @@ job::job({
   
   # save fit_m1_base
   saveRDS(fit_m1_base,
-          "Fit_Model1Baseline.rds")
+          "SimulationStudyResults/Fit_Model1Baseline.rds")
   
 })
 
 
 # model 1 multiple classes - estimation ####
 # computation with NUTS in STAN
-m1_mult <- stan_model("Model1MultipleClasses.stan")
+m1_mult <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
 # number of latent classes
 C <- 2
@@ -74,7 +74,7 @@ job::job({
   
   # save fit_m1_mult
   saveRDS(fit_m1_mult,
-          "Fit_Model1TwoClasses.rds")
+          "SimulationStudyResults/Fit_Model1TwoClasses.rds")
   
 })
 
