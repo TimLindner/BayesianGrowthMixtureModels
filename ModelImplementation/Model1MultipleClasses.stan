@@ -88,10 +88,11 @@ generated quantities {
   
   // predicted dependent variable
   matrix[N,T] Y_pred;
+  Y_pred = rep_matrix(0, N, T);
   for (c in 1:C) {
     for (t in 1:T) {
       for (n in 1:N) {
-        Y_pred[n,t] += Pi[n,c] .* normal_rng(M[c,n,t], sigma[c]);
+        Y_pred[n,t] += Pi[n,c] * normal_rng(M[c,n,t], sigma[c]);
       }
     }
   }
