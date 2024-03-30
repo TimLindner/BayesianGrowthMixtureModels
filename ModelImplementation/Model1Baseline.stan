@@ -20,7 +20,7 @@ parameters {
   // constant
   real beta_0;
   
-  // linear trend
+  // linear trend component
   real beta_1;
   
   // standard deviation for Normal pdfs
