@@ -9,6 +9,6 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 Placeholder
 
 ### References
-* Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package].
-
+* Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
+* Stan Development Team. (n.d.). Stan User’s Guide, Version 2.34. https://mc-stan.org/docs/stan-users-guide/
 
