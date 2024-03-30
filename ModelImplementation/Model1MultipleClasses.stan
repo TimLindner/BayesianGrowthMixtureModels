@@ -7,10 +7,10 @@ data {
   int T;
   
   // observed dependent variable ( simulated or actual data )
-  array[T] vector[N] Y_obs;
+  matrix[N,T] Y_obs;
   
   // time periods
-  array[T] vector[N] X;
+  matrix[N,T] X;
   
   // number of latent classes
   int C;
@@ -43,27 +43,14 @@ parameters {
 transformed parameters {
   
   // means for Normal pdfs
-  array[T,C] vector[N] M;
-  for (t in 1:T) {
-    for (c in 1:C) {
-      M[t,c] = beta_0[c] + beta_1[c] * X[t];
+  array[C] matrix[N,T] M;
+  for (c in 1:C) {
+    for (t in 1:T) {
+      for (n in 1:N) {
+        M[c,n,t] = beta_0[c] + beta_1[c] * X[n,t];
+      }
     }
   }
-  
-  // transpose Pi
-  array[C] vector[N] Pi_transp;
-  for (c in 1:C) {
-    for (n in 1:N) {
-      Pi_transp[c,n] = Pi[n,c];
-    }
-  }
-  
-  // log transform Pi_transp
-  array[C] vector[N] Pi_log;
-  for (c in 1:C) {
-    Pi_log[c] = log(Pi_transp[c]);
-  }
-  
   
 }
 
@@ -83,18 +70,15 @@ model {
   Pi ~ dirichlet(alpha);
   
   // likelihood step 1
-  array[T] matrix[N,C] lp;  // log posterior
-  for (t in 1:T) {
-    for (c in 1:C) {
-      lp[t,,c] = Pi_log[c] + normal_lpdf(Y_obs[t] | M[t,c], sigma[c]);
-    }
-  }
-  
-  // likelihood step 2
+  vector[C] lp;  // log posterior
   for (t in 1:T) {
     for (n in 1:N) {
-      target += log_sum_exp(lp[t,n]);
+      lp = log(Pi[n]);  // log transform Pi
+      for (c in 1:C) {
+        lp += normal_lpdf(Y_obs[n,t] | M[c,n,t], sigma[c]);
+      }
     }
+    target += log_sum_exp(lp);
   }
   
 }
@@ -102,17 +86,13 @@ model {
 
 generated quantities {
   
-  // temp variables
-  array[N] real temp_arr;
-  vector[N] temp_vec;
-  
   // predicted dependent variable
-  array[T] vector[N] Y_pred;
-  for (t in 1:T) {
-    for (c in 1:C) {
-      temp_arr = normal_rng(M[t,c],sigma[c]);
-      temp_vec = to_vector(temp_arr);  // transform temp_arr to column vector
-      Y_pred[t] += Pi_transp[c] + temp_vec;
+  matrix[N,T] Y_pred;
+  for (c in 1:C) {
+    for (t in 1:T) {
+      for (n in 1:N) {
+        Y_pred[n,t] += Pi[n,c] .* normal_rng(M[c,n,t], sigma[c]);
+      }
     }
   }
   
