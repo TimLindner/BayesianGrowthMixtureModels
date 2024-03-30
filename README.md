@@ -6,8 +6,8 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 * The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan, the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024).
 
 ### Repository structure
-* :file_folder: ResultsSimulationStudy
-* :page_facing_up: ModelEstimation
+* :file_folder: SimulationStudyResults:
+* :page_facing_up: ModelEstimation:
 
 ### References
 * Stan Development Team. (n.d.). *Stan Documentation, Version 2.34*. Stan. https://mc-stan.org/docs/
