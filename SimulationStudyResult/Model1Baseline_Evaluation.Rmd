@@ -47,13 +47,13 @@ beta_1_sim <- 0.5
 # standard deviation for Normal distributions
 sigma_sim <- 0.75
 
-# Y_sim
+# load simulated dependent variable
 Y_sim <- data.frame(read_excel("SimulationStudyData/Model1Baseline_Ysim.xlsx",
                                sheet = "Sheet 1"))
 
 
 # estimated data ####
-# load Model1Baseline_Fit
+# load model fit
 m_fit <- readRDS("SimulationStudyResult/Model1Baseline_Fit.rds")
 m_fit_params <- rstan::extract(m_fit)
 
