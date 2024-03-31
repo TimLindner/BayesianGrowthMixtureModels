@@ -1,0 +1,213 @@
+---
+title: "Table of contents"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r, include = FALSE}
+# preparation ####
+# set working directory
+setwd("C:/Users/Diiim/Documents/ResearchAssistance")
+
+# set decimals to digits instead of scientific
+options(scipen = 999)
+
+# load packages
+library(readxl)
+library(rstan)
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
+
+
+# simulated data ####
+# number of individuals
+N <- 30
+
+# number of time periods
+no_periods <- 10
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# number of latent classes
+C <- 2
+
+# constants
+beta_0_sim <- c(-5,5)
+
+# linear trend components
+beta_1_sim <- c(-0.5,0.5)
+
+# load simulated dependent variable
+Y_sim <-
+  data.frame(read_excel("SimulationStudyData/Model1TwoClasses_Ysim.xlsx",
+                        sheet = "Sheet 1"))
+
+
+# estimated data ####
+# load model fit
+m_fit <- readRDS("SimulationStudyResult/Model1TwoClasses_Fit.rds")
+m_fit_params <- rstan::extract(m_fit)
+
+# middle 90% credible intervals for Y_pred
+Y_pred <- m_fit_params$Y_pred
+Y_pred_CI_lower <- matrix(data = 0, nrow = N, ncol = no_periods)
+Y_pred_CI_upper <- matrix(data = 0, nrow = N, ncol = no_periods)
+for (t in 1:no_periods) {
+  for (n in 1:N) {
+    Y_pred_CI_lower[n,t] <- quantile(Y_pred[,n,t], prob = 0.05)
+    Y_pred_CI_upper[n,t] <- quantile(Y_pred[,n,t], prob = 0.95)
+  }
+}
+
+
+# colors ####
+green_transp <- rgb(red = 0,
+                    green = 250,
+                    blue = 154,
+                    max = 250,
+                    alpha = 25,
+                    names = "mediumspringgreen")
+```
+
+
+# Trace plots
+## Constants
+```{r}
+for (c in 1:C) {
+  plot(m_fit_params$beta_0[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  plot(m_fit_params$beta_0[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Class c =", c),
+       xlab = "Sampling iteration",
+       ylab = "beta_0")
+}
+```
+
+
+## Linear trend components
+```{r}
+for (c in 1:C) {
+  plot(m_fit_params$beta_1[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  plot(m_fit_params$beta_1[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Class c =", c),
+       xlab = "Sampling iteration",
+       ylab = "beta_1")
+}
+```
+
+
+## Standard deviation for Normal distributions
+```{r}
+for (c in 1:C) {
+  plot(m_fit_params$sigma[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  plot(m_fit_params$sigma[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Class c =", c),
+       xlab = "Sampling iteration",
+       ylab = "sigma")
+}
+```
+
+
+## Mixture proportions
+```{r}
+for (n in 1:N) {
+  for (c in 1:C) {
+    plot(m_fit_params$Pi[,n,c],
+         type = "l",
+         col = "darkturquoise",
+         main = "",
+         xlab = "",
+         ylab = "")
+    
+    grid(nx = NA, ny = NULL)
+    par(new = TRUE)
+    
+    plot(m_fit_params$Pi[,n,c],
+         type = "l",
+         col = "darkturquoise",
+         main = paste("Individual n =", n, "and class c =", c),
+         xlab = "Sampling iteration",
+         ylab = "Pi")
+  }
+}
+```
+
+
+# Posterior predictive check via middle 90% credible interval
+```{r}
+for (n in 1:N) {
+  y_upper <- Y_pred_CI_upper[n,]
+  y_lower <- Y_pred_CI_lower[n,]
+  x <- X[n,]
+  
+  plot(x = x,
+       y = c(max(y_upper),
+             min(y_lower),
+             max(Y_sim[n,]),
+             min(Y_sim[n,]),
+             rep(max(y_upper), times = no_periods-4)),
+       type="l",
+       col = "white",
+       main = paste("Individual n =", n),
+       sub = "( the orange line shows the simulated dependent variable )",
+       xlab = "t",
+       ylab = "Y_pred")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  polygon(x = c(x, rev(x)),
+          y = c(y_upper, rev(y_lower)),
+          col = green_transp,
+          lty = 0)
+  lines(x = x,
+        y = Y_sim[n,],
+        lwd = 2,
+        col = "orange")
+  box()
+}
+```
+
+
