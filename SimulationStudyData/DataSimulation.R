@@ -80,24 +80,24 @@ beta_1_sim <- c(-0.5,0.5)
 
 # means for Normal distributions step 1
 # uncomment the following lines to run the lines
-#M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
-#M_sim <- list()
-#for (c in 1:C) {
-  #M_sim[[c]] <- M_sim_mtx
-#}
+M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
+M_sim <- list()
+for (c in 1:C) {
+  M_sim[[c]] <- M_sim_mtx
+}
 
 # means for Normal distributions step 2
 # uncomment the following lines to run the lines
-#for (c in 1:C) {
-  #for (t in 1:no_periods) {
-    #for (n in 1:N) {
-      #M_sim[[c]][n,t] <- beta_0_sim[c] + beta_1_sim[c] * X[n,t]
-    #}
-  #}
-#}
+for (c in 1:C) {
+  for (t in 1:no_periods) {
+    for (n in 1:N) {
+      M_sim[[c]][n,t] <- beta_0_sim[c] + beta_1_sim[c] * X[n,t]
+    }
+  }
+}
 
-# standard deviations for Normal distributions
-sigma_sim <- c(0.25,0.75)
+# standard deviation for Normal distributions
+sigma_sim <- 0.75
 
 # mixture proportions step 1
 Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
@@ -112,19 +112,19 @@ for (n in (round(N/2)+1):N) {
 
 # simulated dependent variable
 # uncomment the following lines to run the lines
-#Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
-#for (c in 1:C) {
-  #for (t in 1:no_periods) {
-    #for (n in 1:N) {
-      #Y_sim[n,t] <-
-        #Y_sim[n,t] + Pi[n,c] * rnorm(n=1, mean=M_sim[[c]][n,t], sd=sigma[c])
-    #}
-  #}
-#}
+Y_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
+for (c in 1:C) {
+  for (t in 1:no_periods) {
+    for (n in 1:N) {
+      Y_sim[n,t] <-
+        Y_sim[n,t]+Pi_sim[n,c]*rnorm(n=1,mean=M_sim[[c]][n,t],sd=sigma_sim)
+    }
+  }
+}
 
 # save Y_sim ( transformed to data frame beforehand )
 # uncomment the next line to run the line
-#write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
+write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
 
 # load Y_sim
 Y_sim <- data.frame(read_excel("Model1TwoClasses_Ysim.xlsx",
