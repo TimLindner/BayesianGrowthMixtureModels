@@ -229,7 +229,7 @@ for (n in 1:N) {
              rep(max(y_upper), times = no_periods-2)),
        type="l",
        col = "white",
-       main = paste("n = ", n, sep = ""),
+       main = paste("Individual n =", n),
        sub = "( the orange line shows the simulated dependent variable )",
        xlab = "t",
        ylab = "Y_pred")
