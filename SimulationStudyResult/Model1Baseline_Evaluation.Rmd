@@ -54,11 +54,11 @@ Y_sim <- data.frame(read_excel("SimulationStudyData/Model1Baseline_Ysim.xlsx",
 
 # estimated data ####
 # load Model1Baseline_Fit
-m1_base_fit <- readRDS("SimulationStudyResult/Model1Baseline_Fit.rds")
-m1_base_fit_params <- rstan::extract(m1_base_fit)
+m_fit <- readRDS("SimulationStudyResult/Model1Baseline_Fit.rds")
+m_fit_params <- rstan::extract(m_fit)
 
 # middle 90% credible intervals for Y_pred
-Y_pred <- m1_base_fit_params$Y_pred
+Y_pred <- m_fit_params$Y_pred
 Y_pred_CI_lower <- matrix(data = 0, nrow = N, ncol = no_periods)
 Y_pred_CI_upper <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (t in 1:no_periods) {
@@ -82,7 +82,7 @@ green_transp <- rgb(red = 0,
 # Trace plots
 ```{r}
 # constant
-plot(m1_base_fit_params$beta_0,
+plot(m_fit_params$beta_0,
      type = "l",
      col = "blueviolet",
      main = "",
@@ -92,7 +92,7 @@ plot(m1_base_fit_params$beta_0,
 grid(nx = NA, ny = NULL)
 par(new = TRUE)
 
-plot(m1_base_fit_params$beta_0,
+plot(m_fit_params$beta_0,
      type = "l",
      col = "blueviolet",
      main = "Constant",
@@ -103,7 +103,7 @@ plot(m1_base_fit_params$beta_0,
 
 ```{r}
 # linear trend component
-plot(m1_base_fit_params$beta_1,
+plot(m_fit_params$beta_1,
      type = "l",
      col = "blueviolet",
      main = "",
@@ -113,7 +113,7 @@ plot(m1_base_fit_params$beta_1,
 grid(nx = NA, ny = NULL)
 par(new = TRUE)
 
-plot(m1_base_fit_params$beta_1,
+plot(m_fit_params$beta_1,
      type = "l",
      col = "blueviolet",
      main = "Linear trend component",
@@ -124,7 +124,7 @@ plot(m1_base_fit_params$beta_1,
 
 ```{r}
 # standard deviation for Normal distributions
-plot(m1_base_fit_params$sigma,
+plot(m_fit_params$sigma,
      type = "l",
      col = "blueviolet",
      main = "",
@@ -134,7 +134,7 @@ plot(m1_base_fit_params$sigma,
 grid(nx = NA, ny = NULL)
 par(new = TRUE)
 
-plot(m1_base_fit_params$sigma,
+plot(m_fit_params$sigma,
      type = "l",
      col = "blueviolet",
      main = "Standard deviation for Normal distributions",
@@ -146,7 +146,7 @@ plot(m1_base_fit_params$sigma,
 # Posterior
 ```{r}
 # constant
-hist(m1_base_fit_params$beta_0,
+hist(m_fit_params$beta_0,
      col = "blueviolet",
      border = FALSE,
      main = "",
@@ -155,7 +155,7 @@ hist(m1_base_fit_params$beta_0,
 grid()
 par(new = TRUE)
 
-hist(m1_base_fit_params$beta_0,
+hist(m_fit_params$beta_0,
      col = "blueviolet",
      border = FALSE,
      main = "Constant",
@@ -170,7 +170,7 @@ box()
 
 ```{r}
 # linear trend component
-hist(m1_base_fit_params$beta_1,
+hist(m_fit_params$beta_1,
      col = "blueviolet",
      border = FALSE,
      main = "",
@@ -179,7 +179,7 @@ hist(m1_base_fit_params$beta_1,
 grid()
 par(new = TRUE)
 
-hist(m1_base_fit_params$beta_1,
+hist(m_fit_params$beta_1,
      col = "blueviolet",
      border = FALSE,
      main = "Linear trend component",
@@ -194,7 +194,7 @@ box()
 
 ```{r}
 # standard deviation for Normal distributions
-hist(m1_base_fit_params$sigma,
+hist(m_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
      main = "",
@@ -203,7 +203,7 @@ hist(m1_base_fit_params$sigma,
 grid()
 par(new = TRUE)
 
-hist(m1_base_fit_params$sigma,
+hist(m_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
      main = "Standard deviation for Normal distributions",
