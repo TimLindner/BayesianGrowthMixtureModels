@@ -80,8 +80,8 @@ green_transp <- rgb(red = 0,
 
 
 # Trace plots
-## Constant
 ```{r}
+# constant
 plot(m1_base_fit_params$beta_0,
      type = "l",
      col = "blueviolet",
@@ -101,8 +101,8 @@ plot(m1_base_fit_params$beta_0,
 ```
 
 
-## Linear trend component
 ```{r}
+# linear trend component
 plot(m1_base_fit_params$beta_1,
      type = "l",
      col = "blueviolet",
@@ -122,8 +122,8 @@ plot(m1_base_fit_params$beta_1,
 ```
 
 
-## Standard deviation for Normal pdfs
 ```{r}
+# standard deviation for Normal pdfs
 plot(m1_base_fit_params$sigma,
      type = "l",
      col = "blueviolet",
@@ -144,8 +144,8 @@ plot(m1_base_fit_params$sigma,
 
 
 # Posterior
-## Constant
 ```{r}
+# constant
 hist(m1_base_fit_params$beta_0,
      col = "blueviolet",
      border = FALSE,
@@ -168,8 +168,8 @@ box()
 ```
 
 
-## Linear trend component
 ```{r}
+# linear trend component
 hist(m1_base_fit_params$beta_1,
      col = "blueviolet",
      border = FALSE,
@@ -192,8 +192,8 @@ box()
 ```
 
 
-## Standard deviation for Normal pdfs
 ```{r}
+# standard deviation for Normal pdfs
 hist(m1_base_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
@@ -216,7 +216,7 @@ box()
 ```
 
 
-# Posterior predictive check
+# Posterior predictive check via middle 90% credible interval
 ```{r}
 for (n in 1:N) {
   y_upper <- Y_pred_CI_upper[n,]
@@ -229,7 +229,7 @@ for (n in 1:N) {
              rep(max(y_upper), times = no_periods-2)),
        type="l",
        col = "white",
-       main = paste("Middle 90% credible interval for n = ", n, sep = ""),
+       main = paste("n = ", n, sep = ""),
        sub = "( the orange line shows the simulated dependent variable )",
        xlab = "t",
        ylab = "Y_pred")
