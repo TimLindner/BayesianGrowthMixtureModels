@@ -23,7 +23,7 @@ parameters {
   // linear trend component
   real beta_1;
   
-  // standard deviation for Normal pdfs
+  // standard deviation for Normal distributions
   real<lower=0> sigma;
   
 }
@@ -31,7 +31,7 @@ parameters {
 
 transformed parameters {
   
-  // means for Normal pdfs
+  // means for Normal distributions
   matrix[N,T] M;
   for (t in 1:T) {
     for (n in 1:N) {
