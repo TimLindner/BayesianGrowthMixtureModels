@@ -28,6 +28,9 @@ rstan_options(auto_write = TRUE)
 
 
 # simulated data ####
+# number of latent classes
+C <- 2
+
 # number of individuals
 N <- 30
 
@@ -38,14 +41,25 @@ no_periods <- 10
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# number of latent classes
-C <- 2
-
 # constants
 beta_0_sim <- c(-5,5)
 
 # linear trend components
 beta_1_sim <- c(-0.5,0.5)
+
+# standard deviations for Normal distributions
+sigma_sim <- c(0.25,0.75)
+
+# mixture proportions step 1
+Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
+for (n in 1:round(N/2)) {
+  Pi_sim[n,] <- c(0.9,0.1)
+}
+
+# mixture proportions step 2
+for (n in (round(N/2)+1):N) {
+  Pi_sim[n,] <- c(0.1,0.9)
+}
 
 # load simulated dependent variable
 Y_sim <-
@@ -170,6 +184,113 @@ for (n in 1:N) {
          main = paste("Individual n =", n, "and class c =", c),
          xlab = "Sampling iteration",
          ylab = "Pi")
+  }
+}
+```
+
+
+# Posterior
+## Constants
+```{r}
+for (c in 1:C) {
+  hist(m_fit_params$beta_0[,c],
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+  
+  hist(m_fit_params$beta_0[,c],
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Class c =", c),
+       sub = "( the orange line shows the simulated parameter value )",
+       xlab = "beta_0")
+  abline(v = beta_0_sim[c],
+         lwd = 2,
+         col = "orange")
+  box()
+}
+```
+
+
+## Linear trend components
+```{r}
+for (c in 1:C) {
+  hist(m_fit_params$beta_1[,c],
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+  
+  hist(m_fit_params$beta_1[,c],
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Class c =", c),
+       sub = "( the orange line shows the simulated parameter value )",
+       xlab = "beta_1")
+  abline(v = beta_1_sim[c],
+         lwd = 2,
+         col = "orange")
+  box()
+}
+```
+
+
+## Standard deviation for Normal distributions
+```{r}
+for (c in 1:C) {
+  hist(m_fit_params$sigma[,c],
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+  
+  hist(m_fit_params$sigma[,c],
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Class c =", c),
+       sub = "( the orange line shows the simulated parameter value )",
+       xlab = "sigma")
+  abline(v = sigma_sim[c],
+         lwd = 2,
+         col = "orange")
+  box()
+}
+```
+
+
+## Mixture proportions
+```{r}
+for (n in 1:N) {
+  for (c in 1:C) {
+    hist(m_fit_params$Pi[,n,c],
+         col = "darkturquoise",
+         border = FALSE,
+         main = "",
+         xlab = "")
+    
+    grid()
+    par(new = TRUE)
+    
+    hist(m_fit_params$Pi[,n,c],
+         col = "darkturquoise",
+         border = FALSE,
+         main = paste("Individual n =", n, "and class c =", c),
+         sub = "( the orange line shows the simulated parameter value )",
+         xlab = "sigma")
+    abline(v = Pi_sim[n,c],
+           lwd = 2,
+           col = "orange")
+    box()
   }
 }
 ```
