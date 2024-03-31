@@ -9,7 +9,7 @@ Placeholder
 The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan, the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024).
 
 ### Repository structure
-* :file_folder: ModelImplementation
+* :file_folder: ModelImplementation contains the Stan implementation for each model specified in :page_facing_up: ModelSpecification.pdf, including the implementation of the corresponding baseline model ( one class ).
 * :file_folder: SimulationStudyData
 * :file_folder: SimulationStudyResult
 * :page_facing_up: ModelEstimation.stan
