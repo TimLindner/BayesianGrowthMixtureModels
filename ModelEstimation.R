@@ -19,17 +19,18 @@ warmup <- floor(iter/2)  # default
 
 
 # model 1 baseline - estimation ####
-# computation with NUTS in STAN
+# load model
 m <- stan_model("ModelImplementation/Model1Baseline.stan")
 
 # observed dependent variable
 Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
 
-# Model-specific NUTS parameter
+# model-specific NUTS parameter
 init <- "random"
 
 job::job({
   
+  # estimate model
   m_fit <- sampling(m,
                     data = list(N = N,
                                 T = no_periods,
@@ -41,7 +42,7 @@ job::job({
                     init = init,
                     algorithm = algorithm)
   
-  # save m_fit
+  # save model fit
   saveRDS(m_fit,
           "SimulationStudyResults/Model1Baseline_Fit.rds")
   
@@ -49,7 +50,7 @@ job::job({
 
 
 # model 1 multiple classes - estimation ####
-# computation with NUTS in STAN
+# load model
 m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
 # observed dependent variable
@@ -67,6 +68,7 @@ init <- "random"
 
 job::job({
   
+  # estimate model
   m_fit <- sampling(m,
                     data = list(N = N,
                                 T = no_periods,
@@ -80,7 +82,7 @@ job::job({
                     init = init,
                     algorithm = algorithm)
   
-  # save m_fit
+  # save model fit
   saveRDS(m_fit,
           "SimulationStudyResults/Model1TwoClasses_Fit.rds")
   
