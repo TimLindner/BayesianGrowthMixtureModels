@@ -97,17 +97,17 @@ beta_1_sim <- c(-0.5,0.5)
 #}
 
 # standard deviations for Normal distributions
-sigma <- c(0.25,0.75)
+sigma_sim <- c(0.25,0.75)
 
 # mixture proportions step 1
-Pi <- matrix(data = 0, nrow = N, ncol = C)
+Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
 for (n in 1:round(N/2)) {
-  Pi[n,] <- c(0.9,0.1)
+  Pi_sim[n,] <- c(0.9,0.1)
 }
 
 # mixture proportions step 2
 for (n in (round(N/2)+1):N) {
-  Pi[n,] <- c(0.1,0.9)
+  Pi_sim[n,] <- c(0.1,0.9)
 }
 
 # simulated dependent variable
