@@ -20,29 +20,29 @@ warmup <- floor(iter/2)  # default
 
 # model 1 baseline - estimation ####
 # computation with NUTS in STAN
-m1_base <- stan_model("ModelImplementation/Model1Baseline.stan")
+m <- stan_model("ModelImplementation/Model1Baseline.stan")
 
 # observed dependent variable
 Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
 
 # Model-specific NUTS parameter
-m1_base_init <- "random"
+init <- "random"
 
 job::job({
   
-  m1_base_fit <- sampling(m1_base,
-                          data = list(N = N,
-                                      T = no_periods,
-                                      Y_obs = Y_obs,
-                                      X = X),
-                          chains = chains,
-                          iter = iter,
-                          warmup = warmup,
-                          init = m1_base_init,
-                          algorithm = algorithm)
+  m_fit <- sampling(m,
+                    data = list(N = N,
+                                T = no_periods,
+                                Y_obs = Y_obs,
+                                X = X),
+                    chains = chains,
+                    iter = iter,
+                    warmup = warmup,
+                    init = init,
+                    algorithm = algorithm)
   
-  # save m1_base_fit
-  saveRDS(m1_base_fit,
+  # save m_fit
+  saveRDS(m_fit,
           "SimulationStudyResults/Model1Baseline_Fit.rds")
   
 })
@@ -50,7 +50,7 @@ job::job({
 
 # model 1 multiple classes - estimation ####
 # computation with NUTS in STAN
-m1_mult <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
+m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
 # observed dependent variable
 Y_obs <- Y_sim  # change Y_sim to Y_act for actual data
@@ -67,21 +67,21 @@ init <- "random"
 
 job::job({
   
-  m1_mult_fit <- sampling(m1_mult,
-                          data = list(N = N,
-                                      T = no_periods,
-                                      Y_obs = Y_obs,
-                                      X = X,
-                                      C = C,
-                                      alpha = alpha),
-                          chains = chains,
-                          iter = iter,
-                          warmup = warmup,
-                          init = init,
-                          algorithm = algorithm)
+  m_fit <- sampling(m,
+                    data = list(N = N,
+                                T = no_periods,
+                                Y_obs = Y_obs,
+                                X = X,
+                                C = C,
+                                alpha = alpha),
+                    chains = chains,
+                    iter = iter,
+                    warmup = warmup,
+                    init = init,
+                    algorithm = algorithm)
   
-  # save m1_mult_fit
-  saveRDS(m1_mult_fit,
+  # save m_fit
+  saveRDS(m_fit,
           "SimulationStudyResults/Model1TwoClasses_Fit.rds")
   
 })
