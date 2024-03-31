@@ -44,7 +44,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResults/Model1Baseline_Fit.rds")
+          "SimulationStudyResult/Model1Baseline_Fit.rds")
   
 })
 
@@ -83,7 +83,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResults/Model1TwoClasses_Fit.rds")
+          "SimulationStudyResult/Model1TwoClasses_Fit.rds")
   
 })
 
