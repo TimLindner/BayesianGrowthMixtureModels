@@ -53,15 +53,15 @@ job::job({
 # load model
 m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
-# observed dependent variable
-Y_obs <- Y_sim  # change Y_sim to Y_act for actual data
-
 # number of latent classes
 C <- 2
 
 # alpha parameter for Dirichlet distributions,
 # which serve as prior distributions for mixture proportions
 alpha <- rep(3, times = C)
+
+# observed dependent variable
+Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
 
 # model-specific NUTS parameter
 init <- "random"
@@ -70,12 +70,11 @@ job::job({
   
   # estimate model
   m_fit <- sampling(m,
-                    data = list(N = N,
+                    data = list(C = C,
+                                #alpha = alpha,
                                 T = no_periods,
                                 Y_obs = Y_obs,
-                                X = X,
-                                C = C,
-                                alpha = alpha),
+                                X = X),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
