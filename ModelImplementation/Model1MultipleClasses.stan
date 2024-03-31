@@ -15,7 +15,7 @@ data {
   // number of latent classes
   int C;
   
-  // alpha parameter for Dirichlet pdfs,
+  // alpha parameter for Dirichlet distributions,
   // which serve as prior distributions for mixture proportions
   vector[C] alpha;
   
@@ -31,7 +31,7 @@ parameters {
   // linear trend components
   row_vector[C] beta_1;
   
-  // standard deviations for Normal pdfs
+  // standard deviations for Normal distributions
   row_vector<lower=0>[C] sigma;
   
   // mixture proportions
@@ -42,7 +42,7 @@ parameters {
 
 transformed parameters {
   
-  // means for Normal pdfs
+  // means for Normal distributions
   array[C] matrix[N,T] M;
   for (c in 1:C) {
     for (t in 1:T) {
