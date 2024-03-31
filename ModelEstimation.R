@@ -71,7 +71,7 @@ job::job({
   # estimate model
   m_fit <- sampling(m,
                     data = list(C = C,
-                                #alpha = alpha,
+                                alpha = alpha,
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X),
