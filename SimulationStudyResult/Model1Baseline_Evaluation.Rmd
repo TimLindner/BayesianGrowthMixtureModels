@@ -123,7 +123,7 @@ plot(m1_base_fit_params$beta_1,
 
 
 ```{r}
-# standard deviation for Normal pdfs
+# standard deviation for Normal distributions
 plot(m1_base_fit_params$sigma,
      type = "l",
      col = "blueviolet",
@@ -137,7 +137,7 @@ par(new = TRUE)
 plot(m1_base_fit_params$sigma,
      type = "l",
      col = "blueviolet",
-     main = "Standard deviation for Normal pdfs",
+     main = "Standard deviation for Normal distributions",
      xlab = "Sampling iteration",
      ylab = "sigma")
 ```
@@ -193,7 +193,7 @@ box()
 
 
 ```{r}
-# standard deviation for Normal pdfs
+# standard deviation for Normal distributions
 hist(m1_base_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
@@ -206,7 +206,7 @@ par(new = TRUE)
 hist(m1_base_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
-     main = "Standard deviation for Normal pdfs",
+     main = "Standard deviation for Normal distributions",
      sub = "( the orange line shows the simulated parameter value )",
      xlab = "sigma")
 abline(v = sigma_sim,
