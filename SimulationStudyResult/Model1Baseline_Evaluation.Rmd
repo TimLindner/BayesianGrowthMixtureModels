@@ -70,12 +70,12 @@ for (t in 1:no_periods) {
 
 
 # colors ####
-green_transp <- rgb(red = 0,
-                    green = 250,
-                    blue = 154,
-                    max = 250,
-                    alpha = 25,
-                    names = "mediumspringgreen")
+pink_transp <- rgb(red = 255,
+                   green = 20,
+                   blue = 147,
+                   max = 255,
+                   alpha = 25,
+                   names = "deeppink1")
 ```
 
 
@@ -241,7 +241,7 @@ for (n in 1:N) {
   
   polygon(x = c(x, rev(x)),
           y = c(y_upper, rev(y_lower)),
-          col = green_transp,
+          col = pink_transp,
           lty = 0)
   lines(x = x,
         y = Y_sim[n,],
