@@ -96,7 +96,7 @@ beta_1_sim <- c(-0.5,1)
   #}
 #}
 
-# standard deviation for Normal distributions
+# standard deviations for Normal distributions
 sigma_sim <- c(0.25,0.75)
 
 # mixture proportions step 1
