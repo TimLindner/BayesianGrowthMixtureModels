@@ -39,10 +39,10 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # constant
-beta_0_sim <- 5
+beta_0_sim <- 6
 
 # linear trend component
-beta_1_sim <- 0.5
+beta_1_sim <- 1
 
 # standard deviation for Normal distributions
 sigma_sim <- 0.75
