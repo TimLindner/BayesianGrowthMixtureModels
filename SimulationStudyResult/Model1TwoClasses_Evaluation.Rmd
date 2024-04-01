@@ -12,6 +12,13 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+# Color coding
+* <span style="color: darkturquoise;">darkturquoise</span> for mixture proportion parameters
+* <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameters
+* <span style="color: deeppink;">deeppink</span> for predicted dependent variable
+* <span style="color: orange;">orange</span> for all simulated data
+
+
 ```{r, include = FALSE}
 # preparation ####
 # set working directory
@@ -95,6 +102,30 @@ pink_transp <- rgb(red = 255,
 
 
 # Trace plots
+## Mixture proportions
+```{r}
+for (n in 1:N) {
+  for (c in 1:C) {
+    plot(m_fit_params$Pi[,n,c],
+         type = "l",
+         col = "darkturquoise",
+         main = "",
+         xlab = "",
+         ylab = "")
+    
+    grid(nx = NA, ny = NULL)
+    par(new = TRUE)
+    
+    plot(m_fit_params$Pi[,n,c],
+         type = "l",
+         col = "darkturquoise",
+         main = paste("Individual n =", n, "and class c =", c),
+         xlab = "Sampling iteration",
+         ylab = "Pi")
+  }
+}
+```
+
 ## Constants
 ```{r}
 for (c in 1:C) {
@@ -164,32 +195,34 @@ for (c in 1:C) {
 ```
 
 
+# Posterior
 ## Mixture proportions
 ```{r}
 for (n in 1:N) {
   for (c in 1:C) {
-    plot(m_fit_params$Pi[,n,c],
-         type = "l",
+    hist(m_fit_params$Pi[,n,c],
          col = "darkturquoise",
+         border = FALSE,
          main = "",
-         xlab = "",
-         ylab = "")
+         xlab = "")
     
-    grid(nx = NA, ny = NULL)
+    grid()
     par(new = TRUE)
     
-    plot(m_fit_params$Pi[,n,c],
-         type = "l",
+    hist(m_fit_params$Pi[,n,c],
          col = "darkturquoise",
+         border = FALSE,
          main = paste("Individual n =", n, "and class c =", c),
-         xlab = "Sampling iteration",
-         ylab = "Pi")
+         sub = "( the orange line shows the simulated parameter value )",
+         xlab = "sigma")
+    abline(v = Pi_sim[n,c],
+           lwd = 2,
+           col = "orange")
+    box()
   }
 }
 ```
 
-
-# Posterior
 ## Constants
 ```{r}
 for (c in 1:C) {
@@ -264,34 +297,6 @@ for (c in 1:C) {
          lwd = 2,
          col = "orange")
   box()
-}
-```
-
-
-## Mixture proportions
-```{r}
-for (n in 1:N) {
-  for (c in 1:C) {
-    hist(m_fit_params$Pi[,n,c],
-         col = "darkturquoise",
-         border = FALSE,
-         main = "",
-         xlab = "")
-    
-    grid()
-    par(new = TRUE)
-    
-    hist(m_fit_params$Pi[,n,c],
-         col = "darkturquoise",
-         border = FALSE,
-         main = paste("Individual n =", n, "and class c =", c),
-         sub = "( the orange line shows the simulated parameter value )",
-         xlab = "sigma")
-    abline(v = Pi_sim[n,c],
-           lwd = 2,
-           col = "orange")
-    box()
-  }
 }
 ```
 
