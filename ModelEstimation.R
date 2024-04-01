@@ -58,7 +58,7 @@ C <- 2
 
 # alpha parameter for Dirichlet distributions,
 # which serve as prior distributions for mixture proportions
-alpha <- rep(3, times = C)
+alpha <- rep(1, times = C)
 
 # observed dependent variable
 Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
