@@ -12,6 +12,7 @@ The models have been implemented and estimated using Stan and its built-in No-U-
 * :file_folder: ModelImplementation
 * :file_folder: SimulationStudyData
 * :file_folder: SimulationStudyResult
+* :file_folder: TerrorismStudyResult
 * :page_facing_up: ModelEstimation
 * :page_facing_up: ModelSpecification
 
