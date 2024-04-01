@@ -73,18 +73,18 @@ Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
 C <- 2
 
 # constants
-beta_0_sim <- c(-5,5)
+beta_0_sim <- c(-5,6)
 
 # linear trend components
-beta_1_sim <- c(-0.5,0.5)
+beta_1_sim <- c(-0.5,1)
 
 # means for Normal distributions step 1
 # uncomment the following lines to run the lines
-M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
-M_sim <- list()
-for (c in 1:C) {
-  M_sim[[c]] <- M_sim_mtx
-}
+#M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
+#M_sim <- list()
+#for (c in 1:C) {
+  #M_sim[[c]] <- M_sim_mtx
+#}
 
 # means for Normal distributions step 2
 # uncomment the following lines to run the lines
@@ -97,7 +97,7 @@ for (c in 1:C) {
 #}
 
 # standard deviation for Normal distributions
-sigma_sim <- 0.75
+sigma_sim <- c(0.25,0.75)
 
 # mixture proportions step 1
 Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
