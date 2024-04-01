@@ -33,10 +33,10 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # model 1 baseline ####
 # constant
-beta_0_sim <- 5
+beta_0_sim <- 6
 
 # linear trend component
-beta_1_sim <- 0.5
+beta_1_sim <- 1
 
 # means for Normal distributions
 # uncomment the following lines to run the lines
