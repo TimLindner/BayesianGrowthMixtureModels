@@ -72,6 +72,17 @@ Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
 # number of latent classes
 C <- 2
 
+# mixture proportions step 1
+Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
+for (n in 1:round(N/2)) {
+  Pi_sim[n,] <- c(0.9,0.1)
+}
+
+# mixture proportions step 2
+for (n in (round(N/2)+1):N) {
+  Pi_sim[n,] <- c(0.1,0.9)
+}
+
 # constants
 beta_0_sim <- c(-5,6)
 
@@ -98,17 +109,6 @@ beta_1_sim <- c(-0.5,1)
 
 # standard deviations for Normal distributions
 sigma_sim <- c(0.25,0.75)
-
-# mixture proportions step 1
-Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
-for (n in 1:round(N/2)) {
-  Pi_sim[n,] <- c(0.9,0.1)
-}
-
-# mixture proportions step 2
-for (n in (round(N/2)+1):N) {
-  Pi_sim[n,] <- c(0.1,0.9)
-}
 
 # simulated dependent variable
 # uncomment the following lines to run the lines
