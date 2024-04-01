@@ -213,7 +213,7 @@ for (n in 1:N) {
          col = "darkturquoise",
          border = FALSE,
          main = paste("Individual n =", n, "and class c =", c),
-         sub = "( the orange line shows the simulated parameter value )",
+         sub = "( the orange line shows the simulated parameter )",
          xlab = "sigma")
     abline(v = Pi_sim[n,c],
            lwd = 2,
@@ -239,7 +239,7 @@ for (c in 1:C) {
        col = "blueviolet",
        border = FALSE,
        main = paste("Class c =", c),
-       sub = "( the orange line shows the simulated parameter value )",
+       sub = "( the orange line shows the simulated parameter )",
        xlab = "beta_0")
   abline(v = beta_0_sim[c],
          lwd = 2,
@@ -265,7 +265,7 @@ for (c in 1:C) {
        col = "blueviolet",
        border = FALSE,
        main = paste("Class c =", c),
-       sub = "( the orange line shows the simulated parameter value )",
+       sub = "( the orange line shows the simulated parameter )",
        xlab = "beta_1")
   abline(v = beta_1_sim[c],
          lwd = 2,
@@ -291,7 +291,7 @@ for (c in 1:C) {
        col = "blueviolet",
        border = FALSE,
        main = paste("Class c =", c),
-       sub = "( the orange line shows the simulated parameter value )",
+       sub = "( the orange line shows the simulated parameter )",
        xlab = "sigma")
   abline(v = sigma_sim[c],
          lwd = 2,
