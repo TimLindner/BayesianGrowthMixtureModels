@@ -214,7 +214,7 @@ for (n in 1:N) {
          border = FALSE,
          main = paste("Individual n =", n, "and class c =", c),
          sub = "( the orange line shows the simulated parameter )",
-         xlab = "sigma")
+         xlab = "Pi")
     abline(v = Pi_sim[n,c],
            lwd = 2,
            col = "orange")
