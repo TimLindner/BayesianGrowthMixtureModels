@@ -47,8 +47,8 @@ beta_0_sim <- c(-5,5)
 # linear trend components
 beta_1_sim <- c(-0.5,0.5)
 
-# standard deviations for Normal distributions
-sigma_sim <- c(0.25,0.75)
+# standard deviation for Normal distributions
+sigma_sim <- 0.75
 
 # mixture proportions step 1
 Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
@@ -141,7 +141,7 @@ for (c in 1:C) {
 ```
 
 
-## Standard deviation for Normal distributions
+## Standard deviations for Normal distributions
 ```{r}
 for (c in 1:C) {
   plot(m_fit_params$sigma[,c],
@@ -242,7 +242,7 @@ for (c in 1:C) {
 ```
 
 
-## Standard deviation for Normal distributions
+## Standard deviations for Normal distributions
 ```{r}
 for (c in 1:C) {
   hist(m_fit_params$sigma[,c],
