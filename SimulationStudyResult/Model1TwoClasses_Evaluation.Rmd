@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * <span style="color: darkturquoise;">darkturquoise</span> for mixture proportion parameters
 * <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameters
 * <span style="color: deeppink;">deeppink</span> for predicted dependent variable
-* <span style="color: orange;">orange</span> for all simulated data
+* <span style="color: orange;">orange</span> for all simulated data ( i.e., parameters and dependent variable )
 
 
 ```{r, include = FALSE}
