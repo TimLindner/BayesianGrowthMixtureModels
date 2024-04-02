@@ -19,9 +19,9 @@ library(openxlsx)
 library(readxl)
 
 
-# model 1 general ####
+# model 1 baseline ####
 # number of individuals
-N <- 30
+N <- 200
 
 # number of time periods
 no_periods <- 10
@@ -30,8 +30,6 @@ no_periods <- 10
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-
-# model 1 baseline ####
 # constant
 beta_0_sim <- 6
 
@@ -71,6 +69,16 @@ Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
 # model 1 two classes ####
 # number of latent classes
 C <- 2
+
+# number of individuals
+N <- 400
+
+# number of time periods
+no_periods <- 10
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # mixture proportions step 1
 Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
