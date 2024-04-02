@@ -17,6 +17,9 @@ knitr::opts_chunk$set(echo = FALSE)
 # required files:
 # Model1Baseline_Ysim.xlsx ( to load simulated dependent variable )
 # Model1Baseline_Fit.rds ( to load model fit )
+
+# if necessary, manually adjust descriptive statistics and
+# data simulation section
 ```
 
 
@@ -199,6 +202,8 @@ box()
 ```{r}
 # linear trend component
 hist(m_fit_params$beta_1,
+     xlim = c(min(m_fit_params$beta_1,beta_1_sim),
+              max(m_fit_params$beta_1,beta_1_sim)),
      col = "blueviolet",
      border = FALSE,
      main = "",
@@ -223,6 +228,8 @@ box()
 ```{r}
 # standard deviation for Normal distributions
 hist(m_fit_params$sigma,
+     xlim = c(min(m_fit_params$sigma,sigma_sim),
+              max(m_fit_params$sigma,sigma_sim)),
      col = "blueviolet",
      border = FALSE,
      main = "",
