@@ -25,6 +25,7 @@ algorithm <- "NUTS"
 chains <- 4  # default
 iter <- 2000  # default
 warmup <- floor(iter/2)  # default
+adapt_delta <- 0.8  # default
 
 
 # model 1 baseline ####
@@ -46,7 +47,8 @@ job::job({
                     iter = iter,
                     warmup = warmup,
                     init = init,
-                    algorithm = algorithm)
+                    algorithm = algorithm,
+                    control = list(adapt_delta = adapt_delta))
   
   # save model fit
   saveRDS(m_fit,
@@ -82,7 +84,8 @@ job::job({
                     iter = iter,
                     warmup = warmup,
                     init = init,
-                    algorithm = algorithm)
+                    algorithm = algorithm,
+                    control = list(adapt_delta = adapt_delta))
   
   # save model fit
   saveRDS(m_fit,
