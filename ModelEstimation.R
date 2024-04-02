@@ -21,11 +21,17 @@ rstan_options(auto_write = TRUE)
 
 
 # NUTS parameters ####
+# choose NUTS as algorithm
 algorithm <- "NUTS"
+
+# number of chains
 chains <- 4  # default
+
+# number of iterations per chain
 iter <- 2000  # default
+
+# number of warmup iterations per chain
 warmup <- floor(iter/2)  # default
-adapt_delta <- 0.8  # default
 
 
 # model 1 baseline ####
@@ -47,8 +53,7 @@ job::job({
                     iter = iter,
                     warmup = warmup,
                     init = init,
-                    algorithm = algorithm,
-                    control = list(adapt_delta = adapt_delta))
+                    algorithm = algorithm)
   
   # save model fit
   saveRDS(m_fit,
@@ -84,12 +89,11 @@ job::job({
                     iter = iter,
                     warmup = warmup,
                     init = init,
-                    algorithm = algorithm,
-                    control = list(adapt_delta = adapt_delta))
+                    algorithm = algorithm)
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResult/Model1TwoClasses_Fit.rds")
+          "SimulationStudyResult/Model1TwoClasses_Fit_TEST.rds")
   
 })
 
