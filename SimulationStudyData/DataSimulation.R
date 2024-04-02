@@ -1,6 +1,12 @@
 # closing the sections provides an overview of the script
 
 
+# README ####
+# required files:
+# Model1Baseline_Ysim.xlsx ( to load Y_sim for model 1 baseline )
+# Model1TwoClasses_Ysim.xlsx ( to load Y_sim for model 1 two classes )
+
+
 # preparation ####
 # set working directory
 setwd("C:/Users/Diiim/Documents/ResearchAssistance/SimulationStudyData")
@@ -31,10 +37,12 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # constant
-beta_0_sim <- 6
+# uncomment the next line to run the line
+# beta_0_sim <- 6
 
 # linear trend component
-beta_1_sim <- 1
+# uncomment the next line to run the line
+# beta_1_sim <- 1
 
 # means for Normal distributions
 # uncomment the following lines to run the lines
@@ -46,7 +54,8 @@ beta_1_sim <- 1
 #}
 
 # standard deviation for Normal distributions
-sigma_sim <- 0.75
+# uncomment the next line to run the line
+# sigma_sim <- 0.75
 
 # simulated dependent variable
 # uncomment the following lines to run the lines
@@ -68,7 +77,8 @@ Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
 
 # model 1 two classes ####
 # number of latent classes
-C <- 2
+# uncomment the next line to run the line
+# C <- 2
 
 # number of individuals
 N <- 400
@@ -81,26 +91,30 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # mixture proportions step 1
-Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
-for (n in 1:round(N/2)) {
-  Pi_sim[n,] <- c(0.9,0.1)
-}
+# uncomment the following lines to run the lines
+#Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
+#for (n in 1:round(N/2)) {
+  #Pi_sim[n,] <- c(0.9,0.1)
+#}
 
 # mixture proportions step 2
-for (n in (round(N/2)+1):N) {
-  Pi_sim[n,] <- c(0.1,0.9)
-}
+# uncomment the following lines to run the lines
+#for (n in (round(N/2)+1):N) {
+  #Pi_sim[n,] <- c(0.1,0.9)
+#}
 
 # constants
-beta_0_sim <- c(-5,6)
+# uncomment the next line to run the line
+# beta_0_sim <- c(-5,6)
 
 # linear trend components
-beta_1_sim <- c(-0.5,1)
+# uncomment the next line to run the line
+# beta_1_sim <- c(-0.5,1)
 
 # means for Normal distributions step 1
 # uncomment the following lines to run the lines
-#M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
-#M_sim <- list()
+# M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
+# M_sim <- list()
 #for (c in 1:C) {
   #M_sim[[c]] <- M_sim_mtx
 #}
@@ -116,7 +130,8 @@ beta_1_sim <- c(-0.5,1)
 #}
 
 # standard deviations for Normal distributions
-sigma_sim <- c(0.25,0.75)
+# uncomment the next line to run the line
+# sigma_sim <- c(0.25,0.75)
 
 # simulated dependent variable
 # uncomment the following lines to run the lines
@@ -132,7 +147,7 @@ sigma_sim <- c(0.25,0.75)
 
 # save Y_sim ( transformed to data frame beforehand )
 # uncomment the next line to run the line
-#write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
+# write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
 
 # load Y_sim
 Y_sim <- data.frame(read_excel("Model1TwoClasses_Ysim.xlsx",
