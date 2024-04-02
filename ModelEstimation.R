@@ -1,5 +1,10 @@
 # closing the sections provides an overview of the script
 
+# README ####
+# required files:
+# Model1Baseline.stan ( to load model for model 1 baseline )
+# Model1MultipleClasses ( to load model for model 1 multiple classes )
+
 
 # preparation ####
 # set working directory
@@ -18,7 +23,7 @@ iter <- 2000  # default
 warmup <- floor(iter/2)  # default
 
 
-# model 1 baseline - estimation ####
+# model 1 baseline ####
 # load model
 m <- stan_model("ModelImplementation/Model1Baseline.stan")
 
@@ -49,7 +54,7 @@ job::job({
 })
 
 
-# model 1 multiple classes - estimation ####
+# model 1 multiple classes ####
 # load model
 m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
