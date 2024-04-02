@@ -27,22 +27,25 @@ library(readxl)
 
 # model 1 baseline ####
 # number of individuals
-N <- 200
+# uncomment the next line to run the line
+#N <- 200
 
 # number of time periods
-no_periods <- 10
+# uncomment the next line to run the line
+#no_periods <- 10
 
 # time periods
-time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+# uncomment the following lines to run the lines
+#time_periods <- 0:(no_periods-1)
+#X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # constant
 # uncomment the next line to run the line
-# beta_0_sim <- 6
+#beta_0_sim <- 6
 
 # linear trend component
 # uncomment the next line to run the line
-# beta_1_sim <- 1
+#beta_1_sim <- 1
 
 # means for Normal distributions
 # uncomment the following lines to run the lines
@@ -55,7 +58,7 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # standard deviation for Normal distributions
 # uncomment the next line to run the line
-# sigma_sim <- 0.75
+#sigma_sim <- 0.75
 
 # simulated dependent variable
 # uncomment the following lines to run the lines
@@ -74,21 +77,34 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 Y_sim <- data.frame(read_excel("Model1Baseline_Ysim.xlsx",
                                sheet = "Sheet 1"))
 
-
-# model 1 two classes ####
-# number of latent classes
-# uncomment the next line to run the line
-# C <- 2
-
 # number of individuals
-N <- 400
+N <- dim(Y_sim)[1]
 
 # number of time periods
-no_periods <- 10
+no_periods <- dim(Y_sim)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+
+# model 1 two classes ####
+# number of latent classes
+# uncomment the next line to run the line
+#C <- 2
+
+# number of individuals
+# uncomment the next line to run the line
+#N <- 400
+
+# number of time periods
+# uncomment the next line to run the line
+#no_periods <- 10
+
+# time periods
+# uncomment the following lines to run the lines
+#time_periods <- 0:(no_periods-1)
+#X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # mixture proportions step 1
 # uncomment the following lines to run the lines
@@ -105,11 +121,11 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # constants
 # uncomment the next line to run the line
-# beta_0_sim <- c(-5,6)
+#beta_0_sim <- c(-5,6)
 
 # linear trend components
 # uncomment the next line to run the line
-# beta_1_sim <- c(-0.5,1)
+#beta_1_sim <- c(-0.5,1)
 
 # means for Normal distributions step 1
 # uncomment the following lines to run the lines
@@ -131,7 +147,7 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # standard deviations for Normal distributions
 # uncomment the next line to run the line
-# sigma_sim <- c(0.25,0.75)
+#sigma_sim <- c(0.25,0.75)
 
 # simulated dependent variable
 # uncomment the following lines to run the lines
@@ -147,10 +163,20 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # save Y_sim ( transformed to data frame beforehand )
 # uncomment the next line to run the line
-# write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
+#write.xlsx(data.frame(Y_sim), "Model1TwoClasses_Ysim.xlsx")
 
 # load Y_sim
 Y_sim <- data.frame(read_excel("Model1TwoClasses_Ysim.xlsx",
                                sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_sim)[1]
+
+# number of time periods
+no_periods <- dim(Y_sim)[2]
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 
