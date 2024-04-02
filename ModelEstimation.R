@@ -3,7 +3,7 @@
 # README ####
 # required files:
 # Model1Baseline.stan ( to load model for model 1 baseline )
-# Model1MultipleClasses ( to load model for model 1 multiple classes )
+# Model1MultipleClasses.stan ( to load model for model 1 multiple classes )
 
 
 # preparation ####
