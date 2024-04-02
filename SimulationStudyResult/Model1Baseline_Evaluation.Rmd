@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Data simulation
-* $y^{sim}_{n,t} \sim Normal(6 + 1 \, x_{n,t},0.75) \quad \text{for } n = 1,...,N$
+* $y^{obs}_{n,t} \sim Normal(6 + 1 \, x_{n,t},0.75) \quad \text{for } n = 1,...,N$
 
 
 ```{r, include = FALSE}
@@ -187,6 +187,8 @@ grid()
 par(new = TRUE)
 
 hist(m_fit_params$beta_0,
+     xlim = c(min(m_fit_params$beta_0,beta_0_sim),
+              max(m_fit_params$beta_0,beta_0_sim)),
      col = "blueviolet",
      border = FALSE,
      main = "Constant",
@@ -213,6 +215,8 @@ grid()
 par(new = TRUE)
 
 hist(m_fit_params$beta_1,
+     xlim = c(min(m_fit_params$beta_1,beta_1_sim),
+              max(m_fit_params$beta_1,beta_1_sim)),
      col = "blueviolet",
      border = FALSE,
      main = "Linear trend component",
@@ -239,6 +243,8 @@ grid()
 par(new = TRUE)
 
 hist(m_fit_params$sigma,
+     xlim = c(min(m_fit_params$sigma,sigma_sim),
+              max(m_fit_params$sigma,sigma_sim)),
      col = "blueviolet",
      border = FALSE,
      main = "Standard deviation for Normal distributions",
