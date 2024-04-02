@@ -12,6 +12,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+```{r, include = FALSE}
+# README
+# required files:
+# Model1TwoClasses_Ysim.xlsx ( to load simulated dependent variable )
+# Model1TwoClasses_Fit.rds ( to load model fit )
+```
+
+
 # Color coding
 * <span style="color: darkturquoise;">darkturquoise</span> for mixture proportion parameters
 * <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameters
