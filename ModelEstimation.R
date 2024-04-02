@@ -2,7 +2,8 @@
 
 # README ####
 # before model estimation,
-# run DataSimulation.R ( respective section ) or TerrorismData.R
+# run DataSimulation.R ( preparation section plus respective model section )
+# or TerrorismData.R
 
 # required files:
 # Model1Baseline.stan ( to load model for model 1 baseline )
