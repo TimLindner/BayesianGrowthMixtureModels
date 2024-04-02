@@ -12,6 +12,14 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+```{r, include = FALSE}
+# README
+# required files:
+# Model1Baseline_Ysim.xlsx ( to load simulated dependent variable )
+# Model1Baseline_Fit.rds ( to load model fit )
+```
+
+
 # Color coding
 * <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameters
 * <span style="color: deeppink;">deeppink</span> for predicted dependent variable
