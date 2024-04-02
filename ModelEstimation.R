@@ -31,9 +31,6 @@ warmup <- floor(iter/2)  # default
 # load model
 m <- stan_model("ModelImplementation/Model1Baseline.stan")
 
-# observed dependent variable
-Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
-
 # model-specific NUTS parameter
 init <- "random"
 
@@ -68,9 +65,6 @@ C <- 2
 # alpha parameter for Dirichlet distributions,
 # which serve as prior distributions for mixture proportions
 alpha <- rep(1, times = C)
-
-# observed dependent variable
-Y_obs <- Y_sim  # # change Y_sim to Y_act for actual data
 
 # model-specific NUTS parameter
 init <- "random"
