@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Color coding
-* <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameters
+* <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameter
 * <span style="color: deeppink;">deeppink</span> for predicted dependent variable
 * <span style="color: orange;">orange</span> for simulated parameters and observed dependent variable
 
