@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Data simulation
-* $y^{sim}_{n,t} \sim Normal(5 + 1 \, x_{n,t},0.75) \quad \text{for } n = 1,...,N$
+* $y^{sim}_{n,t} \sim Normal(6 + 1 \, x_{n,t},0.75) \quad \text{for } n = 1,...,N$
 
 
 ```{r, include = FALSE}
@@ -173,6 +173,8 @@ plot(m_fit_params$sigma,
 ```{r}
 # constant
 hist(m_fit_params$beta_0,
+     xlim = c(min(m_fit_params$beta_0,beta_0_sim),
+              max(m_fit_params$beta_0,beta_0_sim)),
      col = "blueviolet",
      border = FALSE,
      main = "",
