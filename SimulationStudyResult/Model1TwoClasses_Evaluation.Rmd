@@ -17,19 +17,29 @@ knitr::opts_chunk$set(echo = FALSE)
 # required files:
 # Model1TwoClasses_Ysim.xlsx ( to load simulated dependent variable )
 # Model1TwoClasses_Fit.rds ( to load model fit )
+
+# if necessary, manually adjust descriptive statistics and
+# data simulation section
 ```
 
 
 # Color coding
 * <span style="color: darkturquoise;">darkturquoise</span> for mixture proportion parameters
-* <span style="color: blueviolet;">blueviolet</span> for constant and trend component parameters
+* <span style="color: blueviolet;">blueviolet</span> for Normal distribution parameters ( i.e., constant, linear trend component, and standard deviation )
 * <span style="color: deeppink;">deeppink</span> for predicted dependent variable
-* <span style="color: orange;">orange</span> for all simulated data ( i.e., parameters and dependent variable )
+* <span style="color: orange;">orange</span> for simulated parameters and observed dependent variable
 
 
 # Descriptive statistics
-* N = 200
-* T = 10
+* $N = 400$
+
+* $T = 10$
+
+
+# Data simulation
+* $y^{obs}_{n,t} \sim 0.9 \, Normal(-5 -0.5 \, x_{n,t},0.25) + 0.1 \, Normal(6 + 1 \, x_{n,t},0.75) \quad \text{for } n = 1,...,200$
+
+* $y^{obs}_{n,t} \sim 0.1 \, Normal(-5 -0.5 \, x_{n,t},0.25) + 0.9 \, Normal(6 + 1 \, x_{n,t},0.75) \quad \text{for } n = 201,...,N$
 
 
 ```{r, include = FALSE}
@@ -47,53 +57,28 @@ options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 
 
-# simulated data ####
+# estimated data ####
 # number of latent classes
 C <- 2
 
+# load model fit
+m_fit <- readRDS("SimulationStudyResult/Model1TwoClasses_Fit.rds")
+m_fit_params <- rstan::extract(m_fit)
+
+# predicted dependent variable
+Y_pred <- m_fit_params$Y_pred
+
 # number of individuals
-N <- 400
+N <- dim(Y_pred[1,,])[1]
 
 # number of time periods
-no_periods <- 10
+no_periods <- dim(Y_pred[1,,])[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mixture proportions step 1
-Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
-for (n in 1:round(N/2)) {
-  Pi_sim[n,] <- c(0.9,0.1)
-}
-
-# mixture proportions step 2
-for (n in (round(N/2)+1):N) {
-  Pi_sim[n,] <- c(0.1,0.9)
-}
-
-# constants
-beta_0_sim <- c(-5,6)
-
-# linear trend components
-beta_1_sim <- c(-0.5,1)
-
-# standard deviations for Normal distributions
-sigma_sim <- c(0.25,0.75)
-
-# load simulated dependent variable
-Y_sim <-
-  data.frame(read_excel("SimulationStudyData/Model1TwoClasses_Ysim.xlsx",
-                        sheet = "Sheet 1"))
-
-
-# estimated data ####
-# load model fit
-m_fit <- readRDS("SimulationStudyResult/Model1TwoClasses_Fit.rds")
-m_fit_params <- rstan::extract(m_fit)
-
 # middle 90% credible intervals for Y_pred
-Y_pred <- m_fit_params$Y_pred
 Y_pred_CI_lower <- matrix(data = 0, nrow = N, ncol = no_periods)
 Y_pred_CI_upper <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (t in 1:no_periods) {
@@ -102,6 +87,33 @@ for (t in 1:no_periods) {
     Y_pred_CI_upper[n,t] <- quantile(Y_pred[,n,t], prob = 0.95)
   }
 }
+
+
+# simulated data ####
+# simulated mixture proportions step 1
+Pi_sim <- matrix(data = 0, nrow = N, ncol = C)
+for (n in 1:round(N/2)) {
+  Pi_sim[n,] <- c(0.9,0.1)
+}
+
+# simulated mixture proportions step 2
+for (n in (round(N/2)+1):N) {
+  Pi_sim[n,] <- c(0.1,0.9)
+}
+
+# simulated constants
+beta_0_sim <- c(-5,6)
+
+# simulated linear trend components
+beta_1_sim <- c(-0.5,1)
+
+# simulated standard deviations for Normal distributions
+sigma_sim <- c(0.25,0.75)
+
+# load observed dependent variable
+Y_obs <-
+  data.frame(read_excel("SimulationStudyData/Model1TwoClasses_Yobs.xlsx",
+                        sheet = "Sheet 1"))
 
 
 # colors ####
@@ -214,6 +226,8 @@ for (c in 1:C) {
 for (n in 1:N) {
   for (c in 1:C) {
     hist(m_fit_params$Pi[,n,c],
+         xlim = c(min(m_fit_params$Pi[,n,c],Pi_sim[n,c]),
+                  max(m_fit_params$Pi[,n,c],Pi_sim[n,c])),
          col = "darkturquoise",
          border = FALSE,
          main = "",
@@ -223,6 +237,8 @@ for (n in 1:N) {
     par(new = TRUE)
     
     hist(m_fit_params$Pi[,n,c],
+         xlim = c(min(m_fit_params$Pi[,n,c],Pi_sim[n,c]),
+                  max(m_fit_params$Pi[,n,c],Pi_sim[n,c])),
          col = "darkturquoise",
          border = FALSE,
          main = paste("Individual n =", n, "and class c =", c),
@@ -240,6 +256,8 @@ for (n in 1:N) {
 ```{r}
 for (c in 1:C) {
   hist(m_fit_params$beta_0[,c],
+       xlim = c(min(m_fit_params$beta_0[,c],beta_0_sim[c]),
+                max(m_fit_params$beta_0[,c],beta_0_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -249,6 +267,8 @@ for (c in 1:C) {
   par(new = TRUE)
   
   hist(m_fit_params$beta_0[,c],
+       xlim = c(min(m_fit_params$beta_0[,c],beta_0_sim[c]),
+                max(m_fit_params$beta_0[,c],beta_0_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Class c =", c),
@@ -266,6 +286,8 @@ for (c in 1:C) {
 ```{r}
 for (c in 1:C) {
   hist(m_fit_params$beta_1[,c],
+       xlim = c(min(m_fit_params$beta_1[,c],beta_1_sim[c]),
+                max(m_fit_params$beta_1[,c],beta_1_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -275,6 +297,8 @@ for (c in 1:C) {
   par(new = TRUE)
   
   hist(m_fit_params$beta_1[,c],
+       xlim = c(min(m_fit_params$beta_1[,c],beta_1_sim[c]),
+                max(m_fit_params$beta_1[,c],beta_1_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Class c =", c),
@@ -292,6 +316,8 @@ for (c in 1:C) {
 ```{r}
 for (c in 1:C) {
   hist(m_fit_params$sigma[,c],
+       xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
+                max(m_fit_params$sigma[,c],sigma_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -301,6 +327,8 @@ for (c in 1:C) {
   par(new = TRUE)
   
   hist(m_fit_params$sigma[,c],
+       xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
+                max(m_fit_params$sigma[,c],sigma_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Class c =", c),
@@ -324,13 +352,13 @@ for (n in 1:N) {
   plot(x = x,
        y = c(max(y_upper),
              min(y_lower),
-             max(Y_sim[n,]),
-             min(Y_sim[n,]),
+             max(Y_obs[n,]),
+             min(Y_obs[n,]),
              rep(max(y_upper), times = no_periods-4)),
        type="l",
        col = "white",
        main = paste("Individual n =", n),
-       sub = "( the orange line shows the simulated dependent variable )",
+       sub = "( the orange line shows the observed dependent variable )",
        xlab = "t",
        ylab = "Y_pred")
   
@@ -342,7 +370,7 @@ for (n in 1:N) {
           col = pink_transp,
           lty = 0)
   lines(x = x,
-        y = Y_sim[n,],
+        y = Y_obs[n,],
         lwd = 2,
         col = "orange")
   box()
