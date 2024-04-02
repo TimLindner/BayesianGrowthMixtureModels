@@ -1,5 +1,12 @@
 data {
   
+  // number of latent classes
+  int C;
+  
+  // alpha parameter for Dirichlet distributions,
+  // which serve as prior distributions for mixture proportions
+  vector[C] alpha;
+  
   // number of individuals
   int N;
   
@@ -12,30 +19,22 @@ data {
   // time periods
   matrix[N,T] X;
   
-  // number of latent classes
-  int C;
-  
-  // alpha parameter for Dirichlet distributions,
-  // which serve as prior distributions for mixture proportions
-  vector[C] alpha;
-  
 }
 
 
-
 parameters {
+  
+  // mixture proportions
+  array[N] simplex[C] Pi;
   
   // constants
   row_vector[C] beta_0;
   
   // linear trend components
-  row_vector[C] beta_1;
+  ordered[C] beta_1;
   
   // standard deviations for Normal distributions
-  row_vector<lower=0>[C] sigma;
-  
-  // mixture proportions
-  array[N] simplex[C] Pi;
+  vector<lower=0>[C] sigma;
   
 }
 
@@ -57,6 +56,9 @@ transformed parameters {
 
 model {
   
+  // prior for mixture proportions
+  Pi ~ dirichlet(alpha);
+  
   // prior for beta_0
   beta_0 ~ normal(0,5);
   
@@ -66,19 +68,16 @@ model {
   // prior for sigma
   sigma ~ normal(0,1);
   
-  // prior for Pi
-  Pi ~ dirichlet(alpha);
-  
-  // likelihood step 1
+  // likelihood
   vector[C] lp;  // log posterior
   for (t in 1:T) {
     for (n in 1:N) {
       lp = log(Pi[n]);  // log transform Pi
       for (c in 1:C) {
-        lp += normal_lpdf(Y_obs[n,t] | M[c,n,t], sigma[c]);
+        lp[c] += normal_lpdf(Y_obs[n,t] | M[c,n,t], sigma[c]);
       }
+      target += log_sum_exp(lp);
     }
-    target += log_sum_exp(lp);
   }
   
 }
