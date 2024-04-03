@@ -1,20 +1,30 @@
 # closing the sections provides an overview of the script
 
 # README ####
-# before model estimation,
-# run DataSimulation.R ( preparation section plus respective model section )
-# or TerrorismData.R
+# required files for model 1 baseline:
+# xlsx file containing observed dependent variable
+# stan file containing model 1 baseline implementation
 
-# required files:
-# Model1Baseline.stan ( to load model for model 1 baseline )
-# Model1MultipleClasses.stan ( to load model for model 1 multiple classes )
+# required files for model 1 multiple classes:
+# xlsx file containing observed dependent variable
+# stan file containing model 1 multiple classes implementation
 
 
 # preparation ####
 # set working directory
 setwd("C:/Users/Diiim/Documents/ResearchAssistance")
 
+# clean workspace
+rm(list = ls())
+
+# clean garbage
+gc()
+
+# set decimals to digits instead of scientific
+options(scipen = 999)
+
 # load packages
+library(readxl)
 library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
@@ -35,6 +45,20 @@ warmup <- floor(iter/2)  # default
 
 
 # model 1 baseline ####
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model1Baseline_Yobs.xlsx",
+                               sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
 # load model
 m <- stan_model("ModelImplementation/Model1Baseline.stan")
 
@@ -63,15 +87,25 @@ job::job({
 
 
 # model 1 multiple classes ####
-# load model
-m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
-
 # number of latent classes
 C <- 2
 
-# alpha parameter for Dirichlet distributions,
-# which serve as prior distributions for mixture proportions
-alpha <- rep(1, times = C)
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model1TwoClasses_Yobs.xlsx",
+                               sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# load model
+m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
 
 # model-specific NUTS parameter
 init <- "random"
@@ -81,7 +115,6 @@ job::job({
   # estimate model
   m_fit <- sampling(m,
                     data = list(C = C,
-                                alpha = alpha,
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X),
