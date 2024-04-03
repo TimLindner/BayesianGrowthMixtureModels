@@ -18,8 +18,8 @@ knitr::opts_chunk$set(echo = FALSE)
 # Model1Baseline_Ysim.xlsx ( to load simulated dependent variable )
 # Model1Baseline_Fit.rds ( to load model fit )
 
-# if necessary, manually adjust descriptive statistics and
-# data simulation section
+# if necessary, the descriptive statistics and data simulation section
+# have to be adjusted manually
 ```
 
 
