@@ -46,7 +46,7 @@ warmup <- floor(iter/2)  # default
 
 # model 1 baseline ####
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1Baseline_Yobs.xlsx",
+Y_obs <- data.frame(read_excel("SimulationStudyData/Model1Baseline_Yobs.xlsx",
                                sheet = "Sheet 1"))
 
 # number of individuals
@@ -91,7 +91,7 @@ job::job({
 C <- 2
 
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1TwoClasses_Yobs.xlsx",
+Y_obs <- data.frame(read_excel("SimulationStudyData/Model1TwoClasses_Yobs.xlsx",
                                sheet = "Sheet 1"))
 
 # number of individuals
