@@ -18,6 +18,6 @@ The models have been implemented and estimated using Stan and its built-in No-U-
 
 ### References
 * Stan Development Team. (n.d.). *Stan Documentation, Version 2.34*. Stan. https://mc-stan.org/docs/
-* Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
+* Stan Development Team. (2024). *RStan: the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing. https://CRAN.R-project.org/package=rstan
 
 
