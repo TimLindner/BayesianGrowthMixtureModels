@@ -1,6 +1,11 @@
 # closing the sections provides an overview of the script
 
 
+# README ####
+# firstly, run the preparation section.
+# secondly, run one or several dataset sections ( in any order ).
+
+
 # preparation ####
 # set working directory
 setwd("C:/Users/Diiim/Documents/ResearchAssistance/SimulationStudyData")
