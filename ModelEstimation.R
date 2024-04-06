@@ -1,13 +1,20 @@
 # closing the sections provides an overview of the script
 
+
 # README ####
+# firstly, run the preparation and NUTS parameters section.
+# secondly, run one or several model sections ( in any order ).
+
 # required files for model 1 baseline:
-# xlsx file containing observed dependent variable
-# stan file containing model 1 baseline implementation
+# Dataset1_Yobs.xlsx
+# Model1Baseline.stan
 
 # required files for model 1 multiple classes:
-# xlsx file containing observed dependent variable
-# stan file containing model 1 multiple classes implementation
+# one of the following datasets:
+# - Dataset2_Yobs.xlsx ( default dataset )
+# - Dataset3_Yobs.xlsx
+# - Dataset4_Yobs.xlsx
+# Model1MultipleClasses.stan
 
 
 # preparation ####
@@ -31,22 +38,22 @@ rstan_options(auto_write = TRUE)
 
 
 # NUTS parameters ####
-# choose NUTS as algorithm
+# algorithm
 algorithm <- "NUTS"
 
 # number of chains
-chains <- 4  # default
+chains <- 4
 
 # number of iterations per chain
-iter <- 2000  # default
+iter <- 2000
 
 # number of warmup iterations per chain
-warmup <- floor(iter/2)  # default
+warmup <- floor(iter/2)
 
 
 # model 1 baseline ####
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("SimulationStudyData/Model1Baseline_Yobs.xlsx",
+Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset1_Yobs.xlsx",
                                sheet = "Sheet 1"))
 
 # number of individuals
@@ -91,7 +98,7 @@ job::job({
 C <- 2
 
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("SimulationStudyData/Model1TwoClasses_Yobs.xlsx",
+Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset2_Yobs.xlsx",
                                sheet = "Sheet 1"))
 
 # number of individuals
@@ -126,7 +133,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResult/Model1TwoClasses_Fit_TEST.rds")
+          "SimulationStudyResult/Model1TwoClasses_FitDataset2.rds")
   
 })
 
