@@ -16,9 +16,49 @@ options(scipen = 999)
 
 # load packages
 library(openxlsx)
+library(extraDistr)
 
 
-# model 1 baseline ####
+# dataset 1 - model 1 baseline ####
+# number of individuals
+N <- 50
+
+# number of time periods
+no_periods <- 10
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# simulated constant
+beta_0_sim <- 10
+
+# simulated linear trend component
+beta_1_sim <- 1
+
+# simulated means for Normal distributions
+M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
+for (t in 1:no_periods) {
+  M_sim[,t] <- beta_0_sim + beta_1_sim * X[,t]  # vectorization
+}
+
+# simulated standard deviation for Normal distributions
+sigma_sim <- 0.75
+
+# observed dependent variable
+Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
+for (t in 1:no_periods) {
+  Y_obs[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim)  # vectorization
+}
+
+# save Y_obs ( transformed to data frame beforehand )
+write.xlsx(data.frame(Y_obs), "Dataset1_Yobs.xlsx")
+
+
+# dataset 2 - model 1 two classes - no overlaps between classes ####
+# number of simulated classes
+C <- 2
+
 # number of individuals
 N <- 200
 
@@ -29,79 +69,20 @@ no_periods <- 10
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# simulated constant
-beta_0_sim <- 6
-
-# simulated linear trend component
-beta_1_sim <- 1
-
-# simulated means for Normal distributions
-M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
-for (t in 1:no_periods) {
-  for (n in 1:N) {
-    M_sim[n,t] <- beta_0_sim + beta_1_sim * X[n,t]
-  }
-}
-
-# simulated standard deviation for Normal distributions
-sigma_sim <- 0.75
-
-# observed dependent variable
-Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (t in 1:no_periods) {
-  for (n in 1:N) {
-    Y_obs[n,t] <- rnorm(1, mean = M_sim[n,t], sd = sigma_sim)
-  }
-}
-
-# save Y_obs ( transformed to data frame beforehand )
-write.xlsx(data.frame(Y_obs), "Model1Baseline_Yobs.xlsx")
-
-
-# model 1 two classes ####
-# number of simulated classes
-C_sim <- 2
-
-# number of individuals
-N <- 400
-
-# number of time periods
-no_periods <- 10
-
-# time periods
-time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
-
-# simulated mixture proportions step 1
-Pi_sim <- matrix(data = 0, nrow = N, ncol = C_sim)
-for (n in 1:round(N/2)) {
-  Pi_sim[n,] <- c(0.9,0.1)
-}
-
-# simulated mixture proportions step 2
-for (n in (round(N/2)+1):N) {
-  Pi_sim[n,] <- c(0.1,0.9)
-}
+# class memberships
+z_sim <- rcat(n = N, prob = c(0.3,0.7))  # vectorization
 
 # simulated constants
-beta_0_sim <- c(-5,6)
+beta_0_sim <- c(-5,10)
 
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
 
-# simulated means for Normal distributions step 1
-M_sim_mtx <- matrix(data = 0, nrow = N, ncol = no_periods)
-M_sim <- list()
-for (c in 1:C_sim) {
-  M_sim[[c]] <- M_sim_mtx
-}
-
-# simulated means for Normal distributions step 2
-for (c in 1:C_sim) {
-  for (t in 1:no_periods) {
-    for (n in 1:N) {
-      M_sim[[c]][n,t] <- beta_0_sim[c] + beta_1_sim[c] * X[n,t]
-    }
+# simulated means for Normal distributions
+M_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
+for (t in 1:no_periods) {
+  for (n in 1:N) {
+    M_sim[n,t] <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,t]
   }
 }
 
@@ -110,17 +91,21 @@ sigma_sim <- c(0.25,0.75)
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (c in 1:C_sim) {
-  for (t in 1:no_periods) {
-    for (n in 1:N) {
-      Y_obs[n,t] <-
-        Y_obs[n,t]+Pi_sim[n,c]*rnorm(n=1,mean=M_sim[[c]][n,t],sd=sigma_sim)
-    }
+for (t in 1:no_periods) {
+  for (n in 1:N) {
+    Y_obs[n,t] <- rnorm(n = 1, mean = M_sim[n,t], sd = sigma_sim)
   }
 }
 
 # save Y_obs ( transformed to data frame beforehand )
-# uncomment the next line to run the line
-write.xlsx(data.frame(Y_obs), "Model1TwoClasses_Yobs.xlsx")
+write.xlsx(data.frame(Y_obs), "Dataset2_Yobs.xlsx")
+
+
+# dataset 3 - model 1 two classes - overlapping constants ####
+# placeholder
+
+
+# dataset 4 - model 1 two classes - intersecting trends ####
+# placeholder
 
 
