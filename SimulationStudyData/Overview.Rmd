@@ -1,0 +1,129 @@
+---
+title: "Table of contents"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r, include = FALSE}
+# README
+# required files:
+# Dataset1_Yobs.xlsx
+# Dataset2_Yobs.xlsx
+```
+
+
+```{r, include = FALSE}
+# preparation
+# set working directory
+setwd("C:/Users/Diiim/Documents/ResearchAssistance/SimulationStudyData")
+
+# set decimals to digits instead of scientific
+options(scipen = 999)
+
+# load packages
+library(readxl)
+```
+
+
+# Model 1
+## Dataset 1 - model 1 baseline
+$\text{For } n \text{ in } 1,...,50\text{:}$
+
+* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Dataset1_Yobs.xlsx", sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# plot observed dependent variable
+x <- time_periods
+plot(x = x,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable",
+     xlab = "t",
+     ylab = "Y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = x,
+        y = Y_obs[n,],
+        col = "orange")
+
+box()
+}
+```
+
+
+## Dataset 2 - model 1 two classes - no overlaps between classes
+$\text{For } n \text{ in } 1,...,200\text{:}$
+
+* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
+
+* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2$
+
+* $z_n \sim Categorical(0.3,0.7)$
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Dataset2_Yobs.xlsx", sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# plot observed dependent variable
+x <- time_periods
+plot(x = x,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable",
+     xlab = "t",
+     ylab = "Y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = x,
+        y = Y_obs[n,],
+        col = "orange")
+
+box()
+}
+```
+
+
