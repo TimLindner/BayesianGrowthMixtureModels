@@ -59,7 +59,9 @@ transformed parameters {
   array[C] matrix[N,T] M;
   for (c in 1:C) {
     for (t in 1:T) {
-      M[c,,t] = beta_0[c] + beta_1[c] * col(X,t);  // vectorization
+      for (n in 1:N) {
+        M[c,n,t] = beta_0[c] + beta_1[c] * X[n,t];
+      }
     }
   }
   
@@ -85,7 +87,7 @@ model {
   lambda ~ dirichlet(alpha);  // vectorization
   
   // prior for beta_0
-  beta_0 ~ normal(0,5);  // vectorization
+  beta_0 ~ normal(0,10);  // vectorization
   
   // prior for beta_1
   beta_1 ~ normal(0,1);  // vectorization
