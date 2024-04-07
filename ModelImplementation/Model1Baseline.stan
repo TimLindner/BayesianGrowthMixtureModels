@@ -48,7 +48,7 @@ model {
   sigma ~ normal(0,1);
   
   // means for Y_obs Normal distributions
-  vector[T] mu;
+  vector[N] mu;
   
   // likelihood
   for (t in 1:T) {
