@@ -58,15 +58,15 @@ parameters {
 
 transformed parameters {
   
-  // log posterior
-  array[N] vector[C] lp;
+  // likelihood
+  array[N] vector[C] L;
   for (n in 1:N) {
-    lp[n] = log(lambda);  // log transform lambda, vectorization
+    L[n] = log(lambda);  // log transform lambda, vectorization
     for (c in 1:C) {
       for (t in 1:T) {
         real mu;  // means for Y_obs Normal distributions
         mu = beta_0[c] + beta_1[c] * X[n,t];
-        lp[n,c] += normal_lpdf(Y_obs[n,t] | mu, sigma[c]);
+        L[n,c] += normal_lpdf(Y_obs[n,t] | mu, sigma[c]);
       }
     }
   }
@@ -90,7 +90,7 @@ model {
   
   // log posterior
   for (n in 1:N) {
-    target += log_sum_exp(lp[n]);
+    target += log_sum_exp(L[n]);
   }
   
 }
@@ -101,7 +101,7 @@ generated quantities {
   // class memberships
   array[N] int z;
   for (n in 1:N) {
-    z[n] = categorical_logit_rng(lp[n]);
+    z[n] = categorical_logit_rng(L[n]);
   }
   
   // predicted dependent variable
