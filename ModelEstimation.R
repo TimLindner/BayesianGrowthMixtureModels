@@ -2,6 +2,7 @@
 
 
 # README ####
+# how to use this file?
 # firstly, run the preparation and NUTS parameters section.
 # secondly, run one or several model sections ( in any order ).
 
@@ -45,7 +46,7 @@ algorithm <- "NUTS"
 chains <- 4
 
 # number of iterations per chain
-iter <- 2000
+iter <- 10000
 
 # number of warmup iterations per chain
 warmup <- floor(iter/2)
@@ -88,7 +89,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResult/Model1Baseline_Fit.rds")
+          "SimulationStudyResult/Model1Baseline_Dataset1_Fit1.rds")
   
 })
 
@@ -133,7 +134,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResult/Model1TwoClasses_FitDataset2.rds")
+          "SimulationStudyResult/Model1TwoClasses_Dataset2_Fit1.rds")
   
 })
 
