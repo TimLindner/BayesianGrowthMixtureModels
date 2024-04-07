@@ -14,29 +14,20 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, include = FALSE}
 # README
-# if necessary, the descriptive statistics and data simulation section
-# have to be adjusted manually
-
 # required files:
-# Model1Baseline_Ysim.xlsx ( to load simulated dependent variable )
-# Model1Baseline_Fit.rds ( to load model fit )
+# Dataset1_Yobs.xlsx
+# Model1Baseline_Dataset1_Fit1.rds
+
+# a note on the R code:
+# data structures are best traversed in the order in which they are stored.
+# in R, data.frames store their data in column-major order.
 ```
 
 
 # Color coding
-* <span style="color: blueviolet;">blueviolet</span> for Normal distribution parameters ( i.e., constant, linear trend component, and standard deviation )
+* <span style="color: blueviolet;">blueviolet</span> for parameters of Normal distributions ( i.e., constant, linear trend component, and standard deviation )
 * <span style="color: deeppink;">deeppink</span> for predicted dependent variable
 * <span style="color: orange;">orange</span> for simulated parameters and observed dependent variable
-
-
-# Descriptive statistics
-* $N = 200$
-
-* $T = 10$
-
-
-# Data simulation
-* $y^{obs}_{n,t} \sim Normal(6 + 1 \, x_{n,t},0.75) \quad \text{for } n = 1,...,N$
 
 
 ```{r, include = FALSE}
@@ -56,21 +47,21 @@ rstan_options(auto_write = TRUE)
 
 # simulated data ####
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("SimulationStudyData/Model1Baseline_Yobs.xlsx",
+Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset1_Yobs.xlsx",
                                sheet = "Sheet 1"))
 
 # number of individuals
-N <- dim(Y_obs[1,,])[1]
+N <- dim(Y_obs)[1]
 
 # number of time periods
-no_periods <- dim(Y_obs[1,,])[2]
+no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # simulated constant
-beta_0_sim <- 6
+beta_0_sim <- 10
 
 # simulated linear trend component
 beta_1_sim <- 1
@@ -81,7 +72,7 @@ sigma_sim <- 0.75
 
 # estimated data ####
 # load model fit
-m_fit <- readRDS("SimulationStudyResult/Model1Baseline_Fit.rds")
+m_fit <- readRDS("SimulationStudyResult/Model1Baseline_Dataset1_Fit1.rds")
 m_fit_params <- rstan::extract(m_fit)
 
 # predicted dependent variable
@@ -192,11 +183,13 @@ hist(m_fit_params$beta_0,
      col = "blueviolet",
      border = FALSE,
      main = "Constant",
-     sub = "( the orange line shows the simulated parameter value )",
+     sub = "( the orange line shows the simulated parameter )",
      xlab = "beta_0")
+
 abline(v = beta_0_sim,
        lwd = 2,
        col = "orange")
+
 box()
 ```
 
@@ -220,11 +213,13 @@ hist(m_fit_params$beta_1,
      col = "blueviolet",
      border = FALSE,
      main = "Linear trend component",
-     sub = "( the orange line shows the simulated parameter value )",
+     sub = "( the orange line shows the simulated parameter )",
      xlab = "beta_1")
+
 abline(v = beta_1_sim,
        lwd = 2,
        col = "orange")
+
 box()
 ```
 
@@ -248,11 +243,13 @@ hist(m_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
      main = "Standard deviation for Normal distributions",
-     sub = "( the orange line shows the simulated parameter value )",
+     sub = "( the orange line shows the simulated parameter )",
      xlab = "sigma")
+
 abline(v = sigma_sim,
        lwd = 2,
        col = "orange")
+
 box()
 ```
 
@@ -260,16 +257,16 @@ box()
 # Posterior predictive check via middle 90% credible interval
 ```{r}
 for (n in 1:N) {
-  y_upper <- Y_pred_CI_upper[n,]
-  y_lower <- Y_pred_CI_lower[n,]
   x <- X[n,]
+  y_lower <- Y_pred_CI_lower[n,]
+  y_upper <- Y_pred_CI_upper[n,]
   
   plot(x = x,
-       y = c(max(y_upper),
-             min(y_lower),
-             max(Y_obs[n,]),
+       y = c(min(y_lower),
+             max(y_upper),
              min(Y_obs[n,]),
-             rep(max(y_upper), times = no_periods-4)),
+             max(Y_obs[n,]),
+             rep(min(y_lower), times = no_periods-4)),
        type="l",
        col = "white",
        main = paste("Individual n =", n),
@@ -281,13 +278,15 @@ for (n in 1:N) {
   par(new = TRUE)
   
   polygon(x = c(x, rev(x)),
-          y = c(y_upper, rev(y_lower)),
+          y = c(y_lower, rev(y_upper)),
           col = pink_transp,
           lty = 0)
+  
   lines(x = x,
         y = Y_obs[n,],
         lwd = 2,
         col = "orange")
+  
   box()
 }
 ```
