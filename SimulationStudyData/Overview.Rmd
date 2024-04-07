@@ -39,6 +39,7 @@ $\text{For } n \text{ in } 1,...,50\text{:}$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
 
+
 ```{r}
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("Dataset1_Yobs.xlsx", sheet = "Sheet 1"))
@@ -55,6 +56,7 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # plot observed dependent variable
 x <- time_periods
+
 plot(x = x,
      y = c(min(Y_obs),
            max(Y_obs),
@@ -87,6 +89,7 @@ $\text{For } n \text{ in } 1,...,200\text{:}$
 
 * $z_n \sim Categorical(0.3,0.7)$
 
+
 ```{r}
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("Dataset2_Yobs.xlsx", sheet = "Sheet 1"))
@@ -103,6 +106,7 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # plot observed dependent variable
 x <- time_periods
+
 plot(x = x,
      y = c(min(Y_obs),
            max(Y_obs),
