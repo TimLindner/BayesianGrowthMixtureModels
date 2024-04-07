@@ -87,7 +87,6 @@ $\text{For } n \text{ in } 1,...,200\text{:}$
 
 * $z_n \sim Categorical(0.3,0.7)$
 
-
 ```{r}
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("Dataset2_Yobs.xlsx", sheet = "Sheet 1"))
