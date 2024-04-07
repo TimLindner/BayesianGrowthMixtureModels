@@ -1,11 +1,13 @@
 // README
+// a note on the Stan code:
 // data structures are best traversed in the order in which they are stored.
-// matrices store their data in column-major order.
+// in Stan, matrices store their data in column-major order, and
 // arrays store their data in row-major order.
 
+// a note on the Stan code:
 // the result of a vectorized log probability density function
 // is equivalent to the sum of the evaluations on each element;
-// e.g., real normal_lpdf(reals y | reals mu, reals sigma).
+// e.g., real normal_lpdf(reals y | reals mu, real sigma).
 
 
 data {
@@ -30,7 +32,7 @@ data {
 
 transformed data {
   
-  // hyperparameters of prior for mixture proportions
+  // hyperparameters for prior of mixture proportions
   vector[C] alpha;
   alpha = rep_vector(1,C);
   
@@ -48,33 +50,24 @@ parameters {
   // linear trend components
   ordered[C] beta_1;
   
-  // standard deviations for Y_obs Normal distributions
+  // standard deviations for Y Normal distributions
   vector<lower=0>[C] sigma;
   
 }
 
+
 transformed parameters {
-  
-  // means for Y_obs Normal distributions
-  array[C] matrix[N,T] M;
-  for (c in 1:C) {
-    for (t in 1:T) {
-      for (n in 1:N) {
-        M[c,n,t] = beta_0[c] + beta_1[c] * X[n,t];
-      }
-    }
-  }
-  
-  // log transform lambda
-  vector[C] lambda_log;
-  lambda_log = log(lambda);  // vectorization
   
   // log posterior
   array[N] vector[C] lp;
   for (n in 1:N) {
-    lp[n] = lambda_log;  // vectorization
+    lp[n] = log(lambda);  // log transform lambda, vectorization
     for (c in 1:C) {
-      lp[n,c] += normal_lpdf(Y_obs[n] | M[c,n], sigma[c]);  // vectorization
+      for (t in 1:T) {
+        real mu;  // means for Y_obs Normal distributions
+        mu = beta_0[c] + beta_1[c] * X[n,t];
+        lp[n,c] += normal_lpdf(Y_obs[n,t] | mu, sigma[c]);
+      }
     }
   }
   
@@ -87,7 +80,7 @@ model {
   lambda ~ dirichlet(alpha);  // vectorization
   
   // prior for beta_0
-  beta_0 ~ normal(0,10);  // vectorization
+  beta_0 ~ normal(5,10);  // vectorization
   
   // prior for beta_1
   beta_1 ~ normal(0,1);  // vectorization
@@ -114,9 +107,9 @@ generated quantities {
   // predicted dependent variable
   array[N,T] real Y_pred;
   for (n in 1:N) {
-    for (t in 1:T) {
-      Y_pred[n] = normal_rng(M[z[n],n], sigma[z[n]]);  // vectorization
-    }
+    row_vector[T] mu;  // means for Y_pred Normal distributions
+    mu = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
+    Y_pred[n] = normal_rng(mu, sigma[z[n]]);  // vectorization
   }
   
 }
