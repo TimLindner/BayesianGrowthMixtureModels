@@ -46,7 +46,7 @@ algorithm <- "NUTS"
 chains <- 4
 
 # number of iterations per chain
-iter <- 10000
+iter <- 2000
 
 # number of warmup iterations per chain
 warmup <- floor(iter/2)
