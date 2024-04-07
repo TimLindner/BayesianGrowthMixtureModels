@@ -99,7 +99,23 @@ pink_transp <- rgb(red = 255,
 ```
 
 
-# Trace plots
+# Convergence
+## Rhat, Bulk ESS, and Tail ESS
+```{r, include = FALSE}
+params <- c("beta_0","beta_1","sigma")
+diagnostics <- c("Rhat","Bulk_ESS","Tail_ESS")
+Rhat_ESS <-
+  as.data.frame(monitor(extract(m_fit, permuted = FALSE)))[params,diagnostics]
+
+```
+
+
+```{r}
+Rhat_ESS
+```
+
+
+## Trace plots
 ```{r}
 # constant
 plot(m_fit_params$beta_0,
