@@ -2,8 +2,13 @@
 
 
 # README ####
+# how to use this file?
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections ( in any order ).
+
+# a note on the R code:
+# data structures are best traversed in the order in which they are stored.
+# in R, matrices store their data in column-major order.
 
 
 # preparation ####
@@ -41,13 +46,13 @@ beta_0_sim <- 10
 # simulated linear trend component
 beta_1_sim <- 1
 
-# simulated means for Normal distributions
+# simulated means for Y_obs Normal distributions
 M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
 for (t in 1:no_periods) {
   M_sim[,t] <- beta_0_sim + beta_1_sim * X[,t]  # vectorization
 }
 
-# simulated standard deviation for Normal distributions
+# simulated standard deviation for Y_obs Normal distributions
 sigma_sim <- 0.75
 
 # observed dependent variable
@@ -74,8 +79,11 @@ no_periods <- 10
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# class memberships
-z_sim <- rcat(n = N, prob = c(0.3,0.7))  # vectorization
+# simulated mixture proportions
+lambda_sim <- c(0.3,0.7)
+
+# simulated class memberships
+z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # simulated constants
 beta_0_sim <- c(-5,10)
@@ -83,7 +91,7 @@ beta_0_sim <- c(-5,10)
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
 
-# simulated means for Normal distributions
+# simulated means for Y_obs Normal distributions
 M_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (t in 1:no_periods) {
   for (n in 1:N) {
@@ -91,7 +99,7 @@ for (t in 1:no_periods) {
   }
 }
 
-# simulated standard deviations for Normal distributions
+# simulated standard deviations for Y_obs Normal distributions
 sigma_sim <- c(0.25,0.75)
 
 # observed dependent variable
