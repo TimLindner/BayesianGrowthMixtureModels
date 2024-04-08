@@ -66,7 +66,7 @@ write.xlsx(data.frame(Y_obs), "Dataset1_Yobs.xlsx")
 
 
 # dataset 2 - model 1 two classes - no overlaps between classes ####
-# number of simulated classes
+# number of latent classes
 C <- 2
 
 # number of individuals
@@ -82,7 +82,7 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 # simulated mixture proportions
 lambda_sim <- c(0.3,0.7)
 
-# simulated latent class memberships
+# simulated class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # save z_sim ( transform to data frame beforehand )
@@ -102,8 +102,8 @@ for (t in 1:no_periods) {
   }
 }
 
-# simulated standard deviations for Y_obs Normal distributions
-sigma_sim <- c(0.25,0.75)
+# simulated standard deviation for Y_obs Normal distributions
+sigma_sim <- c(0.75)
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
