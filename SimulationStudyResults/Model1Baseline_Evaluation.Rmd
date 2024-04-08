@@ -17,10 +17,6 @@ knitr::opts_chunk$set(echo = FALSE)
 # required files:
 # Dataset1_Yobs.xlsx
 # Model1Baseline_Dataset1_Fit1.rds
-
-# a note on the R code:
-# data structures are best traversed in the order in which they are stored.
-# in R, data.frames store their data in column-major order.
 ```
 
 
