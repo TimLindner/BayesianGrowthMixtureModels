@@ -9,12 +9,12 @@ Placeholder
 The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan, the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024).
 
 ### Repository structure
-* :file_folder: ModelImplementation
+* :file_folder: ModelImplementations
 * :file_folder: SimulationStudyData
-* :file_folder: SimulationStudyResult
-* :file_folder: TerrorismCaseStudyResult
-* :page_facing_up: ModelEstimation
-* :page_facing_up: ModelSpecification
+* :file_folder: SimulationStudyResults
+* :file_folder: TerrorismCaseStudyResults
+* :page_facing_up: ModelEstimations
+* :page_facing_up: ModelSpecifications
 
 ### References
 * Stan Development Team. (n.d.). *Stan Documentation, Version 2.34*. Stan. https://mc-stan.org/docs/
