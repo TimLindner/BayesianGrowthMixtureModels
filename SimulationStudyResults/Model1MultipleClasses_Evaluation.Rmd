@@ -16,9 +16,9 @@ knitr::opts_chunk$set(echo = FALSE)
 # README
 # required files:
 # one of the following pairs of datasets:
-# - Dataset2_Yobs.xlsx, Dataset2_zsim ( default )
-# - Dataset3_Yobs.xlsx, Dataset3_zsim
-# - Dataset4_Yobs.xlsx, Dataset4_zsim
+# - Dataset2_Yobs.xlsx, Dataset2_zsim.xlsx ( default )
+# - Dataset3_Yobs.xlsx, Dataset3_zsim.xlsx
+# - Dataset4_Yobs.xlsx, Dataset4_zsim.xlsx
 # and the corresponding model fit:
 # - Model1Baseline_Dataset1_Fit.rds ( default )
 # - Model1Baseline_Dataset2_Fit.rds
@@ -71,8 +71,8 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 lambda_sim <- c(0.3,0.7)
 
 # load simulated class memberships
-#z_sim <- data.frame(read_excel("SimulationStudyData/Dataset2_zsim.xlsx",
-                               #sheet = "Sheet 1"))
+z_sim <- data.frame(read_excel("SimulationStudyData/Dataset2_zsim.xlsx",
+                               sheet = "Sheet 1"))
 
 # simulated constants
 beta_0_sim <- c(-5,10)
@@ -80,8 +80,8 @@ beta_0_sim <- c(-5,10)
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
 
-# simulated standard deviations for Y_obs Normal distributions
-sigma_sim <- c(0.25,0.75)
+# simulated standard deviation for Y_obs Normal distributions
+sigma_sim <- 0.75
 
 
 # estimated data ####
@@ -116,11 +116,13 @@ darkturquoise_transp <- rgb(red = 0,
 # Convergence
 ## Rhat, Bulk ESS, and Tail ESS
 ```{r, include = FALSE}
-params <- c("beta_0","beta_1","sigma")
+params <- c("lambda[1]","lambda[2]",
+            "beta_0[1]","beta_0[2]",
+            "beta_1[1]","beta_1[2]",
+            "sigma")
 diagnostics <- c("Rhat","Bulk_ESS","Tail_ESS")
 Rhat_ESS <-
-  as.data.frame(monitor(extract(m_fit, permuted = FALSE)))[,diagnostics]
-# [params,diagnostics]
+  as.data.frame(monitor(extract(m_fit, permuted = FALSE)))[params,diagnostics]
 ```
 
 
@@ -206,27 +208,25 @@ for (c in 1:C) {
 
 
 ```{r}
-# standard deviations for Y Normal distributions
-for (c in 1:C) {
-  plot(m_fit_params$sigma[,c],
-       type = "l",
-       col = "blueviolet",
-       main = "",
-       xlab = "",
-       ylab = "")
+# standard deviation for Y Normal distributions
+plot(m_fit_params$sigma,
+     type = "l",
+     col = "blueviolet",
+     main = "",
+     xlab = "",
+     ylab = "")
   
-  grid(nx = NA, ny = NULL)
-  par(new = TRUE)
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
   
-  plot(m_fit_params$sigma[,c],
-       type = "l",
-       col = "blueviolet",
-       main = paste("Standard deviation of Y Normal distributions for c =", c),
-       xlab = "Sampling iteration",
-       ylab = "sigma")
+plot(m_fit_params$sigma,
+     type = "l",
+     col = "blueviolet",
+     main = "Standard deviation of Y Normal distributions",
+     xlab = "Sampling iteration",
+     ylab = "sigma")
   
-  box()
-}
+box()
 ```
 
 
@@ -327,33 +327,31 @@ for (c in 1:C) {
 
 
 ```{r}
-# standard deviations for Y Normal distributions
-for (c in 1:C) {
-  hist(m_fit_params$sigma[,c],
-       xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
-                max(m_fit_params$sigma[,c],sigma_sim[c])),
-       col = "blueviolet",
-       border = FALSE,
-       main = "",
-       xlab = "")
+# standard deviation for Y Normal distributions
+hist(m_fit_params$sigma,
+     xlim = c(min(m_fit_params$sigma,sigma_sim),
+              max(m_fit_params$sigma,sigma_sim)),
+     col = "blueviolet",
+     border = FALSE,
+     main = "",
+     xlab = "")
   
-  grid()
-  par(new = TRUE)
+grid()
+par(new = TRUE)
   
-  hist(m_fit_params$sigma[,c],
-       xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
-                max(m_fit_params$sigma[,c],sigma_sim[c])),
-       col = "blueviolet",
-       border = FALSE,
-       main = paste("Standard deviation of Y Normal distributions for c =", c),
-       xlab = "sigma")
+hist(m_fit_params$sigma,
+     xlim = c(min(m_fit_params$sigma,sigma_sim),
+              max(m_fit_params$sigma,sigma_sim)),
+     col = "blueviolet",
+     border = FALSE,
+     main = "Standard deviation of Y Normal distributions",
+     xlab = "sigma")
   
-  abline(v = sigma_sim[c],
-         lwd = 2,
-         col = "deeppink")
+abline(v = sigma_sim,
+       lwd = 2,
+       col = "deeppink")
   
-  box()
-}
+box()
 ```
 
 
@@ -398,7 +396,6 @@ for (n in 1:N) {
        col = "blueviolet",
        border = FALSE,
        main = "",
-       #sub = "",
        xlab = "",
        ylab = "")
   
@@ -409,10 +406,12 @@ for (n in 1:N) {
        col = "blueviolet",
        border = FALSE,
        main = "Latent class membership",
-       #sub = paste("z_sim =", z_sim[n]),
-       col.sub = "deeppink",
        xlab = "c",
        ylab = "Pr( z = c )")
+  
+  legend("topright",
+         legend = paste("z_sim =", z_sim[n,]),
+         text.col = "deeppink")
   
   box()
 }
