@@ -170,7 +170,7 @@ par(new = TRUE)
 plot(m_fit_params$sigma,
      type = "l",
      col = "blueviolet",
-     main = "Standard deviation for Normal distributions",
+     main = "Standard deviation for Y Normal distributions",
      xlab = "Sampling iteration",
      ylab = "sigma")
 ```
@@ -255,7 +255,7 @@ hist(m_fit_params$sigma,
               max(m_fit_params$sigma,sigma_sim)),
      col = "blueviolet",
      border = FALSE,
-     main = "Standard deviation for Normal distributions",
+     main = "Standard deviation for Y Normal distributions",
      sub = "( the orange line shows the simulated parameter )",
      xlab = "sigma")
 
@@ -282,10 +282,10 @@ for (n in 1:N) {
              rep(min(y_lower), times = no_periods-4)),
        type="l",
        col = "white",
-       main = paste("Individual n =", n),
+       main = paste("n =", n),
        sub = "( the orange line shows the observed dependent variable )",
        xlab = "t",
-       ylab = "y_pred")
+       ylab = "y")
   
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
