@@ -196,7 +196,6 @@ hist(m_fit_params$beta_0,
      col = "blueviolet",
      border = FALSE,
      main = "Constant",
-     sub = "( the orange line shows the simulated parameter )",
      xlab = "beta_0")
 
 abline(v = beta_0_sim,
@@ -226,7 +225,6 @@ hist(m_fit_params$beta_1,
      col = "blueviolet",
      border = FALSE,
      main = "Linear trend component",
-     sub = "( the orange line shows the simulated parameter )",
      xlab = "beta_1")
 
 abline(v = beta_1_sim,
@@ -256,7 +254,6 @@ hist(m_fit_params$sigma,
      col = "blueviolet",
      border = FALSE,
      main = "Standard deviation for Y Normal distributions",
-     sub = "( the orange line shows the simulated parameter )",
      xlab = "sigma")
 
 abline(v = sigma_sim,
@@ -283,7 +280,6 @@ for (n in 1:N) {
        type="l",
        col = "white",
        main = paste("n =", n),
-       sub = "( the orange line shows the observed dependent variable )",
        xlab = "t",
        ylab = "y")
   
