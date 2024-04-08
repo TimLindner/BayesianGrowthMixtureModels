@@ -61,7 +61,7 @@ for (t in 1:no_periods) {
   Y_obs[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim)  # vectorization
 }
 
-# save Y_obs ( transformed to data frame beforehand )
+# save Y_obs ( transforme to data frame beforehand )
 write.xlsx(data.frame(Y_obs), "Dataset1_Yobs.xlsx")
 
 
@@ -82,8 +82,11 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 # simulated mixture proportions
 lambda_sim <- c(0.3,0.7)
 
-# simulated class memberships
+# simulated latent class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
+
+# save z_sim ( transforme to data frame beforehand )
+write.xlsx(data.frame(z_sim), "Dataset2_zsim.xlsx")
 
 # simulated constants
 beta_0_sim <- c(-5,10)
@@ -110,7 +113,7 @@ for (t in 1:no_periods) {
   }
 }
 
-# save Y_obs ( transformed to data frame beforehand )
+# save Y_obs ( transforme to data frame beforehand )
 write.xlsx(data.frame(Y_obs), "Dataset2_Yobs.xlsx")
 
 
