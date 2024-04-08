@@ -156,7 +156,7 @@ plot(m_fit_params$beta_1,
 
 
 ```{r}
-# standard deviation for Normal distributions
+# standard deviation for Y Normal distributions
 plot(m_fit_params$sigma,
      type = "l",
      col = "blueviolet",
@@ -238,7 +238,7 @@ box()
 
 
 ```{r}
-# standard deviation for Normal distributions
+# standard deviation for Y Normal distributions
 hist(m_fit_params$sigma,
      xlim = c(min(m_fit_params$sigma,sigma_sim),
               max(m_fit_params$sigma,sigma_sim)),
