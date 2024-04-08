@@ -12,7 +12,7 @@
 
 # required files for model 1 multiple classes:
 # one of the following datasets:
-# - Dataset2_Yobs.xlsx ( default dataset )
+# - Dataset2_Yobs.xlsx ( default )
 # - Dataset3_Yobs.xlsx
 # - Dataset4_Yobs.xlsx
 # Model1MultipleClasses.stan
