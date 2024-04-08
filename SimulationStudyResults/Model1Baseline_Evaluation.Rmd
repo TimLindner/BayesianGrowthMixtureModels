@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # README
 # required files:
 # Dataset1_Yobs.xlsx
-# Model1Baseline_Dataset1_Fit1.rds
+# Model1Baseline_Dataset1_Fit.rds
 ```
 
 
@@ -68,7 +68,7 @@ sigma_sim <- 0.75
 
 # estimated data ####
 # load model fit
-m_fit <- readRDS("SimulationStudyResult/Model1Baseline_Dataset1_Fit1.rds")
+m_fit <- readRDS("SimulationStudyResults/Model1Baseline_Dataset1_Fit.rds")
 m_fit_params <- rstan::extract(m_fit)
 
 # predicted dependent variable
