@@ -63,11 +63,9 @@ transformed parameters {
   for (n in 1:N) {
     L[n] = log(lambda);  // log transform lambda, vectorization
     for (c in 1:C) {
-      for (t in 1:T) {
-        real mu;  // means for Y_obs Normal distributions
-        mu = beta_0[c] + beta_1[c] * X[n,t];
-        L[n,c] += normal_lpdf(Y_obs[n,t] | mu, sigma);
-      }
+      row_vector[T] mu;  // means for Y_obs Normal distributions
+      mu = beta_0[c] + beta_1[c] * X[n];  // vectorization
+      L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma);  // vectorization
     }
   }
   
@@ -107,11 +105,9 @@ generated quantities {
   // predicted dependent variable
   array[N,T] real Y_pred;
   for (n in 1:N) {
-    for (t in 1:T) {
-      real mu;  // means for Y_pred Normal distributions
-      mu = beta_0[z[n]] + beta_1[z[n]] * X[n,t];
-      Y_pred[n,t] = normal_rng(mu, sigma);
-    }
+    row_vector[T] mu;  // means for Y_obs Normal distributions
+    mu = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
+    Y_pred[n] = normal_rng(mu, sigma);  // vectorization
   }
   
 }
