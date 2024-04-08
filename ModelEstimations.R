@@ -68,7 +68,7 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # load model
-m <- stan_model("ModelImplementation/Model1Baseline.stan")
+m <- stan_model("ModelImplementations/Model1Baseline.stan")
 
 # model-specific NUTS parameter
 init <- "random"
@@ -89,7 +89,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResult/Model1Baseline_Dataset1_Fit.rds")
+          "SimulationStudyResults/Model1Baseline_Dataset1_Fit.rds")
   
 })
 
@@ -113,7 +113,7 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # load model
-m <- stan_model("ModelImplementation/Model1MultipleClasses.stan")
+m <- stan_model("ModelImplementations/Model1MultipleClasses.stan")
 
 # model-specific NUTS parameter
 init <- "random"
@@ -134,7 +134,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResult/Model1TwoClasses_Dataset2_Fit.rds")
+          "SimulationStudyResults/Model1TwoClasses_Dataset2_Fit.rds")
   
 })
 
