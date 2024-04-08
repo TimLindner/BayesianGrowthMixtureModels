@@ -35,7 +35,7 @@ library(readxl)
 
 # Model 1
 ## Dataset 1 - model 1 baseline
-$\text{For } n \text{ in } 1,...,50\text{:}$
+$\text{For } n \text{ in } 1,...,50 \text{ and } t \text{ in } 0,...,9\text{:}$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
 
@@ -65,7 +65,7 @@ plot(x = x,
      col = "white",
      main = "Observed dependent variable",
      xlab = "t",
-     ylab = "Y_obs")
+     ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
 par(new = TRUE)
@@ -81,9 +81,9 @@ box()
 
 
 ## Dataset 2 - model 1 two classes - no overlaps between classes
-$\text{For } n \text{ in } 1,...,200\text{:}$
+$\text{For } n \text{ in } 1,...,200 \text{ and } t \text{ in } 0,...,9\text{:}$
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
+* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 1$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2$
 
@@ -115,7 +115,7 @@ plot(x = x,
      col = "white",
      main = "Observed dependent variable",
      xlab = "t",
-     ylab = "Y_obs")
+     ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
 par(new = TRUE)
