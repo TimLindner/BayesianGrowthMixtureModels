@@ -21,9 +21,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Color coding
-* <span style="color: blueviolet;">blueviolet</span> for parameters of Normal distributions ( i.e., constant, linear trend component, and standard deviation )
-* <span style="color: deeppink;">deeppink</span> for predicted dependent variable
-* <span style="color: orange;">orange</span> for simulated parameters and observed dependent variable
+* <span style="color: blueviolet;">blueviolet</span> for estimated parameters
+* <span style="color: deeppink;">deeppink</span> for simulated parameters
+* <span style="color: darkturquoise;">darkturquoise</span> for predicted dependent variable
+* <span style="color: orange;">orange</span> for observed dependent variable
 
 
 ```{r, include = FALSE}
@@ -86,12 +87,12 @@ for (t in 1:no_periods) {
 
 
 # colors ####
-pink_transp <- rgb(red = 255,
-                   green = 20,
-                   blue = 147,
-                   max = 255,
-                   alpha = 25,
-                   names = "deeppink1")
+darkturquoise_transp <- rgb(red = 0,
+                            green = 206,
+                            blue = 209,
+                            max = 209,
+                            alpha = 50,
+                            names = "darkturquoise")
 ```
 
 
@@ -200,7 +201,7 @@ hist(m_fit_params$beta_0,
 
 abline(v = beta_0_sim,
        lwd = 2,
-       col = "orange")
+       col = "deeppink")
 
 box()
 ```
@@ -230,7 +231,7 @@ hist(m_fit_params$beta_1,
 
 abline(v = beta_1_sim,
        lwd = 2,
-       col = "orange")
+       col = "deeppink")
 
 box()
 ```
@@ -260,7 +261,7 @@ hist(m_fit_params$sigma,
 
 abline(v = sigma_sim,
        lwd = 2,
-       col = "orange")
+       col = "deeppink")
 
 box()
 ```
@@ -291,7 +292,7 @@ for (n in 1:N) {
   
   polygon(x = c(x, rev(x)),
           y = c(y_lower, rev(y_upper)),
-          col = pink_transp,
+          col = darkturquoise_transp,
           lty = 0)
   
   lines(x = x,
