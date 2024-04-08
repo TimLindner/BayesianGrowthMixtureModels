@@ -50,8 +50,8 @@ parameters {
   // linear trend components
   ordered[C] beta_1;
   
-  // standard deviations for Y Normal distributions
-  vector<lower=0>[C] sigma;
+  // standard deviation for Y Normal distributions
+  real<lower=0> sigma;
   
 }
 
@@ -66,7 +66,7 @@ transformed parameters {
       for (t in 1:T) {
         real mu;  // means for Y_obs Normal distributions
         mu = beta_0[c] + beta_1[c] * X[n,t];
-        L[n,c] += normal_lpdf(Y_obs[n,t] | mu, sigma[c]);
+        L[n,c] += normal_lpdf(Y_obs[n,t] | mu, sigma);
       }
     }
   }
@@ -86,7 +86,7 @@ model {
   beta_1 ~ normal(0,1);  // vectorization
   
   // prior for sigma
-  sigma ~ normal(0,1);  // vectorization
+  sigma ~ normal(0,1);
   
   // log posterior
   for (n in 1:N) {
@@ -110,7 +110,7 @@ generated quantities {
     for (t in 1:T) {
       real mu;  // means for Y_pred Normal distributions
       mu = beta_0[z[n]] + beta_1[z[n]] * X[n,t];
-      Y_pred[n,t] = normal_rng(mu, sigma[z[n]]);
+      Y_pred[n,t] = normal_rng(mu, sigma);
     }
   }
   
