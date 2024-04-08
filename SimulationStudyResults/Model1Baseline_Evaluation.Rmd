@@ -285,7 +285,7 @@ for (n in 1:N) {
        main = paste("Individual n =", n),
        sub = "( the orange line shows the observed dependent variable )",
        xlab = "t",
-       ylab = "Y_pred")
+       ylab = "y_pred")
   
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
