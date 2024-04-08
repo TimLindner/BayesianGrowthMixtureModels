@@ -231,7 +231,7 @@ box()
 
 
 # Posterior
-```{r, include = FALSE}
+```{r}
 # mixture proportions
 for (c in 1:C) {
   hist(m_fit_params$lambda[,c],
