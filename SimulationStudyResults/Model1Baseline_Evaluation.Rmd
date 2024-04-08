@@ -131,6 +131,8 @@ plot(m_fit_params$beta_0,
      main = "Constant",
      xlab = "Sampling iteration",
      ylab = "beta_0")
+
+box()
 ```
 
 
@@ -152,6 +154,8 @@ plot(m_fit_params$beta_1,
      main = "Linear trend component",
      xlab = "Sampling iteration",
      ylab = "beta_1")
+
+box()
 ```
 
 
@@ -173,6 +177,8 @@ plot(m_fit_params$sigma,
      main = "Standard deviation for Y Normal distributions",
      xlab = "Sampling iteration",
      ylab = "sigma")
+
+box()
 ```
 
 
