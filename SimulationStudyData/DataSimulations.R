@@ -61,7 +61,7 @@ for (t in 1:no_periods) {
   Y_obs[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim)  # vectorization
 }
 
-# save Y_obs ( transforme to data frame beforehand )
+# save Y_obs ( transform to data frame beforehand )
 write.xlsx(data.frame(Y_obs), "Dataset1_Yobs.xlsx")
 
 
@@ -85,7 +85,7 @@ lambda_sim <- c(0.3,0.7)
 # simulated latent class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
-# save z_sim ( transforme to data frame beforehand )
+# save z_sim ( transform to data frame beforehand )
 write.xlsx(data.frame(z_sim), "Dataset2_zsim.xlsx")
 
 # simulated constants
@@ -113,7 +113,7 @@ for (t in 1:no_periods) {
   }
 }
 
-# save Y_obs ( transforme to data frame beforehand )
+# save Y_obs ( transform to data frame beforehand )
 write.xlsx(data.frame(Y_obs), "Dataset2_Yobs.xlsx")
 
 
