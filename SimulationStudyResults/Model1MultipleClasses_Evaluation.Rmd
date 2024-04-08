@@ -70,6 +70,10 @@ X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 # simulated mixture proportions
 lambda_sim <- c(0.3,0.7)
 
+# load simulated class memberships
+#z_sim <- data.frame(read_excel("SimulationStudyData/Dataset2_zsim.xlsx",
+                               #sheet = "Sheet 1"))
+
 # simulated constants
 beta_0_sim <- c(-5,10)
 
@@ -357,6 +361,7 @@ for (c in 1:C) {
 ```{r}
 par(mfrow = c(1,2))
 for (n in 1:N) {
+  # middle 90% credible interval
   x <- X[n,]
   y_lower <- Y_pred_CI_lower[n,]
   y_upper <- Y_pred_CI_upper[n,]
@@ -371,7 +376,7 @@ for (n in 1:N) {
        col = "white",
        main = paste("n =", n),
        xlab = "t",
-       ylab = "Y_pred")
+       ylab = "y")
   
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
@@ -387,11 +392,13 @@ for (n in 1:N) {
         col = "orange")
   
   box()
-  
+
+  # class membership
   barplot(prop.table(table(m_fit_params$z[,n])),
        col = "blueviolet",
        border = FALSE,
        main = "",
+       #sub = "",
        xlab = "",
        ylab = "")
   
@@ -402,6 +409,8 @@ for (n in 1:N) {
        col = "blueviolet",
        border = FALSE,
        main = "Latent class membership",
+       #sub = paste("z_sim =", z_sim[n]),
+       col.sub = "deeppink",
        xlab = "c",
        ylab = "Pr( z = c )")
   
