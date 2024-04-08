@@ -251,7 +251,7 @@ for (c in 1:C) {
        col = "blueviolet",
        border = FALSE,
        main = paste("Mixture proportion for c =", c),
-       xlab = "Pi")
+       xlab = "lambda")
   
   
   abline(v = lambda_sim[c],
