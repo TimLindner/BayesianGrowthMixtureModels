@@ -94,7 +94,7 @@ sigma_sim <- 0.75
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
   # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim[z[n]] + beta_1_sim[z[n]] * X[n,]  # vectorization
+  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
   
   Y_obs[n,] <-
     rnorm(n = no_periods, mean = mu, sd = sigma_sim)  # vectorization
