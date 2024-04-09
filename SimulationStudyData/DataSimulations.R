@@ -103,7 +103,7 @@ for (t in 1:no_periods) {
 }
 
 # simulated standard deviation for Y_obs Normal distributions
-sigma_sim <- c(0.75)
+sigma_sim <- 0.75
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
