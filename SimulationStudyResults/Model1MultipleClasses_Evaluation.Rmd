@@ -235,8 +235,8 @@ box()
 # mixture proportions
 for (c in 1:C) {
   hist(m_fit_params$lambda[,c],
-       xlim = c(min(m_fit_params$lambda[c],lambda_sim[c]),
-                max(m_fit_params$lambda[c],lambda_sim[c])),
+       xlim = c(min(m_fit_params$lambda[,c],lambda_sim[c]),
+                max(m_fit_params$lambda[,c],lambda_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -246,8 +246,8 @@ for (c in 1:C) {
   par(new = TRUE)
 
   hist(m_fit_params$lambda[,c],
-       xlim = c(min(m_fit_params$lambda[c],lambda_sim[c]),
-                max(m_fit_params$lambda[c],lambda_sim[c])),
+       xlim = c(min(m_fit_params$lambda[,c],lambda_sim[c]),
+                max(m_fit_params$lambda[,c],lambda_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Mixture proportion for c =", c),
