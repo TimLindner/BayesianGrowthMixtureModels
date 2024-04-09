@@ -6,10 +6,6 @@
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections ( in any order ).
 
-# a note on the R code:
-# data structures are best traversed in the order in which they are stored.
-# in R, matrices store their data in column-major order.
-
 
 # preparation ####
 # set working directory
@@ -46,19 +42,16 @@ beta_0_sim <- 10
 # simulated linear trend component
 beta_1_sim <- 1
 
-# simulated means for Y_obs Normal distributions
-M_sim <- matrix(data = 0, nrow = N, ncol = no_periods) 
-for (t in 1:no_periods) {
-  M_sim[,t] <- beta_0_sim + beta_1_sim * X[,t]  # vectorization
-}
-
 # simulated standard deviation for Y_obs Normal distributions
 sigma_sim <- 0.75
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (t in 1:no_periods) {
-  Y_obs[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim)  # vectorization
+for (n in 1:N) {
+  # simulated means for Y_obs Normal distributions
+  mu <- beta_0_sim + beta_1_sim * X[n,]  # vectorization
+  
+  Y_obs[n,] <- rnorm(n = no_periods, mean = mu, sd = sigma_sim)  # vectorization
 }
 
 # save Y_obs ( transform to data frame beforehand )
@@ -94,23 +87,17 @@ beta_0_sim <- c(-5,10)
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
 
-# simulated means for Y_obs Normal distributions
-M_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (t in 1:no_periods) {
-  for (n in 1:N) {
-    M_sim[n,t] <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,t]
-  }
-}
-
 # simulated standard deviation for Y_obs Normal distributions
 sigma_sim <- 0.75
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (t in 1:no_periods) {
-  for (n in 1:N) {
-    Y_obs[n,t] <- rnorm(n = 1, mean = M_sim[n,t], sd = sigma_sim)
-  }
+for (n in 1:N) {
+  # simulated means for Y_obs Normal distributions
+  mu <- beta_0_sim[z[n]] + beta_1_sim[z[n]] * X[n,]  # vectorization
+  
+  Y_obs[n,] <-
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim)  # vectorization
 }
 
 # save Y_obs ( transform to data frame beforehand )
