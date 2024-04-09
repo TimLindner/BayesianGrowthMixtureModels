@@ -222,7 +222,7 @@ par(new = TRUE)
 plot(m_fit_params$sigma,
      type = "l",
      col = "blueviolet",
-     main = "Standard deviation of Y Normal distributions",
+     main = "Standard deviation for Y Normal distributions",
      xlab = "Sampling iteration",
      ylab = "sigma")
   
@@ -344,7 +344,7 @@ hist(m_fit_params$sigma,
               max(m_fit_params$sigma,sigma_sim)),
      col = "blueviolet",
      border = FALSE,
-     main = "Standard deviation of Y Normal distributions",
+     main = "Standard deviation for Y Normal distributions",
      xlab = "sigma")
   
 abline(v = sigma_sim,
