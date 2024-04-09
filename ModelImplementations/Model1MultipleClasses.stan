@@ -33,7 +33,7 @@ data {
 transformed data {
   
   // hyperparameters for prior of mixture proportions
-  vector[C] alpha;
+  vector<lower=0>[C] alpha;
   alpha = rep_vector(1,C);
   
 }
