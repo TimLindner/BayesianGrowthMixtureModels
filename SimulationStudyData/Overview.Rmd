@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, include = FALSE}
 # preparation
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance/SimulationStudyData")
+setwd("C:/Users/Diiim/Documents/Github/BayesianGMM/SimulationStudyData")
 
 # set decimals to digits instead of scientific
 options(scipen = 999)
@@ -83,7 +83,7 @@ box()
 ## Dataset 2 - model 1 two classes - no overlaps between classes
 $\text{For } n \text{ in } 1,...,200 \text{ and } t \text{ in } 0,...,9\text{:}$
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 1$
+* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2$
 
