@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, include = FALSE}
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
 
 # set decimals to digits instead of scientific
 options(scipen = 999)
@@ -81,7 +81,7 @@ beta_0_sim <- c(-5,10)
 beta_1_sim <- c(-0.5,1)
 
 # simulated standard deviation for Y_obs Normal distributions
-sigma_sim <- 0.75
+sigma_sim <- c(0.25,0.75)
 
 
 # estimated data ####
@@ -119,7 +119,7 @@ darkturquoise_transp <- rgb(red = 0,
 params <- c("lambda[1]","lambda[2]",
             "beta_0[1]","beta_0[2]",
             "beta_1[1]","beta_1[2]",
-            "sigma")
+            "sigma[1]","sigma[2]")
 diagnostics <- c("Rhat","Bulk_ESS","Tail_ESS")
 Rhat_ESS <-
   as.data.frame(monitor(extract(m_fit, permuted = FALSE)))[params,diagnostics]
@@ -208,25 +208,27 @@ for (c in 1:C) {
 
 
 ```{r}
-# standard deviation for Y Normal distributions
-plot(m_fit_params$sigma,
-     type = "l",
-     col = "blueviolet",
-     main = "",
-     xlab = "",
-     ylab = "")
+# standard deviations for Y Normal distributions
+for (c in 1:C) {
+  plot(m_fit_params$sigma[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
   
-grid(nx = NA, ny = NULL)
-par(new = TRUE)
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
   
-plot(m_fit_params$sigma,
-     type = "l",
-     col = "blueviolet",
-     main = "Standard deviation for Y Normal distributions",
-     xlab = "Sampling iteration",
-     ylab = "sigma")
+  plot(m_fit_params$sigma[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Standard deviation of Y Normal distributions for c =", c),
+       xlab = "Sampling iteration",
+       ylab = "sigma")
   
-box()
+  box()
+}
 ```
 
 
@@ -327,31 +329,33 @@ for (c in 1:C) {
 
 
 ```{r}
-# standard deviation for Y Normal distributions
-hist(m_fit_params$sigma,
-     xlim = c(min(m_fit_params$sigma,sigma_sim),
-              max(m_fit_params$sigma,sigma_sim)),
+# standard deviations for Y Normal distributions
+for (c in 1:C) {
+  hist(m_fit_params$sigma[,c],
+     xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
+              max(m_fit_params$sigma[,c],sigma_sim[c])),
      col = "blueviolet",
      border = FALSE,
      main = "",
      xlab = "")
   
-grid()
-par(new = TRUE)
+  grid()
+  par(new = TRUE)
   
-hist(m_fit_params$sigma,
-     xlim = c(min(m_fit_params$sigma,sigma_sim),
-              max(m_fit_params$sigma,sigma_sim)),
-     col = "blueviolet",
-     border = FALSE,
-     main = "Standard deviation for Y Normal distributions",
-     xlab = "sigma")
+  hist(m_fit_params$sigma[,c],
+       xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
+                max(m_fit_params$sigma[,c],sigma_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Standard deviation of Y Normal distributions for c =", c),
+       xlab = "sigma")
   
-abline(v = sigma_sim,
-       lwd = 2,
-       col = "deeppink")
+  abline(v = sigma_sim[c],
+         lwd = 2,
+         col = "deeppink")
   
-box()
+  box()
+}
 ```
 
 
