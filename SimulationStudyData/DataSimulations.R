@@ -9,7 +9,7 @@
 
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance/SimulationStudyData")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM/SimulationStudyData")
 
 # clean workspace
 rm(list = ls())
@@ -88,7 +88,7 @@ beta_0_sim <- c(-5,10)
 beta_1_sim <- c(-0.5,1)
 
 # simulated standard deviation for Y_obs Normal distributions
-sigma_sim <- 0.75
+sigma_sim <- c(0.25,0.75)
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
@@ -97,7 +97,7 @@ for (n in 1:N) {
   mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
   
   Y_obs[n,] <-
-    rnorm(n = no_periods, mean = mu, sd = sigma_sim)  # vectorization
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
 }
 
 # save Y_obs ( transform to data frame beforehand )
