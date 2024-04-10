@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, include = FALSE}
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
 
 # set decimals to digits instead of scientific
 options(scipen = 999)
