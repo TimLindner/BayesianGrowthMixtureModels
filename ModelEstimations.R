@@ -20,7 +20,7 @@
 
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/ResearchAssistance")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
 
 # clean workspace
 rm(list = ls())
