@@ -42,6 +42,9 @@ transformed data {
 parameters {
   
   // mixture proportions
+  //positive_ordered[C] gamma;
+  
+  // mixture proportions
   simplex[C] lambda;
   
   // constants
@@ -51,21 +54,25 @@ parameters {
   ordered[C] beta_1;
   
   // standard deviation for Y Normal distributions
-  real<lower=0> sigma;
+  row_vector<lower=0>[C] sigma;
   
 }
 
 
 transformed parameters {
   
-  // likelihood
+  // mixture proportions
+  //simplex[C] lambda;
+  //lambda = gamma / sum(gamma);
+  
+  // log likelihood
   array[N] vector[C] L;
   for (n in 1:N) {
     L[n] = log(lambda);  // log transform lambda, vectorization
     for (c in 1:C) {
       row_vector[T] mu;  // means for Y_obs Normal distributions
       mu = beta_0[c] + beta_1[c] * X[n];  // vectorization
-      L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma);  // vectorization
+      L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma[c]);  // vectorization
     }
   }
   
@@ -74,19 +81,22 @@ transformed parameters {
 
 model {
   
-  // prior for mixture proportions
+  // prior for gamma
+  //gamma ~ gamma(alpha,1);
+  
+  // prior for lambda
   lambda ~ dirichlet(alpha);  // vectorization
   
   // prior for beta_0
-  beta_0 ~ normal(5,10);  // vectorization
+  beta_0 ~ normal(5,5);  // vectorization
   
   // prior for beta_1
   beta_1 ~ normal(0,1);  // vectorization
   
   // prior for sigma
-  sigma ~ normal(0,1);
+  sigma ~ normal(0,0.5);  // vectorization
   
-  // log posterior
+  // log likelihood
   for (n in 1:N) {
     target += log_sum_exp(L[n]);
   }
@@ -107,7 +117,7 @@ generated quantities {
   for (n in 1:N) {
     row_vector[T] mu;  // means for Y_obs Normal distributions
     mu = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
-    Y_pred[n] = normal_rng(mu, sigma);  // vectorization
+    Y_pred[n] = normal_rng(mu, sigma[z[n]]);  // vectorization
   }
   
 }
