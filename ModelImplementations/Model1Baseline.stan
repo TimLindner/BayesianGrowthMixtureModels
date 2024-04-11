@@ -19,6 +19,21 @@ data {
   // time periods
   matrix[N,T] X;
   
+  // mean hyperparameter for Normal prior of constant
+  real<lower=0> beta_0_prior_mu;
+  
+  // SD hyperparameter for Normal prior of constant
+  real<lower=0> beta_0_prior_sigma;
+  
+  // mean hyperparameter for Normal prior of linear trend component
+  real<lower=0> beta_1_prior_mu;
+  
+  // SD hyperparameter for Normal prior of linear trend component
+  real<lower=0> beta_1_prior_sigma;
+  
+  // SD hyperparameter for Normal prior of SD for Y Normal distributions
+  real<lower=0> sigma_prior_sigma;
+  
 }
 
 
@@ -39,13 +54,13 @@ parameters {
 model {
   
   // prior for beta_0
-  beta_0 ~ normal(10,10);
+  beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);
   
   // prior for beta_1
-  beta_1 ~ normal(0,1);
+  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);
   
   // prior for sigma
-  sigma ~ normal(0,1);
+  sigma ~ normal(0,sigma_prior_sigma);
   
   // means for Y_obs Normal distributions
   vector[N] mu;
