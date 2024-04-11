@@ -14,9 +14,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, include = FALSE}
 # README
+# if necessary, the hyperparameters section has to be adjusted manually
+
 # required files:
 # Dataset1_Yobs.xlsx
-# Model1Baseline_Dataset1_Fit.rds
+# Model1Baseline_Dataset1_Fit1.rds
 ```
 
 
@@ -25,6 +27,18 @@ knitr::opts_chunk$set(echo = FALSE)
 * <span style="color: deeppink;">deeppink</span> for simulated parameters
 * <span style="color: darkturquoise;">darkturquoise</span> for predicted dependent variable
 * <span style="color: orange;">orange</span> for observed dependent variable
+
+
+# Hyperparameters
+* $\beta_{0,\mu} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
+
+* $\beta_{0,\sigma} = 10$
+
+* $\beta_{1,\mu} = 0$
+
+* $\beta_{1,\sigma} = 1$
+
+* $\sigma_\sigma = 1$
 
 
 ```{r, include = FALSE}
@@ -69,7 +83,7 @@ sigma_sim <- 0.75
 
 # estimated data ####
 # load model fit
-m_fit <- readRDS("SimulationStudyResults/Model1Baseline_Dataset1_Fit.rds")
+m_fit <- readRDS("SimulationStudyResults/Model1Baseline_Dataset1_Fit10_NoWarnings.rds")
 m_fit_params <- rstan::extract(m_fit)
 
 # predicted dependent variable
