@@ -96,7 +96,7 @@ model {
   beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);  // vectorization
   
   // prior for beta_1
-  beta_1 ~ normal(beta_1_prior_mean,beta_1_prior_sigma);  // vectorization
+  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);  // vectorization
   
   // prior for sigma
   sigma ~ normal(0,sigma_prior_sigma);  // vectorization
