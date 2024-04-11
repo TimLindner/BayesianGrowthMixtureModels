@@ -1,0 +1,55 @@
+---
+title: "Table of contents"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r, include = FALSE}
+# preparation ####
+# set working directory
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
+
+# set decimals to digits instead of scientific
+options(scipen = 999)
+
+# load packages
+library(flextable)
+```
+
+
+# Model 1
+```{r}
+model <- c("Baseline",
+           "Two classes")
+
+dataset <- c("1",
+             "2")
+
+convergence <- c("10 / 10",
+                 "9 / 10")
+
+estimation <- c("10 / 10",
+                "9 / 10")
+
+df <- data.frame(model,
+                 dataset,
+                 convergence,
+                 estimation)
+
+names(df) <- c("Model",
+               "Dataset",
+               "Convergence stability",
+               "Estimation stability")
+
+flextable(df)
+```
+
+
