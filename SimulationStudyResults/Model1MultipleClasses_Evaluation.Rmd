@@ -14,15 +14,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, include = FALSE}
 # README
+# if necessary, the hyperparameters section has to be adjusted manually
+
 # required files:
 # one of the following pairs of datasets:
 # - Dataset2_Yobs.xlsx, Dataset2_zsim.xlsx ( default )
 # - Dataset3_Yobs.xlsx, Dataset3_zsim.xlsx
 # - Dataset4_Yobs.xlsx, Dataset4_zsim.xlsx
 # and the corresponding model fit:
-# - Model1Baseline_Dataset1_Fit.rds ( default )
-# - Model1Baseline_Dataset2_Fit.rds
-# - Model1Baseline_Dataset3_Fit.rds
+# - Model1Baseline_Dataset1_Fit1.rds ( default )
+# - Model1Baseline_Dataset2_Fit1.rds
+# - Model1Baseline_Dataset3_Fit1.rds
 ```
 
 
@@ -31,6 +33,20 @@ knitr::opts_chunk$set(echo = FALSE)
 * <span style="color: deeppink;">deeppink</span> for simulated parameters
 * <span style="color: darkturquoise;">darkturquoise</span> for predicted dependent variable
 * <span style="color: orange;">orange</span> for observed dependent variable
+
+
+# Hyperparameters
+* $\beta_{0,c=1,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} - 2$
+
+* $\beta_{0,c=2,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} + 2$
+
+* $\beta_{0,c,\sigma} = 5$
+
+* $\beta_{1,c,\mu} = 0$
+
+* $\beta_{1,c,\sigma} = 1$
+
+* $\sigma_{c,\sigma} = 0.5$
 
 
 ```{r, include = FALSE}
@@ -80,13 +96,13 @@ beta_0_sim <- c(-5,10)
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
 
-# simulated standard deviation for Y_obs Normal distributions
+# simulated standard deviations for Y_obs Normal distributions
 sigma_sim <- c(0.25,0.75)
 
 
 # estimated data ####
 # load model fit
-m_fit <- readRDS("SimulationStudyResults/Model1TwoClasses_Dataset2_Fit.rds")
+m_fit <- readRDS("SimulationStudyResults/Model1TwoClasses_Dataset2_Fit1_NoWarnings.rds")
 m_fit_params <- rstan::extract(m_fit)
 
 # predicted dependent variable
@@ -422,4 +438,5 @@ for (n in 1:N) {
 
 par(mfrow = c(1,1))
 ```
+
 
