@@ -87,7 +87,7 @@ beta_0_sim <- c(-5,10)
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
 
-# simulated standard deviation for Y_obs Normal distributions
+# simulated standard deviations for Y_obs Normal distributions
 sigma_sim <- c(0.25,0.75)
 
 # observed dependent variable
