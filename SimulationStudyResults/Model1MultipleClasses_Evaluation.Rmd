@@ -41,7 +41,7 @@ $\beta_{0,c} < \beta_{0,c+1}$
 
 
 # Hyperparameters
-* $\boldsymbol{\beta}_{0,\mu} = \boldsymbol{\kappa} \text{, where } \boldsymbol{\kappa} \text{ is a row vector of size } C \text{ storing the estimates of K-means clustering for } \boldsymbol{y}^{obs}_{t=1} \text{, with } \kappa_c \leq \kappa_{c+1}$
+* $\boldsymbol{\beta}_{0,\mu} = \boldsymbol{\kappa}\text{,}$ where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$; K-means clustering is performed using the algorithm of Hartigan and Wong (1979) with maximum ten iterations and one random set
 
 * $\beta_{0,c,\sigma} = 1$
 
@@ -441,5 +441,9 @@ for (n in 1:N) {
 
 par(mfrow = c(1,1))
 ```
+
+
+# References
+* Hartigan, J. A. and Wong, M. A. (1979). Algorithm AS 136: A K-means clustering algorithm. *Applied Statistics*, *28*(1), 100-108. https://doi.org/10.2307/2346830.
 
 
