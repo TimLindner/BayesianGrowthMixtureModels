@@ -17,7 +17,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 * :page_facing_up: ModelSpecifications
 
 ### References
-* R Core Team and contributors worldwide. (2022). *The R Stats Package* (Versiob 4.2.2) [R package]. The R Project for Statistical Computing.
+* R Core Team and contributors worldwide. (2022). *The R Stats Package* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (n.d.). *Stan Documentation Version 2.34*. Stan. https://mc-stan.org/docs/
 * Stan Development Team. (2024). *RStan — the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
 
