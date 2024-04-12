@@ -60,10 +60,10 @@ parameters {
   simplex[C] lambda;
   
   // constants
-  row_vector[C] beta_0;
+  ordered[C] beta_0;
   
   // linear trend components
-  ordered[C] beta_1;
+  row_vector[C] beta_1;
   
   // standard deviations for Y Normal distributions
   row_vector<lower=0>[C] sigma;
