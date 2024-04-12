@@ -41,11 +41,11 @@ $\beta_{0,c} < \beta_{0,c+1}$
 
 
 # Hyperparameters
-* $\beta_{0,c=1,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} - 3$
+* $\beta_{0,c=1,\mu} = min\{\boldsymbol{\kappa}\} \text{, where } \boldsymbol{\kappa} \text{ stores the estimates of K-means clustering with two clusters for } \boldsymbol{y}^{obs}_{t=1}$
 
-* $\beta_{0,c=2,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} + 3$
+* $\beta_{0,c=1,\mu} = max\{\boldsymbol{\kappa}$
 
-* $\beta_{0,c,\sigma} = 5$
+* $\beta_{0,c,\sigma} = 1$
 
 * $\beta_{1,c,\mu} = 0$
 
