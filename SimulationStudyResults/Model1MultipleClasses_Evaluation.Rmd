@@ -25,6 +25,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # - Model1Baseline_Dataset1_Fit1.rds ( default )
 # - Model1Baseline_Dataset2_Fit1.rds
 # - Model1Baseline_Dataset3_Fit1.rds
+# - Model1Baseline_Dataset4_Fit1.rds
 ```
 
 
@@ -35,10 +36,14 @@ knitr::opts_chunk$set(echo = FALSE)
 * <span style="color: orange;">orange</span> for observed dependent variable
 
 
-# Hyperparameters
-* $\beta_{0,c=1,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} - 2$
+# Labelling restriction
+$\beta_{0,c} < \beta_{0,c+1}$
 
-* $\beta_{0,c=2,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} + 2$
+
+# Hyperparameters
+* $\beta_{0,c=1,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} - 3$
+
+* $\beta_{0,c=2,\mu} = min\{\boldsymbol{y}^{obs}_{t=1}\} + \frac{max\{\boldsymbol{y}^{obs}_{t=1}\} - min\{\boldsymbol{y}^{obs}_{t=1}\}}{2} + 3$
 
 * $\beta_{0,c,\sigma} = 5$
 
@@ -102,7 +107,7 @@ sigma_sim <- c(0.25,0.75)
 
 # estimated data ####
 # load model fit
-m_fit <- readRDS("SimulationStudyResults/Model1TwoClasses_Dataset2_Fit1_NoWarnings.rds")
+m_fit <- readRDS("SimulationStudyResults/Model1TwoClasses_Dataset2_Fit1.rds")
 m_fit_params <- rstan::extract(m_fit)
 
 # predicted dependent variable
