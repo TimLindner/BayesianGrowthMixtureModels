@@ -20,13 +20,13 @@ data {
   matrix[N,T] X;
   
   // mean hyperparameter for Normal prior of constant
-  real<lower=0> beta_0_prior_mu;
+  real beta_0_prior_mu;
   
   // SD hyperparameter for Normal prior of constant
   real<lower=0> beta_0_prior_sigma;
   
   // mean hyperparameter for Normal prior of linear trend component
-  real<lower=0> beta_1_prior_mu;
+  real beta_1_prior_mu;
   
   // SD hyperparameter for Normal prior of linear trend component
   real<lower=0> beta_1_prior_sigma;
