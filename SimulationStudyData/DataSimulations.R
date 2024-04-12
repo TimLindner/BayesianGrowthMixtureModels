@@ -128,7 +128,7 @@ z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 write.xlsx(data.frame(z_sim), "Dataset3_zsim.xlsx")
 
 # simulated constants
-beta_0_sim <- c(9,10)
+beta_0_sim <- c(10,10)
 
 # simulated linear trend components
 beta_1_sim <- c(-0.5,1)
