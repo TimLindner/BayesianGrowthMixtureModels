@@ -41,9 +41,7 @@ $\beta_{0,c} < \beta_{0,c+1}$
 
 
 # Hyperparameters
-* $\beta_{0,c=1,\mu} = min\{\boldsymbol{\kappa}\} \text{, where } \boldsymbol{\kappa} \text{ stores the estimates of K-means clustering with two clusters for } \boldsymbol{y}^{obs}_{t=1}$
-
-* $\beta_{0,c=1,\mu} = max\{\boldsymbol{\kappa}$
+* $\boldsymbol{\beta}_{0,\mu} = \boldsymbol{\kappa} \text{, where } \boldsymbol{\kappa} \text{ is a row vector of size } C \text{ storing the estimates of K-means clustering for } \boldsymbol{y}^{obs}_{t=1} \text{, with } \kappa_c \leq \kappa_{c+1}$
 
 * $\beta_{0,c,\sigma} = 1$
 
