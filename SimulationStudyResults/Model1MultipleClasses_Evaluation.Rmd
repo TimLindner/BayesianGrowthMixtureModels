@@ -14,8 +14,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, include = FALSE}
 # README
-# if necessary, the hyperparameters section has to be adjusted manually
-
 # required files:
 # one of the following pairs of datasets:
 # - Dataset2_Yobs.xlsx, Dataset2_zsim.xlsx ( default )
@@ -36,7 +34,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * <span style="color: orange;">orange</span> for observed dependent variable
 
 
-# Labelling restriction
+# Labeling restriction
 $\beta_{0,c} < \beta_{0,c+1}$
 
 
