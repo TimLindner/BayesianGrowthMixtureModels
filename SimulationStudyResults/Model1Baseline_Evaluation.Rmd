@@ -14,8 +14,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, include = FALSE}
 # README
-# if necessary, the hyperparameters section has to be adjusted manually
-
 # required files:
 # Dataset1_Yobs.xlsx
 # Model1Baseline_Dataset1_Fit1.rds
