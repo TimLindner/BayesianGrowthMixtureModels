@@ -483,7 +483,7 @@ k_means <- kmeans(Y_obs[,1],  # K-means clustering
 beta_0_prior_mu <- sort(k_means$centers)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(0.5,0.5,0.5)
+beta_0_prior_sigma <- c(1,1,1)
 
 # mean hyperparameters for Normal prior of linear trend components
 beta_1_prior_mu <- c(0,0,0)
@@ -507,10 +507,7 @@ iter <- 2000
 warmup <- floor(iter/2)
 
 # sampler: initial values for parameters
-init <- list()
-for (ch in 1:chains) {
-  init[[ch]] <- list(beta_0 = beta_0_prior_mu)
-}
+init <- "random"
 
 # sampler: algorithm
 algorithm <- "NUTS"
