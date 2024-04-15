@@ -6,7 +6,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 * Placeholder
 
 ### Statistical computing
-* The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan - the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024)
+* The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan — the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024)
 * The R Stats Package has been used to perform K-means clustering in the context of prior elicitation (R Core Team and contributors worldwide, 2022)
 
 ### Repository structure
@@ -19,5 +19,5 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 ### References
 * R Core Team and contributors worldwide. (2022). *The R Stats Package* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (n.d.). *Stan Documentation Version 2.34*. Stan. https://mc-stan.org/docs/
-* Stan Development Team. (2024). *RStan - the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
+* Stan Development Team. (2024). *RStan — the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
 
