@@ -42,7 +42,7 @@ $\beta_{0,c} < \beta_{0,c+1}$
 
 
 # Hyperparameters
-* $\boldsymbol{\beta}_{0,\mu} = \boldsymbol{\kappa}\text{,}$ where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$; K-means clustering is performed using the algorithm of Hartigan and Wong (1979) with maximum ten iterations and one random set
+* $\beta_{0,c,\mu} = \kappa_c$, where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$; K-means clustering is performed using the algorithm of Hartigan and Wong (1979) with maximum ten iterations and two random sets
 
 * $\beta_{0,c,\sigma} = 1$
 
@@ -51,6 +51,18 @@ $\beta_{0,c} < \beta_{0,c+1}$
 * $\beta_{1,c,\sigma} = 1$
 
 * $\sigma_{c,\sigma} = 0.5$
+
+
+# NUTS
+* Number of chains: $4$
+
+* Number of iterations per chain: $2000$
+
+* Number of warmup iterations per chain: $1000$
+
+* Number of sampling iterations per chain: $1000$
+
+* Initial values for parameters: random initial values
 
 
 ```{r, include = FALSE}
