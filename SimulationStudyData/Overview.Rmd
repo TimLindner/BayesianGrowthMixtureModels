@@ -39,9 +39,9 @@ library(readxl)
 
 # Model 1
 ## Dataset 1 - baseline
-$\text{For } n \text{ in } 1,...,50 \text{ and } t \text{ in } 1,...,10\text{:}$
+$\text{For } n \text{ in } 1,...,50 \text{ and } t \text{ in } 1,...,10\text{:}$  
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
+$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
 
 
 ```{r}
