@@ -19,11 +19,14 @@ knitr::opts_chunk$set(echo = FALSE)
 # - Dataset2_Yobs.xlsx, Dataset2_zsim.xlsx ( default )
 # - Dataset3_Yobs.xlsx, Dataset3_zsim.xlsx
 # - Dataset4_Yobs.xlsx, Dataset4_zsim.xlsx
+# - Dataset5_Yobs.xlsx, Dataset5_zsim.xlsx
+# - Dataset6_Yobs.xlsx, Dataset6_zsim.xlsx
 # and the corresponding model fit:
-# - Model1Baseline_Dataset1_Fit1.rds ( default )
-# - Model1Baseline_Dataset2_Fit1.rds
-# - Model1Baseline_Dataset3_Fit1.rds
-# - Model1Baseline_Dataset4_Fit1.rds
+# - Model1TwoClasses_Dataset2_Fit1.rds ( default )
+# - Model1TwoClasses_Dataset3_Fit1.rds
+# - Model1TwoClasses_Dataset4_Fit1.rds
+# - Model1ThreeClasses_Dataset5_Fit1.rds
+# - Model1ThreeClasses_Dataset6_Fit1.rds
 ```
 
 
