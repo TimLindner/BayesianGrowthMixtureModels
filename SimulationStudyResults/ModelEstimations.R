@@ -483,7 +483,7 @@ k_means <- kmeans(Y_obs[,1],  # K-means clustering
 beta_0_prior_mu <- sort(k_means$centers)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(1,1,1)
+beta_0_prior_sigma <- c(0.5,0.5,0.5)
 
 # mean hyperparameters for Normal prior of linear trend components
 beta_1_prior_mu <- c(0,0,0)
