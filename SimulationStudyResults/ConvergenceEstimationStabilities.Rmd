@@ -25,19 +25,30 @@ library(flextable)
 ```
 
 
+# Methodology
+Convergence and estimation stability are measured by the number of successful NUTS runs in relation to the total number of runs.
+
 # Model 1
 ```{r}
 model <- c("Baseline",
-           "Two classes")
+           "Two classes",
+           "Two classes",
+           "Two classes",
+           "Three classes")
 
-dataset <- c("1",
-             "2")
+dataset <- c("1","2","3","4","5")
 
-convergence <- c("10 / 10",
-                 "9 / 10")
+convergence <- c("5 / 5",
+                 "4 / 5",
+                 "2 / 5",
+                 "4 / 5",
+                 "2 / 5")
 
-estimation <- c("10 / 10",
-                "9 / 10")
+estimation <- c("5 / 5",
+                "4 / 5",
+                "2 / 5",
+                "4 / 5",
+                "2 / 5")
 
 df <- data.frame(model,
                  dataset,
