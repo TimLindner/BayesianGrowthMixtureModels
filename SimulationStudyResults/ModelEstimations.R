@@ -164,7 +164,7 @@ beta_1_prior_sigma <- c(1,1)
 sigma_prior_sigma <- c(0.5,0.5)
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses.stan")
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -246,7 +246,7 @@ beta_1_prior_sigma <- c(1,1)
 sigma_prior_sigma <- c(0.5,0.5)
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses.stan")
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -328,7 +328,7 @@ beta_1_prior_sigma <- c(1,1)
 sigma_prior_sigma <- c(0.5,0.5)
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses.stan")
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -410,7 +410,7 @@ beta_1_prior_sigma <- c(1,1,1)
 sigma_prior_sigma <- c(0.5,0.5,0.5)
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses.stan")
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -495,7 +495,9 @@ beta_1_prior_sigma <- c(1,1,1)
 sigma_prior_sigma <- c(0.5,0.5,0.5)
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses.stan")
+m <- stan_model(
+  "ModelImplementations/Model1MultipleClasses_beta0beta1ordered.stan"
+  )
 
 # sampler: number of chains
 chains <- 4
