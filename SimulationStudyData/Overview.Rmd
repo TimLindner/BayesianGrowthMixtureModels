@@ -39,7 +39,7 @@ library(readxl)
 
 # Model 1
 ## Dataset 1 - baseline
-$\text{For } n \text{ in } 1,...,50 \text{ and } t \text{ in } 1,...,10\text{:}$  
+For $n$ in $1,...,50$ and $t$ in $1,...,10$:  
 
 $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
 
@@ -85,7 +85,7 @@ box()
 
 
 ## Dataset 2 - two classes - no overlaps between classes
-$\text{For } n \text{ in } 1,...,200 \text{ and } t \text{ in } 1,...,10\text{:}$
+For $n$ in $1,...,200$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
@@ -135,7 +135,7 @@ box()
 
 
 ## Dataset 3 - two classes - overlapping constants
-$\text{For } n \text{ in } 1,...,200 \text{ and } t \text{ in } 1,...,10\text{:}$
+For $n$ in $1,...,200$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(2 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
@@ -185,7 +185,7 @@ box()
 
 
 ## Dataset 4 - two classes - intersecting trends
-$\text{For } n \text{ in } 1,...,200 \text{ and } t \text{ in } 1,...,10\text{:}$
+For $n$ in $1,...,200$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 + 1 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
@@ -235,7 +235,7 @@ box()
 
 
 ## Dataset 5 - three classes - no overlaps between classes
-$\text{For } n \text{ in } 1,...,250 \text{ and } t \text{ in } 1,...,10\text{:}$
+For $n$ in $1,...,250$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
@@ -287,7 +287,7 @@ box()
 
 
 ## Dataset 6 - three classes - overlapping constants
-$\text{For } n \text{ in } 1,...,250 \text{ and } t \text{ in } 1,...,10\text{:}$
+For $n$ in $1,...,250$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(1.5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
