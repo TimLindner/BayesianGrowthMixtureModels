@@ -1,10 +1,5 @@
 // README
 // a note on the Stan code:
-// data structures are best traversed in the order in which they are stored.
-// in Stan, matrices store their data in column-major order, and
-// arrays store their data in row-major order.
-
-// a note on the Stan code:
 // the result of a vectorized log probability mass function
 // is equivalent to the sum of the evaluations on each element;
 // e.g., real poisson_log_lpmf(ints y_obs | reals theta).
@@ -22,7 +17,7 @@ data {
   int<lower=2> T;
   
   // observed dependent variable ( simulated or actual data )
-  matrix[N,T] Y_obs;
+  array[N,T] int Y_obs;
   
   // time periods
   matrix[N,T] X;
@@ -73,7 +68,7 @@ transformed parameters {
     L[n] = log(lambda);  // log transform lambda, vectorization
     for (c in 1:C) {
       row_vector[T] theta;  // log rates for Y_obs Normal distributions
-      mu = beta_0[c] + beta_1[c] * X[n];  // vectorization
+      theta = beta_0[c] + beta_1[c] * X[n];  // vectorization
       L[n,c] += poisson_log_lpmf(Y_obs[n] | theta);  // vectorization
     }
   }
@@ -111,8 +106,8 @@ generated quantities {
   // predicted dependent variable
   array[N,T] int Y_pred;
   for (n in 1:N) {
-    row_vector[T] mu;  // log rates for Y_pred Normal distributions
-    mu = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
+    row_vector[T] theta;  // log rates for Y_pred Normal distributions
+    theta = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
     Y_pred[n] = poisson_log_rng(theta);  // vectorization
   }
   
