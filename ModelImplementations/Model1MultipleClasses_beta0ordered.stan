@@ -1,10 +1,5 @@
 // README
 // a note on the Stan code:
-// data structures are best traversed in the order in which they are stored.
-// in Stan, matrices store their data in column-major order, and
-// arrays store their data in row-major order.
-
-// a note on the Stan code:
 // the result of a vectorized log probability density function
 // is equivalent to the sum of the evaluations on each element;
 // e.g., real normal_lpdf(reals y_obs | reals mu, real sigma).
