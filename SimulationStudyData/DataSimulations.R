@@ -6,6 +6,9 @@
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections ( in any order ).
 
+# required file for dataset 16 section
+# SimulationModel2.stan
+
 
 # preparation ####
 # set working directory
@@ -23,6 +26,9 @@ options(scipen = 999)
 # load packages
 library(openxlsx)
 library(extraDistr)
+library(rstan)
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
 
 
 # dataset 1 - model 1 baseline ####
@@ -286,5 +292,64 @@ for (n in 1:N) {
 
 # save Y_obs ( transform to data frame beforehand )
 write.xlsx(data.frame(Y_obs), "Dataset6_Yobs.xlsx")
+
+
+# dataset 16 - model 3 two classes - no overlaps between classes ####
+# number of latent classes
+C <- 2
+
+# number of individuals
+N <- 200
+
+# number of time periods
+no_periods <- 10
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# simulated mixture proportions
+lambda_sim <- c(0.3,0.7)
+
+# simulated constants
+beta_0_sim <- c(1,5)
+
+# simulated linear trend components
+beta_1_sim <- c(0.4,0.1)
+
+# load simulation model
+sim_m <- stan_model("SimulationModel2.stan")
+
+job::job({
+  
+  # simulate data
+  sim_m_fit <- sampling(sim_m,
+                        data = list(C = C,
+                                    N = N,
+                                    T = no_periods,
+                                    X = X,
+                                    lambda_sim = lambda_sim,
+                                    beta_0_sim = beta_0_sim,
+                                    beta_1_sim = beta_1_sim),
+                        chains = 1,
+                        iter = 1,
+                        algorithm = "Fixed_param")
+  
+})
+
+# extract simulated data
+sim_m_fit_data <- rstan::extract(sim_m_fit)
+
+# simulated class memberships
+z_sim <- sim_m_fit_data$z_sim[1,]
+
+# save z_sim ( transform to data frame beforehand )
+write.xlsx(data.frame(z_sim), "Dataset16_zsim.xlsx")
+
+# observed dependent variable
+Y_obs <- sim_m_fit_data$Y_obs[1,,]
+
+# save Y_obs ( transform to data frame beforehand )
+write.xlsx(data.frame(Y_obs), "Dataset16_Yobs.xlsx")
 
 
