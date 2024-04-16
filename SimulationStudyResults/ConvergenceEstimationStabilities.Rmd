@@ -34,21 +34,24 @@ model <- c("Baseline",
            "Two classes",
            "Two classes",
            "Two classes",
+           "Three classes",
            "Three classes")
 
-dataset <- c("1","2","3","4","5")
+dataset <- c("1","2","3","4","5","6")
 
 convergence <- c("5 / 5",
                  "4 / 5",
                  "2 / 5",
                  "4 / 5",
-                 "2 / 5")
+                 "2 / 5",
+                 "3 / 5")
 
 estimation <- c("5 / 5",
                 "4 / 5",
                 "2 / 5",
                 "4 / 5",
-                "2 / 5")
+                "2 / 5",
+                "3 / 5")
 
 df <- data.frame(model,
                  dataset,
