@@ -6,6 +6,9 @@
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections ( in any order ).
 
+# required file for dataset 15 section:
+# SimulationModel_DS15.stan
+
 # required file for dataset 16 section:
 # SimulationModel_DS16.stan
 
@@ -292,6 +295,52 @@ for (n in 1:N) {
 
 # save Y_obs ( transform to data frame beforehand )
 write.xlsx(data.frame(Y_obs), "Dataset6_Yobs.xlsx")
+
+
+# dataset 15 - model 3 baseline ####
+# number of individuals
+N <- 50
+
+# number of time periods
+no_periods <- 10
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# simulated constant
+beta_0_sim <- 5
+
+# simulated linear trend component
+beta_1_sim <- 0.1
+
+# load simulation model
+sim_m <- stan_model("SimulationModel_DS15.stan")
+
+job::job({
+  
+  # simulate data
+  sim_m_fit <- sampling(sim_m,
+                        data = list(C = C,
+                                    N = N,
+                                    T = no_periods,
+                                    X = X,
+                                    beta_0_sim = beta_0_sim,
+                                    beta_1_sim = beta_1_sim),
+                        chains = 1,
+                        iter = 1,
+                        algorithm = "Fixed_param")
+  
+})
+
+# extract simulated data
+sim_m_fit_data <- rstan::extract(sim_m_fit)
+
+# observed dependent variable
+Y_obs <- sim_m_fit_data$Y_obs[1,,]
+
+# save Y_obs ( transform to data frame beforehand )
+write.xlsx(data.frame(Y_obs), "Dataset15_Yobs.xlsx")
 
 
 # dataset 16 - model 3 two classes - no overlaps between classes ####
