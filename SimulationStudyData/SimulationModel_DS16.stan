@@ -1,7 +1,8 @@
 // README
 // a note on the Stan code:
 // data structures are best traversed in the order in which they are stored.
-// in Stan, arrays store their data in row-major order.
+// in Stan, matrices store their data in column-major order, and
+// arrays store their data in row-major order.
 
 
 data {
