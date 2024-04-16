@@ -6,8 +6,8 @@
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections ( in any order ).
 
-# required file for dataset 16 section
-# SimulationModel2.stan
+# required file for dataset 16 section:
+# SimulationModel_DS16.stan
 
 
 # preparation ####
@@ -318,7 +318,7 @@ beta_0_sim <- c(1,5)
 beta_1_sim <- c(0.4,0.1)
 
 # load simulation model
-sim_m <- stan_model("SimulationModel2.stan")
+sim_m <- stan_model("SimulationModel_DS16.stan")
 
 job::job({
   
