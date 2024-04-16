@@ -67,3 +67,27 @@ flextable(df)
 ```
 
 
+# Model 1
+```{r}
+model <- c("Baseline")
+
+dataset <- c("15")
+
+convergence <- c("5 / 5")
+
+estimation <- c("5 / 5")
+
+df <- data.frame(model,
+                 dataset,
+                 convergence,
+                 estimation)
+
+names(df) <- c("Model",
+               "Dataset",
+               "Convergence stability",
+               "Estimation stability")
+
+flextable(df)
+```
+
+
