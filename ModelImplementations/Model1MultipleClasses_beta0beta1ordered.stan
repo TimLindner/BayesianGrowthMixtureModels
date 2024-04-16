@@ -7,7 +7,7 @@
 // a note on the Stan code:
 // the result of a vectorized log probability density function
 // is equivalent to the sum of the evaluations on each element;
-// e.g., real normal_lpdf(reals y | reals mu, real sigma).
+// e.g., real normal_lpdf(reals y_obs | reals mu, real sigma).
 
 
 data {
