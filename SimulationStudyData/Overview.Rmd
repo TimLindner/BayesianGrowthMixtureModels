@@ -21,6 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Dataset4_Yobs.xlsx
 # Dataset5_Yobs.xlsx
 # Dataset6_Yobs.xlsx
+# Dataset15_Yobs.xlsx
 # Dataset16_Yobs.xlsx
 ```
 
@@ -340,6 +341,52 @@ box()
 
 
 # Model 3
+## Dataset 15 - baseline
+For $n$ in $1,...,50$ and $t$ in $1,...,10$:  
+
+$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n})$
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Dataset15_Yobs.xlsx", sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+
+# time periods
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# plot observed dependent variable
+x <- time_periods
+
+plot(x = x,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable",
+     xlab = "t",
+     ylab = "y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = x,
+        y = Y_obs[n,],
+        col = "orange")
+
+box()
+}
+```
+
+
 ## Dataset 16 - two classes - no overlaps between classes
 For $n$ in $1,...,200$ and $t$ in $1,...,10$:
 
