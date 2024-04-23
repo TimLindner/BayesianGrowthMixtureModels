@@ -1,13 +1,13 @@
 data {
   
   // number of individuals
-  int<lower=2> N;
+  int<lower=1> N;
   
   // number of time periods
   int<lower=2> T;
   
   // observed dependent variable (simulated or actual data)
-  array[N,T] int Y_obs;
+  array[N,T] int<lower=0> Y_obs;
   
   // time periods
   matrix[N,T] X;
