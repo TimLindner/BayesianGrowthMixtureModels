@@ -4,10 +4,10 @@ data {
   int<lower=2> C;
   
   // number of individuals
-  int<lower=2> N;
+  int<lower=200> N;
   
   // number of time periods
-  int<lower=2> T;
+  int<lower=10> T;
   
   // time periods
   matrix[N,T] X;
