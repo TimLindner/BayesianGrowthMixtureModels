@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, include = FALSE}
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs")
 
 # set decimals to digits instead of scientific
 options(scipen = 999)
@@ -67,7 +67,7 @@ flextable(df)
 ```
 
 
-# Model 1
+# Model 3
 ```{r}
 model <- c("Baseline")
 
