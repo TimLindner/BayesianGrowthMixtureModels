@@ -6,7 +6,7 @@ data {
   // number of time periods
   int<lower=2> T;
   
-  // observed dependent variable ( simulated or actual data )
+  // observed dependent variable (simulated or actual data)
   matrix[N,T] Y_obs;
   
   // time periods
