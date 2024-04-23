@@ -1,7 +1,7 @@
 data {
   
   // number of individuals
-  int<lower=2> N;
+  int<lower=1> N;
   
   // number of time periods
   int<lower=2> T;
