@@ -1,10 +1,10 @@
 data {
   
   // number of individuals
-  int<lower=1> N;
+  int<lower=50> N;
   
   // number of time periods
-  int<lower=2> T;
+  int<lower=10> T;
   
   // observed dependent variable (simulated or actual data)
   matrix[N,T] Y_obs;
