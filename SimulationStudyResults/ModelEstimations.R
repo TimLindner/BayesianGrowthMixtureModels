@@ -4,7 +4,7 @@
 # README ####
 # how to use this file?
 # firstly, run the preparation section.
-# secondly, run one or several model sections ( in any order ).
+# secondly, run one or several model sections; in any order.
 
 # required files for model 1 baseline - dataset 1 section:
 # Dataset1_Yobs.xlsx
@@ -41,7 +41,7 @@
 
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs")
 
 # clean workspace
 rm(list = ls())
@@ -487,15 +487,10 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # mean hyperparameter for Normal prior of constant
-k_means <- kmeans(Y_obs[,1],  # K-means clustering
-                  centers = C,
-                  iter.max = 10,
-                  nstart = 2,
-                  algorithm = "Hartigan-Wong")
-beta_0_prior_mu <- sort(k_means$centers)
+beta_0_prior_mu <- rep(mean(Y_obs[,1]), times = C)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(0.5,0.5,0.5)
+beta_0_prior_sigma <- c(1,1,1)
 
 # mean hyperparameters for Normal prior of linear trend components
 beta_1_prior_mu <- c(0,0,0)
@@ -504,12 +499,10 @@ beta_1_prior_mu <- c(0,0,0)
 beta_1_prior_sigma <- c(1,1,1)
 
 # SD hyperparameters for Normal prior of SDs for Y Normal distributions
-sigma_prior_sigma <- c(0.5,0.5,0.5)
+sigma_prior_sigma <- c(0.5)
 
 # load model
-m <- stan_model(
-  "ModelImplementations/Model1MultipleClasses_beta0beta1ordered.stan"
-  )
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta1ordered_Onesigma.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -548,7 +541,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResults/Model1ThreeClasses_Dataset6_Fit1.rds")
+          "SimulationStudyResults/Model1ThreeClasses_Dataset6_Fit5.rds")
   
 })
 
