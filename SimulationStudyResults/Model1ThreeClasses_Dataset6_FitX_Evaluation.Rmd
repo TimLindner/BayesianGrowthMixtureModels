@@ -28,20 +28,22 @@ knitr::opts_chunk$set(echo = FALSE)
 * <span style="color: orange;">orange</span> for observed dependent variable
 
 
-# Labeling restrictions
-* $\beta_{0,c} < \beta_{0,c+1}$
-
-* $\beta_{1,c} < \beta_{1,c+1}$
+# Labeling restriction
+$\beta_{1,c} < \beta_{1,c+1}$
 
 
 # Hyperparameters
-* $\beta_{0,c,\mu} = \kappa_c$, where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$; K-means clustering is performed using the algorithm of Hartigan and Wong (1979) with maximum ten iterations and two random sets
+* $\beta_{0,c,\mu} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
 
-* $\beta_{0,c,\sigma} = 0.5$
+* $\beta_{0,c,\sigma} = 5$
 
-* $\beta_{1,c,\mu} = 0$
+* $\beta_{1,c=1,\mu} = -0.5$
 
-* $\beta_{1,c,\sigma} = 1$
+* $\beta_{1,c=2,\mu} = 0.5$
+
+* $\beta_{1,c=3,\mu} = 1$
+
+* $\beta_{1,c,\sigma} = 0.5$
 
 * $\sigma_{c,\sigma} = 0.5$
 
@@ -61,7 +63,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, include = FALSE}
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs")
 
 # set decimals to digits instead of scientific
 options(scipen = 999)
