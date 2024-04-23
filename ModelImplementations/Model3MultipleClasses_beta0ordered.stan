@@ -17,7 +17,7 @@ data {
   int<lower=2> T;
   
   // observed dependent variable (simulated or actual data)
-  array[N,T] int Y_obs;
+  array[N,T] int<lower=0> Y_obs;
   
   // time periods
   matrix[N,T] X;
