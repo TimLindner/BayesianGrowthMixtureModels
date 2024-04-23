@@ -1,12 +1,12 @@
 > Please note that this repository is work in progress
 ### Introduction
-Hi there :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models ( or GMMs for short ) including Markov chains and their application to country-level terrorism data. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
+Hi there :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and their application to country-level terrorism data. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
 
 ### Work developed
 Placeholder
 
 ### Statistical computing
-* The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler ( or NUTS for short ) via RStan — the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024)
+* The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler (or NUTS for short) via RStan — the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024)
 * The R Stats Package has been used to perform K-means clustering in the context of prior elicitation (R Core Team and contributors worldwide, 2022)
 
 ### Repository structure
