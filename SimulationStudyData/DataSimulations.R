@@ -4,7 +4,7 @@
 # README ####
 # how to use this file?
 # firstly, run the preparation section.
-# secondly, run one or several dataset sections ( in any order ).
+# secondly, run one or several dataset sections; in any order.
 
 # required file for dataset 15 section:
 # SimulationModel_DS15.stan
@@ -15,7 +15,7 @@
 
 # preparation ####
 # set working directory
-setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMM/SimulationStudyData")
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs/SimulationStudyData")
 
 # clean workspace
 rm(list = ls())
@@ -63,7 +63,7 @@ for (n in 1:N) {
   Y_obs[n,] <- rnorm(n = no_periods, mean = mu, sd = sigma_sim)  # vectorization
 }
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset1_Yobs.xlsx")
 
 
@@ -87,7 +87,7 @@ lambda_sim <- c(0.3,0.7)
 # simulated class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
-# save z_sim ( transform to data frame beforehand )
+# save z_sim (transform to data frame beforehand)
 write.xlsx(data.frame(z_sim), "Dataset2_zsim.xlsx")
 
 # simulated constants
@@ -109,7 +109,7 @@ for (n in 1:N) {
     rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
 }
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset2_Yobs.xlsx")
 
 
@@ -133,7 +133,7 @@ lambda_sim <- c(0.3,0.7)
 # simulated class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
-# save z_sim ( transform to data frame beforehand )
+# save z_sim (transform to data frame beforehand)
 write.xlsx(data.frame(z_sim), "Dataset3_zsim.xlsx")
 
 # simulated constants
@@ -155,7 +155,7 @@ for (n in 1:N) {
     rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
 }
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset3_Yobs.xlsx")
 
 
@@ -179,7 +179,7 @@ lambda_sim <- c(0.3,0.7)
 # simulated class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
-# save z_sim ( transform to data frame beforehand )
+# save z_sim (transform to data frame beforehand)
 write.xlsx(data.frame(z_sim), "Dataset4_zsim.xlsx")
 
 # simulated constants
@@ -201,7 +201,7 @@ for (n in 1:N) {
     rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
 }
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset4_Yobs.xlsx")
 
 
@@ -225,7 +225,7 @@ lambda_sim <- c(0.3,0.2,0.5)
 # simulated class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
-# save z_sim ( transform to data frame beforehand )
+# save z_sim (transform to data frame beforehand)
 write.xlsx(data.frame(z_sim), "Dataset5_zsim.xlsx")
 
 # simulated constants
@@ -247,7 +247,7 @@ for (n in 1:N) {
     rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
 }
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset5_Yobs.xlsx")
 
 
@@ -271,7 +271,7 @@ lambda_sim <- c(0.3,0.2,0.5)
 # simulated class memberships
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
-# save z_sim ( transform to data frame beforehand )
+# save z_sim (transform to data frame beforehand)
 write.xlsx(data.frame(z_sim), "Dataset6_zsim.xlsx")
 
 # simulated constants
@@ -293,7 +293,7 @@ for (n in 1:N) {
     rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
 }
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset6_Yobs.xlsx")
 
 
@@ -339,7 +339,7 @@ sim_m_fit_data <- rstan::extract(sim_m_fit)
 # observed dependent variable
 Y_obs <- sim_m_fit_data$Y_obs[1,,]
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset15_Yobs.xlsx")
 
 
@@ -392,13 +392,13 @@ sim_m_fit_data <- rstan::extract(sim_m_fit)
 # simulated class memberships
 z_sim <- sim_m_fit_data$z_sim[1,]
 
-# save z_sim ( transform to data frame beforehand )
+# save z_sim (transform to data frame beforehand)
 write.xlsx(data.frame(z_sim), "Dataset16_zsim.xlsx")
 
 # observed dependent variable
 Y_obs <- sim_m_fit_data$Y_obs[1,,]
 
-# save Y_obs ( transform to data frame beforehand )
+# save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset16_Yobs.xlsx")
 
 
