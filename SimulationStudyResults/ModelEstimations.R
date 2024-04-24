@@ -70,7 +70,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -147,7 +147,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -230,7 +230,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -313,7 +313,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -396,7 +396,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -482,7 +482,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -557,7 +557,7 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -627,7 +627,7 @@ Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset16_Yobs.xlsx",
 # number of individuals
 N <- dim(Y_obs)[1]
 
-# number of time periods
+# explanatory variable
 no_periods <- dim(Y_obs)[2]
 
 # time periods
