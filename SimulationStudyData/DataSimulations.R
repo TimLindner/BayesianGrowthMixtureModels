@@ -41,7 +41,7 @@ N <- 50
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -78,7 +78,7 @@ N <- 200
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -125,7 +125,7 @@ N <- 200
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -172,7 +172,7 @@ N <- 200
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -219,7 +219,7 @@ N <- 250
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -266,7 +266,7 @@ N <- 250
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -311,7 +311,7 @@ N <- 50
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
@@ -360,7 +360,7 @@ N <- 200
 # number of time periods
 no_periods <- 10
 
-# time periods
+# explanatory variable: time periods, starting at zero
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
