@@ -50,9 +50,9 @@ model {
   vector[N] theta;
   
   // likelihood
-  for (t in 1:T) {
-    theta = beta_0 + beta_1 * col(X,t);  // vectorization over t
-    Y_obs[,t] ~ poisson_log(theta);  // vectorization over t
+  for (n in 1:N) {
+    theta = beta_0 + beta_1 * X[n];  // vectorization over t
+    Y_obs[n] ~ poisson_log(theta);  // vectorization over t
   }
   
 }
