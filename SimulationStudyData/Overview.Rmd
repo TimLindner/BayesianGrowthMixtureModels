@@ -72,7 +72,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -124,7 +124,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -176,7 +176,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -228,7 +228,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -282,7 +282,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -336,7 +336,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -385,7 +385,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
@@ -437,7 +437,7 @@ plot(x = x,
      type = "l",
      col = "white",
      main = "Observed dependent variable",
-     xlab = "t",
+     xlab = "x",
      ylab = "y_obs")
   
 grid(nx = NA, ny = NULL)
