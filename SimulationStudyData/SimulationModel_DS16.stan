@@ -9,8 +9,8 @@ data {
   // number of time periods
   int<lower=10> T;
   
-  // time periods
-  matrix[N,T] X;
+  // explanatory variable
+  array[N] row_vector[T] X;
   
   // simulated mixture proportions
   simplex[C] lambda_sim;
