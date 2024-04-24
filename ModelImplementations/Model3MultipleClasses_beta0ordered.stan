@@ -19,8 +19,8 @@ data {
   // observed dependent variable (simulated or actual data)
   array[N,T] int<lower=0> Y_obs;
   
-  // time periods
-  matrix[N,T] X;
+  // explanatory variable
+  array[N] row_vector[T] X;
   
   // mean hyperparameters for Normal prior of constants
   vector[C] beta_0_prior_mu;
@@ -65,11 +65,11 @@ transformed parameters {
   // log likelihood
   array[N] vector[C] L;
   for (n in 1:N) {
-    L[n] = log(lambda);  // log transform lambda, vectorization
+    L[n] = log(lambda);  // log transform lambda, vectorization over c
     for (c in 1:C) {
       row_vector[T] theta;  // log rates for Y_obs PoissonLog distributions
-      theta = beta_0[c] + beta_1[c] * X[n];  // vectorization
-      L[n,c] += poisson_log_lpmf(Y_obs[n] | theta);  // vectorization
+      theta = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
+      L[n,c] += poisson_log_lpmf(Y_obs[n] | theta);  // vectorization over t
     }
   }
   
@@ -79,13 +79,13 @@ transformed parameters {
 model {
   
   // prior for lambda
-  lambda ~ dirichlet(alpha);  // vectorization
+  lambda ~ dirichlet(alpha);  // vectorization over c
   
   // prior for beta_0
-  beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);  // vectorization
+  beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);  // vectorization over c
   
   // prior for beta_1
-  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);  // vectorization
+  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);  // vectorization over c
   
   // log likelihood
   for (n in 1:N) {
@@ -107,8 +107,8 @@ generated quantities {
   array[N,T] int Y_pred;
   for (n in 1:N) {
     row_vector[T] theta;  // log rates for Y_pred PoissonLog distributions
-    theta = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
-    Y_pred[n] = poisson_log_rng(theta);  // vectorization
+    theta = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization over t
+    Y_pred[n] = poisson_log_rng(theta);  // vectorization over t
   }
   
 }
