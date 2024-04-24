@@ -44,7 +44,7 @@ $\beta_{0,c} < \beta_{0,c+1}$
 * $\sigma_{c,\sigma} = 0.5$
 
 
-# NUTS
+# NUTS parameters
 * Number of chains: $4$
 
 * Number of iterations per chain: $2000$
@@ -406,7 +406,7 @@ for (n in 1:N) {
        type="l",
        col = "white",
        main = paste("n =", n),
-       xlab = "t",
+       xlab = "x",
        ylab = "y")
   
   grid(nx = NA, ny = NULL)
