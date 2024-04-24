@@ -39,9 +39,9 @@ generated quantities {
   for (n in 1:N) {
     row_vector[T] theta;  // log rates for Y_obs PoissonLog distributions
     theta = beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n];
-    // vectorization
+    // vectorization over t
     
-    Y_obs[n] = poisson_log_rng(theta);  // vectorization
+    Y_obs[n] = poisson_log_rng(theta);  // vectorization over t
   }
   
 }
