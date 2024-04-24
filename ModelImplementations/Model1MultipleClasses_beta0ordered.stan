@@ -23,28 +23,28 @@ data {
   array[N] row_vector[T] X;
   
   // mean hyperparameters for Normal prior of constants
-  vector[C] beta_0_prior_mu;
+  vector[C] mu_beta_0;
   
   // SD hyperparameters for Normal prior of constants
-  vector<lower=0>[C] beta_0_prior_sigma;
+  vector<lower=0>[C] sigma_beta_0;
   
   // mean hyperparameters for Normal prior of linear trend components
-  vector[C] beta_1_prior_mu;
+  vector[C] mu_beta_1;
   
   // SD hyperparameters for Normal prior of linear trend components
-  vector<lower=0>[C] beta_1_prior_sigma;
+  vector<lower=0>[C] sigma_beta_1;
   
   // SD hyperparameters for Normal prior of SDs for Y Normal distributions
-  vector<lower=0>[C] sigma_prior_sigma;
+  vector<lower=0>[C] sigma_sigma;
   
 }
 
 
 transformed data {
   
-  // hyperparameter for Dirichlet prior of mixture proportions
-  vector<lower=0>[C] alpha;
-  alpha = rep_vector(1,C);
+  // hyperparameters for Dirichlet prior of mixture proportions
+  vector<lower=0>[C] alpha_lambda;
+  alpha_lambda = rep_vector(1,C);
   
 }
 
@@ -85,16 +85,16 @@ transformed parameters {
 model {
   
   // prior for lambda
-  lambda ~ dirichlet(alpha);  // vectorization over c
+  lambda ~ dirichlet(alpha_lambda);  // vectorization over c
   
   // prior for beta_0
-  beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);  // vectorization over c
+  beta_0 ~ normal(mu_beta_0,sigma_beta_0);  // vectorization over c
   
   // prior for beta_1
-  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);  // vectorization over c
+  beta_1 ~ normal(mu_beta_1,sigma_beta_1);  // vectorization over c
   
   // prior for sigma
-  sigma ~ normal(0,sigma_prior_sigma);  // vectorization over c
+  sigma ~ normal(0,sigma_sigma);  // vectorization over c
   
   // log likelihood
   for (n in 1:N) {
