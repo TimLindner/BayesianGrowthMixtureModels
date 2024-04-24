@@ -44,14 +44,14 @@ convergence <- c("5 / 5",
                  "2 / 5",
                  "4 / 5",
                  "2 / 5",
-                 "3 / 5")
+                 "... / ...")
 
 estimation <- c("5 / 5",
                 "4 / 5",
                 "2 / 5",
                 "4 / 5",
                 "2 / 5",
-                "3 / 5")
+                "... / ...")
 
 df <- data.frame(model,
                  dataset,
@@ -69,13 +69,16 @@ flextable(df)
 
 # Model 3
 ```{r}
-model <- c("Baseline")
+model <- c("Baseline",
+           "Two classes")
 
-dataset <- c("15")
+dataset <- c("15","16")
 
-convergence <- c("5 / 5")
+convergence <- c("5 / 5",
+                 "... / ...")
 
-estimation <- c("5 / 5")
+estimation <- c("5 / 5",
+                "... / ...")
 
 df <- data.frame(model,
                  dataset,
