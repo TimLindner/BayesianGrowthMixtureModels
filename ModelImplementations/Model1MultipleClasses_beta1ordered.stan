@@ -17,10 +17,10 @@ data {
   int<lower=2> T;
   
   // observed dependent variable (simulated or actual data)
-  matrix[N,T] Y_obs;
+  array[N] row_vector[T] Y_obs;
   
-  // time periods
-  matrix[N,T] X;
+  // explanatory variable
+  array[N] row_vector[T] X;
   
   // mean hyperparameters for Normal prior of constants
   vector[C] beta_0_prior_mu;
@@ -71,11 +71,11 @@ transformed parameters {
   // log likelihood
   array[N] vector[C] L;
   for (n in 1:N) {
-    L[n] = log(lambda);  // log transform lambda, vectorization
+    L[n] = log(lambda);  // log transform lambda, vectorization over c
     for (c in 1:C) {
       row_vector[T] mu;  // means for Y_obs Normal distributions
-      mu = beta_0[c] + beta_1[c] * X[n];  // vectorization
-      L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma[c]);  // vectorization
+      mu = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
+      L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma[c]);  // vectorization over t
     }
   }
   
@@ -85,16 +85,16 @@ transformed parameters {
 model {
   
   // prior for lambda
-  lambda ~ dirichlet(alpha);  // vectorization
+  lambda ~ dirichlet(alpha);  // vectorization over c
   
   // prior for beta_0
-  beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);  // vectorization
+  beta_0 ~ normal(beta_0_prior_mu,beta_0_prior_sigma);  // vectorization over c
   
   // prior for beta_1
-  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);  // vectorization
+  beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);  // vectorization over c
   
   // prior for sigma
-  sigma ~ normal(0,sigma_prior_sigma);  // vectorization
+  sigma ~ normal(0,sigma_prior_sigma);  // vectorization over c
   
   // log likelihood
   for (n in 1:N) {
@@ -116,8 +116,8 @@ generated quantities {
   array[N,T] real Y_pred;
   for (n in 1:N) {
     row_vector[T] mu;  // means for Y_pred Normal distributions
-    mu = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization
-    Y_pred[n] = normal_rng(mu, sigma[z[n]]);  // vectorization
+    mu = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization over t
+    Y_pred[n] = normal_rng(mu, sigma[z[n]]);  // vectorization over t
   }
   
 }
