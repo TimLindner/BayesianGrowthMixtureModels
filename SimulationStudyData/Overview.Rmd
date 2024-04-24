@@ -41,9 +41,11 @@ library(readxl)
 
 # Model 1
 ## Dataset 1 - baseline
-For $n$ in $1,...,50$ and $t$ in $1,...,10$:  
+For $n$ in $1,...,50$,
 
-$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)$
+$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -87,13 +89,15 @@ box()
 
 
 ## Dataset 2 - two classes - no overlaps between classes
-For $n$ in $1,...,200$ and $t$ in $1,...,10$:
+For $n$ in $1,...,200$,
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2$
 
-* $z_n \sim Categorical(0.3,0.7)$
+* $z_n \sim Categorical(0.3,0.7)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -137,13 +141,15 @@ box()
 
 
 ## Dataset 3 - two classes - overlapping constants
-For $n$ in $1,...,200$ and $t$ in $1,...,10$:
+For $n$ in $1,...,200$,
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(2 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(3 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2$
 
-* $z_n \sim Categorical(0.3,0.7)$
+* $z_n \sim Categorical(0.3,0.7)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -187,13 +193,15 @@ box()
 
 
 ## Dataset 4 - two classes - intersecting trends
-For $n$ in $1,...,200$ and $t$ in $1,...,10$:
+For $n$ in $1,...,200$,
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 + 1 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 - 2 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2$
 
-* $z_n \sim Categorical(0.3,0.7)$
+* $z_n \sim Categorical(0.3,0.7)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -237,7 +245,7 @@ box()
 
 
 ## Dataset 5 - three classes - no overlaps between classes
-For $n$ in $1,...,250$ and $t$ in $1,...,10$:
+For $n$ in $1,...,250$,
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
@@ -245,7 +253,9 @@ For $n$ in $1,...,250$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 3$
 
-* $z_n \sim Categorical(0.3,0.2,0.5)$
+* $z_n \sim Categorical(0.3,0.2,0.5)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -289,7 +299,7 @@ box()
 
 
 ## Dataset 6 - three classes - overlapping constants
-For $n$ in $1,...,250$ and $t$ in $1,...,10$:
+For $n$ in $1,...,250$,
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(1.5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1$
 
@@ -297,7 +307,9 @@ For $n$ in $1,...,250$ and $t$ in $1,...,10$:
 
 * $\boldsymbol{y}^{obs}_{n} \sim Normal(3.5 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 3$
 
-* $z_n \sim Categorical(0.3,0.2,0.5)$
+* $z_n \sim Categorical(0.3,0.2,0.5)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -342,9 +354,11 @@ box()
 
 # Model 3
 ## Dataset 15 - baseline
-For $n$ in $1,...,50$ and $t$ in $1,...,10$:  
+For $n$ in $1,...,50$,
 
-$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n})$
+$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n})\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
@@ -388,13 +402,15 @@ box()
 
 
 ## Dataset 16 - two classes - no overlaps between classes
-For $n$ in $1,...,200$ and $t$ in $1,...,10$:
+For $n$ in $1,...,200$,
 
 * $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 1$
 
 * $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 2$
 
-* $z_n \sim Categorical(0.3,0.7)$
+* $z_n \sim Categorical(0.3,0.7)\text{,}$
+
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 
 
 ```{r}
