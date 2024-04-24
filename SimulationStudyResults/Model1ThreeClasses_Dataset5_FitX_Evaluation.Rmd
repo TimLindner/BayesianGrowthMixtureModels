@@ -33,15 +33,15 @@ $\beta_{0,c} < \beta_{0,c+1}$
 
 
 # Hyperparameters
-* $\beta_{0,c,\mu} = \kappa_c$, where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$; K-means clustering is performed using the algorithm of Hartigan and Wong (1979) with maximum ten iterations and two random sets
+* $\mu_{\beta_{0,c}} = \kappa_c$, where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$; K-means clustering is performed using the algorithm of Hartigan and Wong (1979) with maximum ten iterations and two random sets
 
-* $\beta_{0,c,\sigma} = 0.5$
+* $\sigma_{\beta_{0,c}} = 0.5$
 
-* $\beta_{1,c,\mu} = 0$
+* $\mu_{\beta_{1,c}} = 0$
 
-* $\beta_{1,c,\sigma} = 1$
+* $\sigma_{\beta_{1,c}} = 1$
 
-* $\sigma_{c,\sigma} = 0.5$
+* $\sigma_{\sigma_c} = 0.5$
 
 
 # NUTS parameters
