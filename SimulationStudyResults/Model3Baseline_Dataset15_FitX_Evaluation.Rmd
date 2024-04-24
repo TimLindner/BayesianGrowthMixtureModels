@@ -28,13 +28,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Hyperparameters
-* $\beta_{0,\mu} = \log \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
+* $\mu_{\beta_0} = \log \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
 
-* $\beta_{0,\sigma} = 10$
+* $\sigma_{\beta_0} = 10$
 
-* $\beta_{1,\mu} = 0$
+* $\mu_{\beta_1} = 0$
 
-* $\beta_{1,\sigma} = 1$
+* $\sigma_{\beta_1} = 1$
 
 * $\sigma_\sigma = 1$
 
