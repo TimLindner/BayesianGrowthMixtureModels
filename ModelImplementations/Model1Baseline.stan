@@ -7,10 +7,10 @@ data {
   int<lower=10> T;
   
   // observed dependent variable (simulated or actual data)
-  matrix[N,T] Y_obs;
+  array[N] row_vector[T] Y_obs;
   
-  // time periods
-  matrix[N,T] X;
+  // explanatory variable
+  array[N] row_vector[T] X;
   
   // mean hyperparameter for Normal prior of constant
   real beta_0_prior_mu;
@@ -56,12 +56,12 @@ model {
   sigma ~ normal(0,sigma_prior_sigma);
   
   // means for Y_obs Normal distributions
-  vector[N] mu;
+  row_vector[N] mu;
   
   // likelihood
-  for (t in 1:T) {
-    mu = beta_0 + beta_1 * col(X,t);  // vectorization
-    Y_obs[,t] ~ normal(mu,sigma);  // vectorization
+  for (n in 1:N) {
+    mu = beta_0 + beta_1 * X[n];  // vectorization over t
+    Y_obs[n] ~ normal(mu,sigma);  // vectorization over t
   }
   
 }
@@ -73,8 +73,8 @@ generated quantities {
   array[N,T] real Y_pred;
   for (n in 1:N) {
     row_vector[T] mu;  // means for Y_pred Normal distributions
-    mu = beta_0 + beta_1 * X[n];  // vectorization
-    Y_pred[n] = normal_rng(mu, sigma);  // vectorization
+    mu = beta_0 + beta_1 * X[n];  // vectorization over t
+    Y_pred[n] = normal_rng(mu, sigma);  // vectorization over t
   }
   
 }
