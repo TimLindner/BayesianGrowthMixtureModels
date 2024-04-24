@@ -9,8 +9,8 @@ data {
   // observed dependent variable (simulated or actual data)
   array[N,T] int<lower=0> Y_obs;
   
-  // time periods
-  matrix[N,T] X;
+  // explanatory variable
+  array[N] row_vector[T] X;
   
   // mean hyperparameter for Normal prior of constant
   real beta_0_prior_mu;
@@ -51,8 +51,8 @@ model {
   
   // likelihood
   for (t in 1:T) {
-    theta = beta_0 + beta_1 * col(X,t);  // vectorization
-    Y_obs[,t] ~ poisson_log(theta);  // vectorization
+    theta = beta_0 + beta_1 * col(X,t);  // vectorization over t
+    Y_obs[,t] ~ poisson_log(theta);  // vectorization over t
   }
   
 }
@@ -64,8 +64,8 @@ generated quantities {
   array[N,T] int Y_pred;
   for (n in 1:N) {
     row_vector[T] theta;  // log rates for Y_pred PoissonLog distributions
-    theta = beta_0 + beta_1 * X[n];  // vectorization
-    Y_pred[n] = poisson_log_rng(theta);  // vectorization
+    theta = beta_0 + beta_1 * X[n];  // vectorization over t
+    Y_pred[n] = poisson_log_rng(theta);  // vectorization over t
   }
   
 }
