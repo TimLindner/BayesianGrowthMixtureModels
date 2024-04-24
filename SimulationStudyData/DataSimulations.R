@@ -57,10 +57,11 @@ sigma_sim <- 0.75
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
-  # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim + beta_1_sim * X[n,]  # vectorization
+  mu <- beta_0_sim + beta_1_sim * X[n,]
+  # simulated means for Y_obs Normal distributions, vectorization over t
   
-  Y_obs[n,] <- rnorm(n = no_periods, mean = mu, sd = sigma_sim)  # vectorization
+  Y_obs[n,] <- rnorm(n = no_periods, mean = mu, sd = sigma_sim)
+  # vectorization over t
 }
 
 # save Y_obs (transform to data frame beforehand)
@@ -102,11 +103,12 @@ sigma_sim <- c(0.25,0.75)
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
-  # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
+  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]
+  # simulated means for Y_obs Normal distributions, vectorization over t
   
   Y_obs[n,] <-
-    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])
+  # vectorization over t
 }
 
 # save Y_obs (transform to data frame beforehand)
@@ -148,11 +150,12 @@ sigma_sim <- c(0.25,0.75)
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
-  # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
+  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]
+  # simulated means for Y_obs Normal distributions, vectorization over t
   
   Y_obs[n,] <-
-    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])
+  # vectorization over t
 }
 
 # save Y_obs (transform to data frame beforehand)
@@ -194,11 +197,12 @@ sigma_sim <- c(0.25,0.75)
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
-  # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
+  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]
+  # simulated means for Y_obs Normal distributions, vectorization over t
   
   Y_obs[n,] <-
-    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])
+  # vectorization over t
 }
 
 # save Y_obs (transform to data frame beforehand)
@@ -240,11 +244,12 @@ sigma_sim <- c(0.25,0.5,0.75)
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
-  # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
+  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]
+  # simulated means for Y_obs Normal distributions, vectorization over t
   
   Y_obs[n,] <-
-    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])
+  # vectorization over t
 }
 
 # save Y_obs (transform to data frame beforehand)
@@ -287,10 +292,12 @@ sigma_sim <- c(0.25,0.5,0.75)
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
 for (n in 1:N) {
   # simulated means for Y_obs Normal distributions
-  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]  # vectorization
+  mu <- beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n,]
+  # simulated means for Y_obs Normal distributions, vectorization over t
   
   Y_obs[n,] <-
-    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])  # vectorization
+    rnorm(n = no_periods, mean = mu, sd = sigma_sim[z_sim[n]])
+  # vectorization over t
 }
 
 # save Y_obs (transform to data frame beforehand)
