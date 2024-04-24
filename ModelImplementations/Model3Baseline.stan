@@ -47,7 +47,7 @@ model {
   beta_1 ~ normal(beta_1_prior_mu,beta_1_prior_sigma);
   
   // log rates for Y_obs PoissonLog distributions
-  vector[N] theta;
+  row_vector[N] theta;
   
   // likelihood
   for (n in 1:N) {
