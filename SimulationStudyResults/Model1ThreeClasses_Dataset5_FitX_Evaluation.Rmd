@@ -112,6 +112,8 @@ sigma_sim <- c(0.25,0.5,0.75)
 # estimated data ####
 # load model fit
 m_fit <- readRDS("SimulationStudyResults/Model1ThreeClasses_Dataset5_Fit1.rds")
+
+# extract estimated data
 m_fit_params <- rstan::extract(m_fit)
 
 # predicted dependent variable
