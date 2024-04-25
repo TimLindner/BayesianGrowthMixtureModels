@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # Color coding
-* <span style="color: blueviolet;">blueviolet</span> for estimated parameters
+* <span style="color: blueviolet;">blueviolet</span> for estimated parameters, also <span style="color: deepskyblue;">deepskyblue</span> and <span style="color: darkblue;">darkblue</span>
 * <span style="color: deeppink;">deeppink</span> for simulated parameters
 * <span style="color: darkturquoise;">darkturquoise</span> for predicted dependent variable
 * <span style="color: orange;">orange</span> for observed dependent variable
@@ -120,10 +120,18 @@ m_fit_data <- rstan::extract(m_fit)
 Y_pred <- m_fit_data$Y_pred
 
 # posterior for class memberships
+z_posterior_n <- matrix(data = 0, nrow = C, ncol = 1)
+z_posterior_n_rownames <- c()
+for (c in 1:C) {
+  z_posterior_n_rownames[c] <- paste("c =", c)
+}
+rownames(z_posterior_n) <- z_posterior_n_rownames
+colnames(z_posterior_n) <- "1"
 z_posterior <- list()
 for (n in 1:N) {
   prop_table <- prop.table(table(factor(m_fit_data$z[,n], levels = 1:C)))
-  z_posterior[[n]] <- prop_table
+  z_posterior_n[,1] <- prop_table
+  z_posterior[[n]] <- z_posterior_n
 }
 
 # middle 90% credible intervals for Y_pred
@@ -148,8 +156,8 @@ darkturquoise_transp <- rgb(red = 0,
 
 
 # Convergence
-## Rhat, Bulk ESS, and Tail ESS
 ```{r, include = FALSE}
+# diagnostics: Rhat, Bulk ESS, and Tail ESS for all parameters
 lambda_conv <- c(); beta_0_conv <- c(); beta_1_conv <- c(); sigma_conv <- c()
 for (c in 1:C) {
   lambda_conv <- c(lambda_conv,paste("lambda[",c,"]", sep = ""))
@@ -169,9 +177,8 @@ Rhat_ESS
 ```
 
 
-## Trace plots
 ```{r}
-# mixture proportions
+# diagnostics: trace plots for mixture proportions
 for (c in 1:C) {
   plot(m_fit_data$lambda[,c],
        type = "l",
@@ -186,7 +193,7 @@ for (c in 1:C) {
   plot(m_fit_data$lambda[,c],
        type = "l",
        col = "blueviolet",
-       main = paste("Mixture proportion for c =", c),
+       main = paste("Trace plot for mixture proportion c =", c),
        xlab = "Sampling iteration",
        ylab = "lambda")
   
@@ -196,7 +203,7 @@ for (c in 1:C) {
 
 
 ```{r}
-# constants
+# diagnostics: trace plots for constants
 for (c in 1:C) {
   plot(m_fit_data$beta_0[,c],
        type = "l",
@@ -221,7 +228,7 @@ for (c in 1:C) {
 
 
 ```{r}
-# linear trend components
+# diagnostics: trace plots for linear trend components
 for (c in 1:C) {
   plot(m_fit_data$beta_1[,c],
        type = "l",
@@ -246,7 +253,7 @@ for (c in 1:C) {
 
 
 ```{r}
-# standard deviations for Y Normal distributions
+# diagnostics: trace plots for standard deviations for Y Normal distributions
 for (c in 1:C) {
   plot(m_fit_data$sigma[,c],
        type = "l",
@@ -401,23 +408,26 @@ for (c in 1:C) {
 # class memberships
 for (n in 1:N) {
   barplot(z_posterior[[n]],
-       col = "blueviolet",
-       border = FALSE,
-       main = "",
-       xlab = "",
-       ylab = "")
+          beside = TRUE,
+          col = c("deepskyblue","blueviolet","darkblue"),
+          border = FALSE,
+          main = "",
+          names.arg = "",
+          ylab = "")
   
   grid()
   par(new = TRUE)
   
   barplot(z_posterior[[n]],
-       col = "blueviolet",
-       border = FALSE,
-       main = paste("Latent class membership for n =", n),
-       xlab = "c",
-       ylab = "Pr( z = c )")
+          beside = TRUE,
+          col = c("deepskyblue","blueviolet","darkblue"),
+          border = FALSE,
+          main = paste("Latent class membership for n =", n),
+          names.arg = "",
+          ylab = "Pr( z = c )",
+          legend.text = rownames(z_posterior[[n]]))
   
-  legend("topright",
+  legend("top",
          legend = paste("z_sim =", z_sim[n,1]),
          text.col = "deeppink")
   
