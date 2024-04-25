@@ -114,10 +114,10 @@ sigma_sim <- c(0.25,0.5,0.75)
 m_fit <- readRDS("SimulationStudyResults/Model1ThreeClasses_Dataset5_Fit1.rds")
 
 # extract estimated data
-m_fit_params <- rstan::extract(m_fit)
+m_fit_data <- rstan::extract(m_fit)
 
 # predicted dependent variable
-Y_pred <- m_fit_params$Y_pred
+Y_pred <- m_fit_data$Y_pred
 
 # middle 90% credible intervals for Y_pred
 Y_pred_CI_lower <- matrix(data = 0, nrow = N, ncol = no_periods)
@@ -166,7 +166,7 @@ Rhat_ESS
 ```{r}
 # mixture proportions
 for (c in 1:C) {
-  plot(m_fit_params$lambda[,c],
+  plot(m_fit_data$lambda[,c],
        type = "l",
        col = "blueviolet",
        main = "",
@@ -176,7 +176,7 @@ for (c in 1:C) {
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
   
-  plot(m_fit_params$lambda[,c],
+  plot(m_fit_data$lambda[,c],
        type = "l",
        col = "blueviolet",
        main = paste("Mixture proportion for c =", c),
@@ -191,7 +191,7 @@ for (c in 1:C) {
 ```{r}
 # constants
 for (c in 1:C) {
-  plot(m_fit_params$beta_0[,c],
+  plot(m_fit_data$beta_0[,c],
        type = "l",
        col = "blueviolet",
        main = "",
@@ -201,7 +201,7 @@ for (c in 1:C) {
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
   
-  plot(m_fit_params$beta_0[,c],
+  plot(m_fit_data$beta_0[,c],
        type = "l",
        col = "blueviolet",
        main = paste("Constant for c =", c),
@@ -216,7 +216,7 @@ for (c in 1:C) {
 ```{r}
 # linear trend components
 for (c in 1:C) {
-  plot(m_fit_params$beta_1[,c],
+  plot(m_fit_data$beta_1[,c],
        type = "l",
        col = "blueviolet",
        main = "",
@@ -226,7 +226,7 @@ for (c in 1:C) {
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
   
-  plot(m_fit_params$beta_1[,c],
+  plot(m_fit_data$beta_1[,c],
        type = "l",
        col = "blueviolet",
        main = paste("Linear trend component for c =", c),
@@ -241,7 +241,7 @@ for (c in 1:C) {
 ```{r}
 # standard deviations for Y Normal distributions
 for (c in 1:C) {
-  plot(m_fit_params$sigma[,c],
+  plot(m_fit_data$sigma[,c],
        type = "l",
        col = "blueviolet",
        main = "",
@@ -251,7 +251,7 @@ for (c in 1:C) {
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
   
-  plot(m_fit_params$sigma[,c],
+  plot(m_fit_data$sigma[,c],
        type = "l",
        col = "blueviolet",
        main = paste("Standard deviation of Y Normal distributions for c =", c),
@@ -267,9 +267,9 @@ for (c in 1:C) {
 ```{r}
 # mixture proportions
 for (c in 1:C) {
-  hist(m_fit_params$lambda[,c],
-       xlim = c(min(m_fit_params$lambda[,c],lambda_sim[c]),
-                max(m_fit_params$lambda[,c],lambda_sim[c])),
+  hist(m_fit_data$lambda[,c],
+       xlim = c(min(m_fit_data$lambda[,c],lambda_sim[c]),
+                max(m_fit_data$lambda[,c],lambda_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -278,9 +278,9 @@ for (c in 1:C) {
   grid()
   par(new = TRUE)
 
-  hist(m_fit_params$lambda[,c],
-       xlim = c(min(m_fit_params$lambda[,c],lambda_sim[c]),
-                max(m_fit_params$lambda[,c],lambda_sim[c])),
+  hist(m_fit_data$lambda[,c],
+       xlim = c(min(m_fit_data$lambda[,c],lambda_sim[c]),
+                max(m_fit_data$lambda[,c],lambda_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Mixture proportion for c =", c),
@@ -300,9 +300,9 @@ for (c in 1:C) {
 ```{r}
 # constants
 for (c in 1:C) {
-  hist(m_fit_params$beta_0[,c],
-       xlim = c(min(m_fit_params$beta_0[,c],beta_0_sim[c]),
-                max(m_fit_params$beta_0[,c],beta_0_sim[c])),
+  hist(m_fit_data$beta_0[,c],
+       xlim = c(min(m_fit_data$beta_0[,c],beta_0_sim[c]),
+                max(m_fit_data$beta_0[,c],beta_0_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -311,9 +311,9 @@ for (c in 1:C) {
   grid()
   par(new = TRUE)
   
-  hist(m_fit_params$beta_0[,c],
-       xlim = c(min(m_fit_params$beta_0[,c],beta_0_sim[c]),
-                max(m_fit_params$beta_0[,c],beta_0_sim[c])),
+  hist(m_fit_data$beta_0[,c],
+       xlim = c(min(m_fit_data$beta_0[,c],beta_0_sim[c]),
+                max(m_fit_data$beta_0[,c],beta_0_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Constant for c =", c),
@@ -331,9 +331,9 @@ for (c in 1:C) {
 ```{r}
 # linear trend components
 for (c in 1:C) {
-  hist(m_fit_params$beta_1[,c],
-       xlim = c(min(m_fit_params$beta_1[,c],beta_1_sim[c]),
-                max(m_fit_params$beta_1[,c],beta_1_sim[c])),
+  hist(m_fit_data$beta_1[,c],
+       xlim = c(min(m_fit_data$beta_1[,c],beta_1_sim[c]),
+                max(m_fit_data$beta_1[,c],beta_1_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -342,9 +342,9 @@ for (c in 1:C) {
   grid()
   par(new = TRUE)
   
-  hist(m_fit_params$beta_1[,c],
-       xlim = c(min(m_fit_params$beta_1[,c],beta_1_sim[c]),
-                max(m_fit_params$beta_1[,c],beta_1_sim[c])),
+  hist(m_fit_data$beta_1[,c],
+       xlim = c(min(m_fit_data$beta_1[,c],beta_1_sim[c]),
+                max(m_fit_data$beta_1[,c],beta_1_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Linear trend component for c =", c),
@@ -362,9 +362,9 @@ for (c in 1:C) {
 ```{r}
 # standard deviations for Y Normal distributions
 for (c in 1:C) {
-  hist(m_fit_params$sigma[,c],
-     xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
-              max(m_fit_params$sigma[,c],sigma_sim[c])),
+  hist(m_fit_data$sigma[,c],
+     xlim = c(min(m_fit_data$sigma[,c],sigma_sim[c]),
+              max(m_fit_data$sigma[,c],sigma_sim[c])),
      col = "blueviolet",
      border = FALSE,
      main = "",
@@ -373,9 +373,9 @@ for (c in 1:C) {
   grid()
   par(new = TRUE)
   
-  hist(m_fit_params$sigma[,c],
-       xlim = c(min(m_fit_params$sigma[,c],sigma_sim[c]),
-                max(m_fit_params$sigma[,c],sigma_sim[c])),
+  hist(m_fit_data$sigma[,c],
+       xlim = c(min(m_fit_data$sigma[,c],sigma_sim[c]),
+                max(m_fit_data$sigma[,c],sigma_sim[c])),
        col = "blueviolet",
        border = FALSE,
        main = paste("Standard deviation of Y Normal distributions for c =", c),
@@ -427,7 +427,7 @@ for (n in 1:N) {
   box()
 
   # class membership
-  barplot(prop.table(table(m_fit_params$z[,n])),
+  barplot(prop.table(table(m_fit_data$z[,n])),
        col = "blueviolet",
        border = FALSE,
        main = "",
@@ -437,7 +437,7 @@ for (n in 1:N) {
   grid()
   par(new = TRUE)
   
-  barplot(prop.table(table(m_fit_params$z[,n])),
+  barplot(prop.table(table(m_fit_data$z[,n])),
        col = "blueviolet",
        border = FALSE,
        main = "Latent class membership",
