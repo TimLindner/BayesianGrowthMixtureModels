@@ -13,7 +13,6 @@ Placeholder
 * :file_folder: ModelImplementations
 * :file_folder: SimulationStudyData
 * :file_folder: SimulationStudyResults
-* :file_folder: TerrorismCaseStudyResults
 * :page_facing_up: ModelSpecifications
 
 ### References
