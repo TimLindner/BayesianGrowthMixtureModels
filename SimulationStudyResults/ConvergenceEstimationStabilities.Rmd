@@ -30,36 +30,43 @@ Convergence and estimation stability are measured by the number of successful NU
 
 # Model 1
 ```{r}
-model <- c("Baseline",
-           "Two classes",
-           "Two classes",
-           "Two classes",
-           "Three classes",
-           "Three classes")
+model <- c("baseline",
+           "two classes",
+           "two classes",
+           "two classes",
+           "three classes",
+           "three classes",
+           "three classes")
 
-dataset <- c("1","2","3","4","5","6")
+dataset <- c("1","2","3","4","5","6","6")
+
+part <- c("","","","","","one","two")
 
 convergence <- c("5 / 5",
                  "4 / 5",
                  "2 / 5",
                  "4 / 5",
                  "2 / 5",
-                 "... / ...")
+                 "4 / 5",
+                 "5 / 5")
 
 estimation <- c("5 / 5",
                 "4 / 5",
                 "2 / 5",
                 "4 / 5",
                 "2 / 5",
-                "... / ...")
+                "4 / 5",
+                "5 / 5")
 
 df <- data.frame(model,
                  dataset,
+                 part,
                  convergence,
                  estimation)
 
 names(df) <- c("Model",
                "Dataset",
+               "Part",
                "Convergence stability",
                "Estimation stability")
 
@@ -69,8 +76,8 @@ flextable(df)
 
 # Model 3
 ```{r}
-model <- c("Baseline",
-           "Two classes")
+model <- c("baseline",
+           "two classes")
 
 dataset <- c("15","16")
 
