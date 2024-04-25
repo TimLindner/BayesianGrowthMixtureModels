@@ -6,6 +6,13 @@
 # firstly, run the preparation section.
 # secondly, run one or several model sections; in any order.
 
+# how to use the model 1 three classes - dataset 6 sections?
+# part one estimates the posterior means for the constants and linear trend
+# components via a slightly different version of model 1, where the errors are
+# identically distributed not only over individuals and time periods but also
+# latent classes. subsequently, part two estimates model 1 and utilizes the
+# posterior means estimated in part one as NUTS initial values.
+
 # required files for model 1 baseline - dataset 1 section:
 # Dataset1_Yobs.xlsx
 # Model1Baseline.stan
@@ -75,19 +82,19 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # mean hyperparameter for Normal prior of constant
-beta_0_prior_mu <- mean(Y_obs[,1])
+mu_beta_0 <- mean(Y_obs[,1])
 
 # SD hyperparameter for Normal prior of constant
-beta_0_prior_sigma <- 10
+sigma_beta_0 <- 10
 
 # mean hyperparameter for Normal prior of linear trend component
-beta_1_prior_mu <- 0
+mu_beta_1 <- 0
 
 # SD hyperparameter for Normal prior of linear trend component
-beta_1_prior_sigma <- 1
+sigma_beta_1 <- 1
 
 # SD hyperparameter for Normal prior of SD for Y Normal distributions
-sigma_prior_sigma <- 1
+sigma_sigma <- 1
 
 # load model
 m <- stan_model("ModelImplementations/Model1Baseline.stan")
@@ -115,11 +122,11 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma,
-                                sigma_prior_sigma = sigma_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -151,25 +158,25 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameter for Normal prior of constant
+# mean hyperparameters for Normal prior of constant
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
                   nstart = 2,
                   algorithm = "Hartigan-Wong")
-beta_0_prior_mu <- sort(k_means$centers)
+mu_beta_0 <- sort(k_means$centers)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(1,1)
+sigma_beta_0 <- c(1,1)
 
 # mean hyperparameters for Normal prior of linear trend components
-beta_1_prior_mu <- c(0,0)
+mu_beta_1 <- c(0,0)
 
 # SD hyperparameters for Normal prior of linear trend components
-beta_1_prior_sigma <- c(1,1)
+sigma_beta_1 <- c(1,1)
 
 # SD hyperparameters for Normal prior of SDs for Y Normal distributions
-sigma_prior_sigma <- c(0.5,0.5)
+sigma_sigma <- c(0.5,0.5)
 
 # load model
 m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
@@ -198,11 +205,11 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma,
-                                sigma_prior_sigma = sigma_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -234,25 +241,25 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameter for Normal prior of constant
+# mean hyperparameters for Normal prior of constant
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
                   nstart = 2,
                   algorithm = "Hartigan-Wong")
-beta_0_prior_mu <- sort(k_means$centers)
+mu_beta_0 <- sort(k_means$centers)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(1,1)
+sigma_beta_0 <- c(1,1)
 
 # mean hyperparameters for Normal prior of linear trend components
-beta_1_prior_mu <- c(0,0)
+mu_beta_1 <- c(0,0)
 
 # SD hyperparameters for Normal prior of linear trend components
-beta_1_prior_sigma <- c(1,1)
+sigma_beta_1 <- c(1,1)
 
 # SD hyperparameters for Normal prior of SDs for Y Normal distributions
-sigma_prior_sigma <- c(0.5,0.5)
+sigma_sigma <- c(0.5,0.5)
 
 # load model
 m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
@@ -281,11 +288,11 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma,
-                                sigma_prior_sigma = sigma_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -317,25 +324,25 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameter for Normal prior of constant
+# mean hyperparameters for Normal prior of constant
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
                   nstart = 2,
                   algorithm = "Hartigan-Wong")
-beta_0_prior_mu <- sort(k_means$centers)
+mu_beta_0 <- sort(k_means$centers)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(1,1)
+sigma_beta_0 <- c(1,1)
 
 # mean hyperparameters for Normal prior of linear trend components
-beta_1_prior_mu <- c(0,0)
+mu_beta_1 <- c(0,0)
 
 # SD hyperparameters for Normal prior of linear trend components
-beta_1_prior_sigma <- c(1,1)
+sigma_beta_1 <- c(1,1)
 
 # SD hyperparameters for Normal prior of SDs for Y Normal distributions
-sigma_prior_sigma <- c(0.5,0.5)
+sigma_sigma <- c(0.5,0.5)
 
 # load model
 m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
@@ -364,11 +371,11 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma,
-                                sigma_prior_sigma = sigma_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -400,25 +407,25 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameter for Normal prior of constant
+# mean hyperparameters for Normal prior of constant
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
                   nstart = 2,
                   algorithm = "Hartigan-Wong")
-beta_0_prior_mu <- sort(k_means$centers)
+mu_beta_0 <- sort(k_means$centers)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(0.5,0.5,0.5)
+sigma_beta_0 <- c(0.5,0.5,0.5)
 
 # mean hyperparameters for Normal prior of linear trend components
-beta_1_prior_mu <- c(0,0,0)
+mu_beta_1 <- c(0,0,0)
 
 # SD hyperparameters for Normal prior of linear trend components
-beta_1_prior_sigma <- c(1,1,1)
+sigma_beta_1 <- c(1,1,1)
 
 # SD hyperparameters for Normal prior of SDs for Y Normal distributions
-sigma_prior_sigma <- c(0.5,0.5,0.5)
+sigma_sigma <- c(0.5,0.5,0.5)
 
 # load model
 m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
@@ -435,7 +442,7 @@ warmup <- floor(iter/2)
 # sampler: initial values for parameters
 init <- list()
 for (ch in 1:chains) {
-  init[[ch]] <- list(beta_0 = beta_0_prior_mu)
+  init[[ch]] <- list(beta_0 = mu_beta_0)
 }
 
 # sampler: algorithm
@@ -450,11 +457,11 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma,
-                                sigma_prior_sigma = sigma_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -468,7 +475,7 @@ job::job({
 })
 
 
-# model 1 three classes - dataset 6 ####
+# model 1 three classes - dataset 6 - part one ####
 # number of latent classes
 C <- 3
 
@@ -486,23 +493,24 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameter for Normal prior of constant
-beta_0_prior_mu <- rep(mean(Y_obs[,1]), times = C)
+# mean hyperparameters for Normal prior of constant
+mu_beta_0 <- rep(mean(Y_obs[,1]), times = C)
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(1,1,1)
+sigma_beta_0 <- c(0.5,0.5,0.5)
 
 # mean hyperparameters for Normal prior of linear trend components
-beta_1_prior_mu <- c(0,0,0)
+mu_beta_1 <- c(0,0,0)
 
 # SD hyperparameters for Normal prior of linear trend components
-beta_1_prior_sigma <- c(1,1,1)
+sigma_beta_1 <- c(0.5,0.5,0.5)
 
-# SD hyperparameters for Normal prior of SDs for Y Normal distributions
-sigma_prior_sigma <- c(0.5)
+# SD hyperparameter for Normal prior of SD for Y Normal distributions
+sigma_sigma <- 0.5
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses_beta1ordered_Onesigma.stan")
+m <- stan_model(
+  "ModelImplementations/Model1MultipleClasses_beta1ordered_Onesigma.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -528,11 +536,87 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma,
-                                sigma_prior_sigma = sigma_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
+                    chains = chains,
+                    iter = iter,
+                    warmup = warmup,
+                    init = init,
+                    algorithm = algorithm)
+  
+})
+
+# extract estimated data
+m_fit_data <- rstan::extract(m_fit)
+
+# posterior means for beta_0 and beta_1
+beta_posterior_means <- matrix(data = 0, nrow = C, ncol = 2)
+for (c in 1:C) {
+  beta_posterior_means[c,1] <- mean(m_fit_data$beta_0[,c])
+  beta_posterior_means[c,2] <- mean(m_fit_data$beta_1[,c])
+}
+beta_posterior_means <- beta_posterior_means[order(beta_posterior_means[,1]),]
+
+# [1,] 1.518507 -0.5010104
+# [2,] 2.496293  0.5040321
+# [3,] 3.455839  1.0103312
+
+
+# model 1 three classes - dataset 6 - part two ####
+# mean hyperparameters for Normal prior of constant
+rep(mean(Y_obs[,1]), times = C)
+
+# SD hyperparameters for Normal prior of constants
+sigma_beta_0 <- c(1,1,1)
+
+# mean hyperparameters for Normal prior of linear trend components
+mu_beta_1 <- c(0,0,0)
+
+# SD hyperparameters for Normal prior of linear trend components
+sigma_beta_1 <- c(1,1,1)
+
+# SD hyperparameters for Normal prior of SDs for Y Normal distributions
+sigma_sigma <- c(1,1,1)
+
+# load model
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta1ordered.stan")
+
+# sampler: number of chains
+chains <- 4
+
+# sampler: number of iterations per chain
+iter <- 2000
+
+# sampler: number of warmup iterations per chain
+warmup <- floor(iter/2)
+
+# sampler: initial values for parameters
+init <- list()
+for (ch in 1:chains) {
+  init[[ch]] <- list(beta_0 = beta_posterior_means[,1],
+                     beta_1 = beta_posterior_means[,2])
+}
+
+# sampler: algorithm
+algorithm <- "NUTS"
+
+job::job({
+  
+  # estimate model
+  m_fit <- sampling(m,
+                    data = list(C = C,
+                                N = N,
+                                T = no_periods,
+                                Y_obs = Y_obs,
+                                X = X,
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -541,7 +625,7 @@ job::job({
   
   # save model fit
   saveRDS(m_fit,
-          "SimulationStudyResults/Model1ThreeClasses_Dataset6_Fit5.rds")
+          "SimulationStudyResults/Model1ThreeClasses_Dataset6_Fit1.rds")
   
 })
 
@@ -562,16 +646,16 @@ time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
 # mean hyperparameter for Normal prior of constant
-beta_0_prior_mu <- log(mean(Y_obs[,1]))
+mu_beta_0 <- log(mean(Y_obs[,1]))
 
 # SD hyperparameter for Normal prior of constant
-beta_0_prior_sigma <- 10
+sigma_beta_0 <- 10
 
 # mean hyperparameter for Normal prior of linear trend component
-beta_1_prior_mu <- 0
+mu_beta_1 <- 0
 
 # SD hyperparameter for Normal prior of linear trend component
-beta_1_prior_sigma <- 1
+sigma_beta_1 <- 1
 
 # load model
 m <- stan_model("ModelImplementations/Model3Baseline.stan")
@@ -599,10 +683,10 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
@@ -627,29 +711,29 @@ Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset16_Yobs.xlsx",
 # number of individuals
 N <- dim(Y_obs)[1]
 
-# explanatory variable
+# number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
+# explanatory variable
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameter for Normal prior of constant
+# mean hyperparameters for Normal prior of constant
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
                   nstart = 2,
                   algorithm = "Hartigan-Wong")
-beta_0_prior_mu <- log(sort(k_means$centers))
+mu_beta_0 <- log(sort(k_means$centers))
 
 # SD hyperparameters for Normal prior of constants
-beta_0_prior_sigma <- c(1,1)
+sigma_beta_0 <- c(1,1)
 
 # mean hyperparameters for Normal prior of linear trend components
-beta_1_prior_mu <- c(0,0)
+mu_beta_1 <- c(0,0)
 
 # SD hyperparameters for Normal prior of linear trend components
-beta_1_prior_sigma <- c(1,1)
+sigma_beta_1 <- c(1,1)
 
 # load model
 m <- stan_model("ModelImplementations/Model3MultipleClasses_beta0ordered.stan")
@@ -678,10 +762,10 @@ job::job({
                                 T = no_periods,
                                 Y_obs = Y_obs,
                                 X = X,
-                                beta_0_prior_mu = beta_0_prior_mu,
-                                beta_0_prior_sigma = beta_0_prior_sigma,
-                                beta_1_prior_mu = beta_1_prior_mu,
-                                beta_1_prior_sigma = beta_1_prior_sigma),
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1),
                     chains = chains,
                     iter = iter,
                     warmup = warmup,
