@@ -123,7 +123,6 @@ for (c in 1:C) {
   z_posterior_n_rownames[c] <- paste("c =", c)
 }
 rownames(z_posterior_n) <- z_posterior_n_rownames
-colnames(z_posterior_n) <- "1"
 z_posterior <- list()
 for (n in 1:N) {
   prop_table <- prop.table(table(factor(m_fit_data$z[,n], levels = 1:C)))
