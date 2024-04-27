@@ -408,4 +408,11 @@ Y_obs <- sim_m_fit_data$Y_obs[1,,]
 # save Y_obs (transform to data frame beforehand)
 write.xlsx(data.frame(Y_obs), "Dataset16_Yobs.xlsx")
 
+# transform Y_obs to log scale
+Y_obs[Y_obs==0] <- 1
+Y_obs_log <- log(Y_obs)
+
+# save Y_obs_log (transform to data frame beforehand)
+write.xlsx(data.frame(Y_obs_log), "Dataset16_Yobslog.xlsx")
+
 
