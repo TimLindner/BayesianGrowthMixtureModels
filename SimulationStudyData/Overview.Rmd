@@ -23,6 +23,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Dataset6_Yobs.xlsx
 # Dataset15_Yobs.xlsx
 # Dataset16_Yobs.xlsx
+# Dataset16_Yobslog.xlsx
 ```
 
 
@@ -60,12 +61,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -79,12 +77,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -112,12 +110,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -131,12 +126,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -164,12 +159,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -183,12 +175,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -216,12 +208,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -235,12 +224,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -270,12 +259,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -289,12 +275,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -324,12 +310,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -343,12 +326,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -373,12 +356,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -392,12 +372,12 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
-}
 ```
 
 
@@ -416,6 +396,7 @@ where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
 ```{r}
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("Dataset16_Yobs.xlsx", sheet = "Sheet 1"))
+Y_obs_log <- data.frame(read_excel("Dataset16_Yobslog.xlsx", sheet = "Sheet 1"))
 
 # number of individuals
 N <- dim(Y_obs)[1]
@@ -425,12 +406,9 @@ no_periods <- dim(Y_obs)[2]
 
 # time periods
 time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# plot observed dependent variable
-x <- time_periods
-
-plot(x = x,
+# plot Y_obs
+plot(x = time_periods,
      y = c(min(Y_obs),
            max(Y_obs),
            rep(min(Y_obs), times = no_periods-2)),
@@ -444,12 +422,34 @@ grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
 for (n in 1:N) {
-  lines(x = x,
+  lines(x = time_periods,
         y = Y_obs[n,],
         col = "orange")
+}
 
 box()
+
+# plot Y_obs_log
+plot(x = time_periods,
+     y = c(min(Y_obs_log),
+           max(Y_obs_log),
+           rep(min(Y_obs_log), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable on log scale",
+     xlab = "x",
+     ylab = "y_obs_log")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = time_periods,
+        y = Y_obs_log[n,],
+        col = "orange")
 }
+
+box()
 ```
 
 
