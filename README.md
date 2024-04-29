@@ -5,7 +5,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 ### Work developed
 Placeholder
 
-### Statistical computing
+### Statistical computation
 * The models have been implemented and estimated using Stan and its built-in No-U-Turn Sampler (or NUTS for short) via RStan — the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024)
 * The R Stats Package has been used to perform K-means clustering in the context of prior elicitation (R Core Team and contributors worldwide, 2022)
 
