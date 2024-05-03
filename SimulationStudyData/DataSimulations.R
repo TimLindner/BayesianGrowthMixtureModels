@@ -1,8 +1,7 @@
-# closing the sections provides an overview of the script
-
-
 # README ####
-# how to use this file?
+# closing the sections provides an overview of the R script.
+
+# how to use this R script?
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections; in any order.
 
@@ -56,16 +55,26 @@ sigma_sim <- 0.75
 
 # observed dependent variable
 Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
-for (n in 1:N) {
-  mu <- beta_0_sim + beta_1_sim * X[n,]
-  # simulated means for Y_obs Normal distributions, vectorization over t
-  
-  Y_obs[n,] <- rnorm(n = no_periods, mean = mu, sd = sigma_sim)
-  # vectorization over t
-}
 
-# save Y_obs (transform to data frame beforehand)
-write.xlsx(data.frame(Y_obs), "Dataset1_Yobs.xlsx")
+# number of simulation runs
+R <- 5
+
+# simulation runs
+for (r in 1:R) {
+  
+  # simulated means for Y_obs Normal distributions
+  M <- beta_0_sim + beta_1_sim * X  # vectorization over n and t
+  
+  for (t in 1:no_periods) {
+    Y_obs[,t] <- rnorm(n = N, mean = M[,t], sd = sigma_sim)
+    # vectorization over n
+  }
+  
+  # save Y_obs (transform to data frame beforehand)
+  write.xlsx(data.frame(Y_obs),
+             paste("Dataset1_Yobs_Run", r, ".xlsx", sep = ""))
+  
+}
 
 
 # dataset 2 - model 1 two classes - no overlaps between classes ####
