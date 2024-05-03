@@ -66,7 +66,7 @@ options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 
 
-# model 1 baseline - dataset 1 ####
+# model 1 baseline - dataset 1 - Yobs ####
 # SD hyperparameter for Normal prior of constant
 sigma_beta_0 <- 10
 
@@ -152,7 +152,7 @@ for (r in 1:R) {
 }
 
 
-# model 1 two classes - dataset 2 ####
+# model 1 two classes - dataset 2 - Yobs ####
 # number of latent classes
 C <- 2
 
@@ -235,7 +235,7 @@ job::job({
 })
 
 
-# model 1 two classes - dataset 3 ####
+# model 1 two classes - dataset 3 - Yobs ####
 # number of latent classes
 C <- 2
 
@@ -318,7 +318,7 @@ job::job({
 })
 
 
-# model 1 two classes - dataset 4 ####
+# model 1 two classes - dataset 4 - Yobs ####
 # number of latent classes
 C <- 2
 
@@ -401,7 +401,7 @@ job::job({
 })
 
 
-# model 1 three classes - dataset 5 ####
+# model 1 three classes - dataset 5- Yobs ####
 # number of latent classes
 C <- 3
 
@@ -638,7 +638,7 @@ job::job({
 })
 
 
-# model 3 baseline - dataset 15 ####
+# model 3 baseline - dataset 15 - Yobs ####
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset15_Yobs.xlsx",
                                sheet = "Sheet 1"))
@@ -708,7 +708,7 @@ job::job({
 })
 
 
-# model 1 two classes - dataset 16 ####
+# model 1 two classes - dataset 16 - Yobslog ####
 # number of latent classes
 C <- 2
 
@@ -791,7 +791,7 @@ job::job({
 })
 
 
-# model 3 two classes - dataset 16 ####
+# model 3 two classes - dataset 16 - Yobs ####
 # number of latent classes
 C <- 2
 
