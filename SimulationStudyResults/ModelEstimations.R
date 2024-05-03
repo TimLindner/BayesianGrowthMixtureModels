@@ -1,20 +1,16 @@
-# closing the sections provides an overview of the script
-
-
 # README ####
-# how to use this file?
+# closing the sections provides an overview of this R script.
+
+# how to use this R script?
 # firstly, run the preparation section.
 # secondly, run one or several model sections; in any order.
 
-# how to use the model 1 three classes - dataset 6 sections?
-# part one estimates the posterior means for the constants and linear trend
-# components via a slightly different version of model 1, where the errors are
-# identically distributed not only over individuals and time periods but also
-# latent classes. subsequently, part two estimates model 1 and utilizes the
-# posterior means estimated in part one as NUTS initial values.
-
 # required files for model 1 baseline - dataset 1 section:
-# Dataset1_Yobs.xlsx
+# Dataset1_Yobs_Run1.xlsx
+# Dataset1_Yobs_Run2.xlsx
+# Dataset1_Yobs_Run3.xlsx
+# Dataset1_Yobs_Run4.xlsx
+# Dataset1_Yobs_Run5.xlsx
 # Model1Baseline.stan
 
 # required files for model 1 two classes - dataset 2 section:
@@ -40,6 +36,10 @@
 # required files for model 3 baseline - dataset 15 section:
 # Dataset15_Yobs.xlsx
 # Model3Baseline.stan
+
+# required files for model 1 two classes - dataset 16 section:
+# Dataset16_Yobslog.xlsx
+# Model1MultipleClasses_beta0ordered.stan
 
 # required files for model 3 two classes - dataset 16 section:
 # Dataset16_Yobs.xlsx
@@ -67,23 +67,6 @@ rstan_options(auto_write = TRUE)
 
 
 # model 1 baseline - dataset 1 ####
-# load observed dependent variable
-Y_obs <- data.frame(read_excel("SimulationStudyData/Dataset1_Yobs.xlsx",
-                               sheet = "Sheet 1"))
-
-# number of individuals
-N <- dim(Y_obs)[1]
-
-# number of time periods
-no_periods <- dim(Y_obs)[2]
-
-# explanatory variable
-time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
-
-# mean hyperparameter for Normal prior of constant
-mu_beta_0 <- mean(Y_obs[,1])
-
 # SD hyperparameter for Normal prior of constant
 sigma_beta_0 <- 10
 
@@ -114,30 +97,59 @@ init <- "random"
 # sampler: algorithm
 algorithm <- "NUTS"
 
-job::job({
+# number of estimation runs
+R <- 5
+
+# estimation runs
+for (r in 1:R) {
   
-  # estimate model
-  m_fit <- sampling(m,
-                    data = list(N = N,
-                                T = no_periods,
-                                Y_obs = Y_obs,
-                                X = X,
-                                mu_beta_0 = mu_beta_0,
-                                sigma_beta_0 = sigma_beta_0,
-                                mu_beta_1 = mu_beta_1,
-                                sigma_beta_1 = sigma_beta_1,
-                                sigma_sigma = sigma_sigma),
-                    chains = chains,
-                    iter = iter,
-                    warmup = warmup,
-                    init = init,
-                    algorithm = algorithm)
+  # load observed dependent variable
+  Y_obs <- data.frame(read_excel(
+    paste("SimulationStudyData/Dataset1_Yobs_Run", r, ".xlsx", sep = ""),
+    sheet = "Sheet 1"))
   
-  # save model fit
-  saveRDS(m_fit,
-          "SimulationStudyResults/Model1Baseline_Dataset1_Fit1.rds")
+  # number of individuals
+  N <- dim(Y_obs)[1]
   
-})
+  # number of time periods
+  no_periods <- dim(Y_obs)[2]
+  
+  # explanatory variable
+  time_periods <- 0:(no_periods-1)
+  X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+  
+  # mean hyperparameter for Normal prior of constant
+  mu_beta_0 <- mean(Y_obs[,1])
+  
+  job::job({
+    
+    # estimate model
+    m_fit <- sampling(m,
+                      data = list(N = N,
+                                  T = no_periods,
+                                  Y_obs = Y_obs,
+                                  X = X,
+                                  mu_beta_0 = mu_beta_0,
+                                  sigma_beta_0 = sigma_beta_0,
+                                  mu_beta_1 = mu_beta_1,
+                                  sigma_beta_1 = sigma_beta_1,
+                                  sigma_sigma = sigma_sigma),
+                      chains = chains,
+                      iter = iter,
+                      warmup = warmup,
+                      init = init,
+                      algorithm = algorithm)
+    
+    # save model fit
+    saveRDS(m_fit, paste(
+      "SimulationStudyResults/Model1/Model1Baseline_Dataset1_Yobs_Run",
+      r,
+      ".rds",
+      sep = ""))
+    
+  })
+  
+}
 
 
 # model 1 two classes - dataset 2 ####
@@ -158,7 +170,7 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameters for Normal prior of constant
+# mean hyperparameters for Normal prior of constants
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
@@ -179,7 +191,7 @@ sigma_beta_1 <- c(1,1)
 sigma_sigma <- c(0.5,0.5)
 
 # load model
-m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
+m <- stan_model("ModelImplementations/Model5MultipleClasses_beta0ordered.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -241,7 +253,7 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameters for Normal prior of constant
+# mean hyperparameters for Normal prior of constants
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
@@ -324,7 +336,7 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameters for Normal prior of constant
+# mean hyperparameters for Normal prior of constants
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
@@ -407,7 +419,7 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameters for Normal prior of constant
+# mean hyperparameters for Normal prior of constants
 k_means <- kmeans(Y_obs[,1],  # K-means clustering
                   centers = C,
                   iter.max = 10,
@@ -493,7 +505,7 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameters for Normal prior of constant
+# mean hyperparameters for Normal prior of constants
 mu_beta_0 <- rep(mean(Y_obs[,1]), times = C)
 
 # SD hyperparameters for Normal prior of constants
@@ -510,7 +522,7 @@ sigma_sigma <- 0.5
 
 # load model
 m <- stan_model(
-  "ModelImplementations/Model1MultipleClasses_beta1ordered_Onesigma.stan")
+  "ModelImplementations/Model1MultipleClasses_IdentErr_beta1ordered.stan")
 
 # sampler: number of chains
 chains <- 4
@@ -560,13 +572,9 @@ for (c in 1:C) {
 }
 beta_posterior_means <- beta_posterior_means[order(beta_posterior_means[,1]),]
 
-# [1,] 1.518507 -0.5010104
-# [2,] 2.496293  0.5040321
-# [3,] 3.455839  1.0103312
-
 
 # model 1 three classes - dataset 6 - part two ####
-# mean hyperparameters for Normal prior of constant
+# mean hyperparameters for Normal prior of constants
 rep(mean(Y_obs[,1]), times = C)
 
 # SD hyperparameters for Normal prior of constants
@@ -700,6 +708,89 @@ job::job({
 })
 
 
+# model 1 two classes - dataset 16 ####
+# number of latent classes
+C <- 2
+
+# load observed dependent variable
+Y_obs_log <- data.frame(read_excel("SimulationStudyData/Dataset16_Yobslog.xlsx",
+                                   sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs_log)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs_log)[2]
+
+# explanatory variable
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# mean hyperparameters for Normal prior of constants
+k_means <- kmeans(Y_obs_log[,1],  # K-means clustering
+                  centers = C,
+                  iter.max = 10,
+                  nstart = 2,
+                  algorithm = "Hartigan-Wong")
+mu_beta_0 <- sort(k_means$centers)
+
+# SD hyperparameters for Normal prior of constants
+sigma_beta_0 <- c(1,1)
+
+# mean hyperparameters for Normal prior of linear trend components
+mu_beta_1 <- c(0,0)
+
+# SD hyperparameters for Normal prior of linear trend components
+sigma_beta_1 <- c(1,1)
+
+# SD hyperparameters for Normal prior of SDs for Y Normal distributions
+sigma_sigma <- c(0.5,0.5)
+
+# load model
+m <- stan_model("ModelImplementations/Model1MultipleClasses_beta0ordered.stan")
+
+# sampler: number of chains
+chains <- 4
+
+# sampler: number of iterations per chain
+iter <- 2000
+
+# sampler: number of warmup iterations per chain
+warmup <- floor(iter/2)
+
+# sampler: initial values for parameters
+init <- "random"
+
+# sampler: algorithm
+algorithm <- "NUTS"
+
+job::job({
+  
+  # estimate model
+  m_fit <- sampling(m,
+                    data = list(C = C,
+                                N = N,
+                                T = no_periods,
+                                Y_obs = Y_obs_log,
+                                X = X,
+                                mu_beta_0 = mu_beta_0,
+                                sigma_beta_0 = sigma_beta_0,
+                                mu_beta_1 = mu_beta_1,
+                                sigma_beta_1 = sigma_beta_1,
+                                sigma_sigma = sigma_sigma),
+                    chains = chains,
+                    iter = iter,
+                    warmup = warmup,
+                    init = init,
+                    algorithm = algorithm)
+  
+  # save model fit
+  saveRDS(m_fit,
+          "SimulationStudyResults/Model1TwoClasses_Dataset16_Fit1.rds")
+  
+})
+
+
 # model 3 two classes - dataset 16 ####
 # number of latent classes
 C <- 2
@@ -718,13 +809,22 @@ no_periods <- dim(Y_obs)[2]
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# mean hyperparameters for Normal prior of constant
-k_means <- kmeans(Y_obs[,1],  # K-means clustering
-                  centers = C,
-                  iter.max = 10,
-                  nstart = 2,
-                  algorithm = "Hartigan-Wong")
-mu_beta_0 <- log(sort(k_means$centers))
+# load model fit for model 1 two classes dataset 16
+m_fit <- readRDS("SimulationStudyResults/Model1TwoClasses_Dataset16_Fit1.rds")
+
+# extract estimated data for model 1 two classes dataset 16
+m_fit_data <- rstan::extract(m_fit)
+
+# posterior means of beta_0 and beta_1 for model 1 two classes dataset 16
+beta_posterior_means <- matrix(data = 0, nrow = C, ncol = 2)
+for (c in 1:C) {
+  beta_posterior_means[c,1] <- mean(m_fit_data$beta_0[,c])
+  beta_posterior_means[c,2] <- mean(m_fit_data$beta_1[,c])
+}
+beta_posterior_means <- beta_posterior_means[order(beta_posterior_means[,1]),]
+
+# mean hyperparameters for Normal prior of constants
+mu_beta_0 <- beta_posterior_means[,1]
 
 # SD hyperparameters for Normal prior of constants
 sigma_beta_0 <- c(1,1)
@@ -748,7 +848,11 @@ iter <- 2000
 warmup <- floor(iter/2)
 
 # sampler: initial values for parameters
-init <- "random"
+init <- list()
+for (ch in 1:chains) {
+  init[[ch]] <- list(beta_0 = beta_posterior_means[,1],
+                     beta_1 = beta_posterior_means[,2])
+}
 
 # sampler: algorithm
 algorithm <- "NUTS"
