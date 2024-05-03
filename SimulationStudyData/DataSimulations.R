@@ -1,5 +1,5 @@
 # README ####
-# closing the sections provides an overview of the R script.
+# closing the sections provides an overview of this R script.
 
 # how to use this R script?
 # firstly, run the preparation section.
