@@ -32,10 +32,15 @@ R <- 5
 
 for (r in 1:R) {
   
-  rmarkdown::render("Model1/Model1Baseline_Dataset1_Yobs_Runr.Rmd",
-                    output_file = paste("Model1Baseline_Dataset1_Yobs_Run",
-                                        r,
-                                        sep = ""))
+  # knit Model1Baseline_Dataset1_Yobs_Runr.Rmd with input r
+  job::job({
+    
+    rmarkdown::render("Model1/Model1Baseline_Dataset1_Yobs_Runr.Rmd",
+                      output_file = paste("Model1Baseline_Dataset1_Yobs_Run",
+                                          r,
+                                          sep = ""))
+    
+  })
   
 }
 
