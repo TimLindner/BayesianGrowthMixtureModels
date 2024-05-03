@@ -26,47 +26,67 @@ library(flextable)
 
 
 # Methodology
-Convergence and estimation stability are measured by the number of successful NUTS runs in relation to the total number of runs.
+Convergence and estimation stability are measured by the number of successful NUTS estimation runs in relation to the total number of runs.
 
 # Model 1
 ```{r}
-model <- c("baseline",
-           "two classes",
-           "two classes",
-           "two classes",
-           "three classes",
-           "three classes",
-           "three classes")
+# model
+m <- c("baseline",
+       "two classes",
+       "two classes",
+       "two classes",
+       "three classes",
+       "three classes",
+       "three classes",
+       "two classes")
 
-dataset <- c("1","2","3","4","5","6","6")
+# model_modification
+m_modification <- c("","","","","","ident. err.","","")
 
-part <- c("","","","","","one","two")
+# dataset
+ds <- c("1","2","3","4","5","6","6","16")
 
-convergence <- c("5 / 5",
-                 "4 / 5",
-                 "2 / 5",
-                 "4 / 5",
-                 "2 / 5",
-                 "4 / 5",
-                 "5 / 5")
+# observed_dependent_variable
+Y_obs <- c("Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobslog")
 
-estimation <- c("5 / 5",
-                "4 / 5",
-                "2 / 5",
-                "4 / 5",
-                "2 / 5",
-                "4 / 5",
-                "5 / 5")
+# convergence stability
+conv_stability <- c("5 / 5",
+                    "4 / 5",
+                    "2 / 5",
+                    "4 / 5",
+                    "2 / 5",
+                    "4 / 5",
+                    "5 / 5",
+                    "5 / 5")
 
-df <- data.frame(model,
-                 dataset,
-                 part,
-                 convergence,
-                 estimation)
+# estimation stability 
+est_stability <- c("5 / 5",
+                   "4 / 5",
+                   "2 / 5",
+                   "4 / 5",
+                   "2 / 5",
+                   "4 / 5",
+                   "5 / 5",
+                   "5 / 5")
+
+df <- data.frame(m,
+                 m_modification,
+                 ds,
+                 Y_obs,
+                 conv_stability,
+                 est_stability)
 
 names(df) <- c("Model",
+               "Model modification",
                "Dataset",
-               "Part",
+               "Observed dependent variable",
                "Convergence stability",
                "Estimation stability")
 
@@ -76,24 +96,39 @@ flextable(df)
 
 # Model 3
 ```{r}
-model <- c("baseline",
-           "two classes")
+# model
+m <- c("baseline",
+       "two classes")
 
-dataset <- c("15","16")
+# model_modification
+m_modification <- c("","")
 
-convergence <- c("5 / 5",
-                 "... / ...")
+# dataset
+ds <- c("15","16")
 
-estimation <- c("5 / 5",
-                "... / ...")
+# observed_dependent_variable
+Y_obs <- c("Yobs",
+           "Yobs")
 
-df <- data.frame(model,
-                 dataset,
-                 convergence,
-                 estimation)
+# convergence stability
+conv_stability <- c("5 / 5",
+                    "2 / 2")
+
+# estimation stability
+est_stability <- c("5 / 5",
+                   "2 / 2")
+
+df <- data.frame(m,
+                 m_modification,
+                 ds,
+                 Y_obs,
+                 conv_stability,
+                 est_stability)
 
 names(df) <- c("Model",
+               "Model modification",
                "Dataset",
+               "Observed dependent variable",
                "Convergence stability",
                "Estimation stability")
 
