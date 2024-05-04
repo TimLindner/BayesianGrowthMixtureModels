@@ -5,11 +5,14 @@
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections; in any order.
 
-# required file for dataset 15 section:
-# SimulationModel_DS15.stan
+# required file for dataset 15 section from SimulationStudyData folder:
+# SimulationModel_Model3Baseline.stan
 
-# required file for dataset 16 section:
-# SimulationModel_DS16.stan
+# required file for dataset 16 section from SimulationStudyData folder:
+# SimulationModel_Model3MultipleClasses.stan
+
+# required file for dataset 17 section from SimulationStudyData folder:
+# SimulationModel_Model3MultipleClasses.stan
 
 
 # preparation ####
@@ -331,7 +334,7 @@ beta_0_sim <- 5
 beta_1_sim <- 0.1
 
 # load simulation model
-sim_m <- stan_model("SimulationModel_DS15.stan")
+sim_m <- stan_model("SimulationModel_Model3Baseline.stan")
 
 job::job({
   
@@ -383,9 +386,13 @@ beta_0_sim <- c(1,5)
 beta_1_sim <- c(0.4,0.1)
 
 # load simulation model
-sim_m <- stan_model("SimulationModel_DS16.stan")
+sim_m <- stan_model("SimulationModel_Model3MultipleClasses.stan")
 
-job::job({
+# number of simulation runs
+R <- 5
+
+# simulation runs
+for (r in 1:R) {
   
   # simulate data
   sim_m_fit <- sampling(sim_m,
@@ -400,28 +407,104 @@ job::job({
                         iter = 1,
                         algorithm = "Fixed_param")
   
-})
+  # extract simulated data
+  sim_m_fit_data <- rstan::extract(sim_m_fit)
+  
+  # simulated class memberships
+  z_sim <- sim_m_fit_data$z_sim[1,]
+  
+  # save z_sim (transform to data frame beforehand)
+  write.xlsx(data.frame(z_sim),
+             paste("Dataset16_zsim_Run", r, ".xlsx", sep = ""))
+  
+  # observed dependent variable
+  Y_obs <- sim_m_fit_data$Y_obs[1,,]
+  
+  # save Y_obs (transform to data frame beforehand)
+  write.xlsx(data.frame(Y_obs),
+             paste("Dataset16_Yobs_Run", r, ".xlsx", sep = ""))
+  
+  # log transform Y_obs
+  Y_obs[Y_obs==0] <- 1  # vectorization over n and t
+  Y_obs_log <- log(Y_obs)  # vectorization over n and t
+  
+  # save Y_obs_log (transform to data frame beforehand)
+  write.xlsx(data.frame(Y_obs_log),
+             paste("Dataset16_Yobslog_Run", r, ".xlsx", sep = ""))
+  
+}
 
-# extract simulated data
-sim_m_fit_data <- rstan::extract(sim_m_fit)
 
-# simulated class memberships
-z_sim <- sim_m_fit_data$z_sim[1,]
+# dataset 17 - model 3 two classes - overlapping constants ####
+# number of latent classes
+C <- 2
 
-# save z_sim (transform to data frame beforehand)
-write.xlsx(data.frame(z_sim), "Dataset16_zsim.xlsx")
+# number of individuals
+N <- 200
 
-# observed dependent variable
-Y_obs <- sim_m_fit_data$Y_obs[1,,]
+# number of time periods
+no_periods <- 10
 
-# save Y_obs (transform to data frame beforehand)
-write.xlsx(data.frame(Y_obs), "Dataset16_Yobs.xlsx")
+# explanatory variable
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# log transform Y_obs
-Y_obs[Y_obs==0] <- 1
-Y_obs_log <- log(Y_obs)
+# simulated mixture proportions
+lambda_sim <- c(0.3,0.7)
 
-# save Y_obs_log (transform to data frame beforehand)
-write.xlsx(data.frame(Y_obs_log), "Dataset16_Yobslog.xlsx")
+# simulated constants
+beta_0_sim <- c(1,1.5)
+
+# simulated linear trend components
+beta_1_sim <- c(0.4,0.8)
+
+# load simulation model
+sim_m <- stan_model("SimulationModel_Model3MultipleClasses.stan")
+
+# number of simulation runs
+R <- 5
+
+# simulation runs
+for (r in 1:R) {
+  
+  # simulate data
+  sim_m_fit <- sampling(sim_m,
+                        data = list(C = C,
+                                    N = N,
+                                    T = no_periods,
+                                    X = X,
+                                    lambda_sim = lambda_sim,
+                                    beta_0_sim = beta_0_sim,
+                                    beta_1_sim = beta_1_sim),
+                        chains = 1,
+                        iter = 1,
+                        algorithm = "Fixed_param")
+  
+  # extract simulated data
+  sim_m_fit_data <- rstan::extract(sim_m_fit)
+  
+  # simulated class memberships
+  z_sim <- sim_m_fit_data$z_sim[1,]
+  
+  # save z_sim (transform to data frame beforehand)
+  write.xlsx(data.frame(z_sim),
+             paste("Dataset17_zsim_Run", r, ".xlsx", sep = ""))
+  
+  # observed dependent variable
+  Y_obs <- sim_m_fit_data$Y_obs[1,,]
+  
+  # save Y_obs (transform to data frame beforehand)
+  write.xlsx(data.frame(Y_obs),
+             paste("Dataset17_Yobs_Run", r, ".xlsx", sep = ""))
+  
+  # log transform Y_obs
+  Y_obs[Y_obs==0] <- 1  # vectorization over n and t
+  Y_obs_log <- log(Y_obs)  # vectorization over n and t
+  
+  # save Y_obs_log (transform to data frame beforehand)
+  write.xlsx(data.frame(Y_obs_log),
+             paste("Dataset17_Yobslog_Run", r, ".xlsx", sep = ""))
+  
+}
 
 
