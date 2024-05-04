@@ -73,7 +73,7 @@ parameters {
 
 transformed parameters {
   
-  // log mixture proportions
+  // log lambda
   vector[C] log_lambda;
   log_lambda = log(lambda);
   
