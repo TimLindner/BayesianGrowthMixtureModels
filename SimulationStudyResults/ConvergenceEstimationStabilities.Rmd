@@ -1,9 +1,9 @@
 ---
-title: "Table of contents"
 output:
   html_document:
     toc: true
     toc_depth: 2
+    toc_float: TRUE
 ---
 
 
@@ -41,10 +41,24 @@ m <- c("baseline",
        "two classes")
 
 # model_modification
-m_modification <- c("","","","","","ident. err.","","")
+m_modification <- c("",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "ident. err.",
+                    "",
+                    "")
 
 # dataset
-ds <- c("1","2","3","4","5","6","6","16")
+ds <- c("1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "6",
+        "16")
 
 # observed_dependent_variable
 Y_obs <- c("Yobs",
@@ -101,10 +115,12 @@ m <- c("baseline",
        "two classes")
 
 # model_modification
-m_modification <- c("","")
+m_modification <- c("",
+                    "")
 
 # dataset
-ds <- c("15","16")
+ds <- c("15",
+        "16")
 
 # observed_dependent_variable
 Y_obs <- c("Yobs",
