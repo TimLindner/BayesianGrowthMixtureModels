@@ -5,13 +5,13 @@
 # firstly, run the preparation section.
 # secondly, run one or several dataset sections; in any order.
 
-# required file for dataset 15 section from SimulationStudyData folder:
+# required file for dataset 15 section from SimulationStudyData/Model3 folder:
 # SimulationModel_Model3Baseline.stan
 
-# required file for dataset 16 section from SimulationStudyData folder:
+# required file for dataset 16 section from SimulationStudyData/Model3 folder:
 # SimulationModel_Model3MultipleClasses.stan
 
-# required file for dataset 17 section from SimulationStudyData folder:
+# required file for dataset 17 section from SimulationStudyData/Model3 folder:
 # SimulationModel_Model3MultipleClasses.stan
 
 
@@ -75,7 +75,7 @@ for (r in 1:R) {
   
   # save Y_obs (transform to data frame beforehand)
   write.xlsx(data.frame(Y_obs),
-             paste("Dataset1_Yobs_Run", r, ".xlsx", sep = ""))
+             paste("Model1/Dataset1_Yobs_Run", r, ".xlsx", sep = ""))
   
 }
 
@@ -101,7 +101,7 @@ lambda_sim <- c(0.3,0.7)
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # save z_sim (transform to data frame beforehand)
-write.xlsx(data.frame(z_sim), "Dataset2_zsim.xlsx")
+write.xlsx(data.frame(z_sim), "Model1/Dataset2_zsim.xlsx")
 
 # simulated constants
 beta_0_sim <- c(-5,10)
@@ -148,7 +148,7 @@ lambda_sim <- c(0.3,0.7)
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # save z_sim (transform to data frame beforehand)
-write.xlsx(data.frame(z_sim), "Dataset3_zsim.xlsx")
+write.xlsx(data.frame(z_sim), "Model1/Dataset3_zsim.xlsx")
 
 # simulated constants
 beta_0_sim <- c(2,3)
@@ -195,7 +195,7 @@ lambda_sim <- c(0.3,0.7)
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # save z_sim (transform to data frame beforehand)
-write.xlsx(data.frame(z_sim), "Dataset4_zsim.xlsx")
+write.xlsx(data.frame(z_sim), "Model1/Dataset4_zsim.xlsx")
 
 # simulated constants
 beta_0_sim <- c(-5,10)
@@ -242,7 +242,7 @@ lambda_sim <- c(0.3,0.2,0.5)
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # save z_sim (transform to data frame beforehand)
-write.xlsx(data.frame(z_sim), "Dataset5_zsim.xlsx")
+write.xlsx(data.frame(z_sim), "Model1/Dataset5_zsim.xlsx")
 
 # simulated constants
 beta_0_sim <- c(-5,2.5,10)
@@ -289,7 +289,7 @@ lambda_sim <- c(0.3,0.2,0.5)
 z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization
 
 # save z_sim (transform to data frame beforehand)
-write.xlsx(data.frame(z_sim), "Dataset6_zsim.xlsx")
+write.xlsx(data.frame(z_sim), "Model1/Dataset6_zsim.xlsx")
 
 # simulated constants
 beta_0_sim <- c(1.5,2.5,3.5)
@@ -334,7 +334,7 @@ beta_0_sim <- 5
 beta_1_sim <- 0.1
 
 # load simulation model
-sim_m <- stan_model("SimulationModel_Model3Baseline.stan")
+sim_m <- stan_model("Model3/SimulationModel_Model3Baseline.stan")
 
 job::job({
   
@@ -359,7 +359,7 @@ sim_m_fit_data <- rstan::extract(sim_m_fit)
 Y_obs <- sim_m_fit_data$Y_obs[1,,]
 
 # save Y_obs (transform to data frame beforehand)
-write.xlsx(data.frame(Y_obs), "Dataset15_Yobs.xlsx")
+write.xlsx(data.frame(Y_obs), "Model3/Dataset15_Yobs.xlsx")
 
 
 # dataset 16 - model 3 two classes - no overlaps between classes ####
@@ -386,7 +386,7 @@ beta_0_sim <- c(1,5)
 beta_1_sim <- c(0.4,0.1)
 
 # load simulation model
-sim_m <- stan_model("SimulationModel_Model3MultipleClasses.stan")
+sim_m <- stan_model("Model3/SimulationModel_Model3MultipleClasses.stan")
 
 # number of simulation runs
 R <- 5
@@ -415,14 +415,14 @@ for (r in 1:R) {
   
   # save z_sim (transform to data frame beforehand)
   write.xlsx(data.frame(z_sim),
-             paste("Dataset16_zsim_Run", r, ".xlsx", sep = ""))
+             paste("Model3/Dataset16_zsim_Run", r, ".xlsx", sep = ""))
   
   # observed dependent variable
   Y_obs <- sim_m_fit_data$Y_obs[1,,]
   
   # save Y_obs (transform to data frame beforehand)
   write.xlsx(data.frame(Y_obs),
-             paste("Dataset16_Yobs_Run", r, ".xlsx", sep = ""))
+             paste("Model3/Dataset16_Yobs_Run", r, ".xlsx", sep = ""))
   
   # log transform Y_obs
   Y_obs[Y_obs==0] <- 1  # vectorization over n and t
@@ -430,7 +430,7 @@ for (r in 1:R) {
   
   # save Y_obs_log (transform to data frame beforehand)
   write.xlsx(data.frame(Y_obs_log),
-             paste("Dataset16_Yobslog_Run", r, ".xlsx", sep = ""))
+             paste("Model3/Dataset16_Yobslog_Run", r, ".xlsx", sep = ""))
   
 }
 
@@ -459,7 +459,7 @@ beta_0_sim <- c(1,1.5)
 beta_1_sim <- c(0.4,0.8)
 
 # load simulation model
-sim_m <- stan_model("SimulationModel_Model3MultipleClasses.stan")
+sim_m <- stan_model("Model3/SimulationModel_Model3MultipleClasses.stan")
 
 # number of simulation runs
 R <- 5
@@ -488,14 +488,14 @@ for (r in 1:R) {
   
   # save z_sim (transform to data frame beforehand)
   write.xlsx(data.frame(z_sim),
-             paste("Dataset17_zsim_Run", r, ".xlsx", sep = ""))
+             paste("Model3/Dataset17_zsim_Run", r, ".xlsx", sep = ""))
   
   # observed dependent variable
   Y_obs <- sim_m_fit_data$Y_obs[1,,]
   
   # save Y_obs (transform to data frame beforehand)
   write.xlsx(data.frame(Y_obs),
-             paste("Dataset17_Yobs_Run", r, ".xlsx", sep = ""))
+             paste("Model3/Dataset17_Yobs_Run", r, ".xlsx", sep = ""))
   
   # log transform Y_obs
   Y_obs[Y_obs==0] <- 1  # vectorization over n and t
@@ -503,7 +503,7 @@ for (r in 1:R) {
   
   # save Y_obs_log (transform to data frame beforehand)
   write.xlsx(data.frame(Y_obs_log),
-             paste("Dataset17_Yobslog_Run", r, ".xlsx", sep = ""))
+             paste("Model3/Dataset17_Yobslog_Run", r, ".xlsx", sep = ""))
   
 }
 
