@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Dataset17_Yobslog_Run5.xlsx, Dataset17_zsim_Run2.xlsx
 # and the corresponding model fit from the SimulationStudyResults/Model1 folder:
 # e.g., for the first pair of datasets listed above,
-# Model17TwoClasses_IdentErr_Dataset17_Yobslog_Run1.rds
+# Model1TwoClasses_IdentErr_Dataset17_Yobslog_Run1.rds
 ```
 
 
