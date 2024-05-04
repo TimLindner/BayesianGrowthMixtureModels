@@ -22,7 +22,8 @@ knitr::opts_chunk$set(echo = FALSE)
 # Dataset1_Yobs_Run4.xlsx
 # Dataset1_Yobs_Run5.xlsx
 # and the corresponding model fit from the SimulationStudyResults/Model1 folder:
-# e.g., for Dataset1_Yobs_Run1.xlsx, Model1Baseline_Dataset1_Yobs_Run1.rds
+# e.g., for the first dataset listed above,
+# Model1Baseline_Dataset1_Yobs_Run1.rds
 ```
 
 
