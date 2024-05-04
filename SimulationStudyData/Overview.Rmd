@@ -481,9 +481,9 @@ box()
 ## Dataset 17 - two classes - overlapping constants
 For $n$ in $1,...,200$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 1$
+* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(4.75 + 0.05 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 1$
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1.5 + 0.8 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 2$
+* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 2$
 
 * $z_n \sim Categorical(0.3,0.7)\text{,}$
 
@@ -500,7 +500,7 @@ for (r in 1:R) {
   Y_obs <- data.frame(read_excel(
     paste("Model3/Dataset17_Yobs_Run", r, ".xlsx", sep = ""),
     sheet = "Sheet 1"))
-  Y_obs <- data.frame(read_excel(
+  Y_obs_log <- data.frame(read_excel(
     paste("Model3/Dataset17_Yobslog_Run", r, ".xlsx", sep = ""),
     sheet = "Sheet 1"))
   
