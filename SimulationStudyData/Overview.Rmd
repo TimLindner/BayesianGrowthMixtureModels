@@ -72,9 +72,9 @@ R <- 5
 for (r in 1:R) {
   
   # load observed dependent variable
-  Y_obs <- data.frame(read_excel(paste("Model1/Dataset1_Yobs_Run", r, ".xlsx",
-                                       sep = ""),
-                                 sheet = "Sheet 1"))
+  Y_obs <- data.frame(read_excel(
+    paste("Model1/Dataset1_Yobs_Run", r, ".xlsx", sep = ""),
+    sheet = "Sheet 1"))
   
   # number of individuals
   N <- dim(Y_obs)[1]
@@ -497,12 +497,11 @@ R <- 5
 for (r in 1:R) {
   
   # load observed dependent variable
-  Y_obs <- data.frame(read_excel(paste("Model3/Dataset17_Yobs_Run", r, ".xlsx",
-                                       sep = ""),
-                                 sheet = "Sheet 1"))
-  Y_obs <- data.frame(read_excel(paste(
-    "Model3/Dataset17_Yobslog_Run", r, ".xlsx",
-    sep = ""),
+  Y_obs <- data.frame(read_excel(
+    paste("Model3/Dataset17_Yobs_Run", r, ".xlsx", sep = ""),
+    sheet = "Sheet 1"))
+  Y_obs <- data.frame(read_excel(
+    paste("Model3/Dataset17_Yobslog_Run", r, ".xlsx", sep = ""),
     sheet = "Sheet 1"))
   
   # number of individuals
