@@ -134,7 +134,7 @@ darkturquoise_transp <- rgb(red = 0,
 
 # Convergence
 ```{r, include = FALSE}
-# diagnostics: Rhat, Bulk ESS, and Tail ESS for beta_0, beta_1, and sigma
+# diagnostics: Rhat, Bulk ESS, and Tail ESS
 params <- c("beta_0","beta_1","sigma")
 diagnostics <- c("Rhat","Bulk_ESS","Tail_ESS")
 Rhat_ESS <-
