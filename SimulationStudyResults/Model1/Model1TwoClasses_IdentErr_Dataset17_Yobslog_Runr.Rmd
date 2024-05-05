@@ -84,11 +84,15 @@ C <- 2
 
 # load observed dependent variable
 Y_obs_log <- data.frame(read_excel(
-    paste("SimulationStudyData/Model3/Dataset17_Yobslog_Run", r, ".xlsx",
+    paste("SimulationStudyData/Model3/Dataset17_Yobslog_Run",
+          r,
+          ".xlsx",
           sep = ""),
     sheet = "Sheet 1"))
 Y_obs <- data.frame(read_excel(
-    paste("SimulationStudyData/Model3/Dataset17_Yobs_Run", r, ".xlsx",
+    paste("SimulationStudyData/Model3/Dataset17_Yobs_Run",
+          r,
+          ".xlsx",
           sep = ""),
     sheet = "Sheet 1"))
 
