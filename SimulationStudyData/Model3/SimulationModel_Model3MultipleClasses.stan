@@ -49,12 +49,12 @@ generated quantities {
   // observed dependent variable
   array[N,T] int Y_obs;
   for (n in 1:N) {
-    // log rates for Y_obs PoissonLog distributions of n
-    row_vector[T] theta_n;
-    theta_n = beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n];
+    // simulated log rates for Y_obs PoissonLog distributions of n
+    row_vector[T] theta_n_sim;
+    theta_n_sim = beta_0_sim[z_sim[n]] + beta_1_sim[z_sim[n]] * X[n];
     // vectorization over t
     
-    Y_obs[n] = poisson_log_rng(theta_n);  // vectorization over t
+    Y_obs[n] = poisson_log_rng(theta_n_sim);  // vectorization over t
   }
   
 }
