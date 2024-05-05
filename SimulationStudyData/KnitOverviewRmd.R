@@ -20,6 +20,4 @@ options(scipen = 999)
 library(rmarkdown)
 
 # knit Overview.Rmd
-rmarkdown::render("Overview.Rmd")
-
-
+rmarkdown::render("Overview.Rmd", envir = new.env())
