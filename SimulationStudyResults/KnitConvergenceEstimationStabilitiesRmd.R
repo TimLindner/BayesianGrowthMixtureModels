@@ -4,6 +4,7 @@
 
 # CTR + ALT + R runs the entire R script
 
+
 # set working directory
 setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs/SimulationStudyResults")
 
