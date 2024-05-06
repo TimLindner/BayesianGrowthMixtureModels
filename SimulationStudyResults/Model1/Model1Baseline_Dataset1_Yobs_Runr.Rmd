@@ -319,7 +319,7 @@ for (n in 1:N) {
              max(y_upper),
              min(Y_obs[n,]),
              max(Y_obs[n,]),
-             rep(min(y_lower), times = no_periods-4)),
+             rep(min(y_lower), times = no_periods - 4)),
        type="l",
        col = "white",
        main = paste("Predicted dependent variable for n =", n),
@@ -329,8 +329,8 @@ for (n in 1:N) {
   grid(nx = NA, ny = NULL)
   par(new = TRUE)
   
-  polygon(x = c(x, rev(x)),
-          y = c(y_lower, rev(y_upper)),
+  polygon(x = c(x,rev(x)),
+          y = c(y_lower,rev(y_upper)),
           col = darkturquoise_transp,
           lty = 0)
   
