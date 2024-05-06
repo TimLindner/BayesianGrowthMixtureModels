@@ -417,7 +417,7 @@ box()
 
 
 ```{r}
-# class memberships
+# z_posterior
 for (n in 1:N) {
   barplot(z_posterior[[n]],
           beside = TRUE,
