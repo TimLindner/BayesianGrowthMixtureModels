@@ -17,7 +17,8 @@ knitr::opts_chunk$set(echo = FALSE)
 # required files:
 # one of the following pairs of datasets from the SimulationStudyData/Model3
 # folder:
-# Dataset17_Yobslog_Run1.xlsx, Dataset17_zsim_Run1.xlsx 
+# Dataset17_Yobslog_Run1.xlsx, Dataset17_zsim_Run1.xlsx
+# Dataset17_Yobslog_Run2.xlsx, Dataset17_zsim_Run2.xlsx
 # Dataset17_Yobslog_Run3.xlsx, Dataset17_zsim_Run3.xlsx
 # Dataset17_Yobslog_Run4.xlsx, Dataset17_zsim_Run4.xlsx
 # Dataset17_Yobslog_Run5.xlsx, Dataset17_zsim_Run5.xlsx
