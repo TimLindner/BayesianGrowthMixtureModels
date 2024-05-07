@@ -117,7 +117,7 @@ z_sim <- data.frame(read_excel(
 beta_0_sim <- c(1,5)
 
 # simulated linear trend components
-beta_1_sim <- c(0.4,-0.1)
+beta_1_sim <- c(0.4,-0.2)
 
 
 # estimated data ####
