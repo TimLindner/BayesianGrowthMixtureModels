@@ -102,9 +102,8 @@ N <- dim(Y_obs)[1]
 # number of time periods
 no_periods <- dim(Y_obs)[2]
 
-# time periods
-time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+# indexes t
+indexes_t <- 1:no_periods
 
 # simulated mixture proportions
 lambda_sim <- c(0.3,0.7)
@@ -452,7 +451,7 @@ for (n in 1:N) {
 ```{r}
 # middle 90% credible intervals for Y_pred_log and Y_pred
 for (n in 1:N) {
-  x <- X[n,]
+  x <- indexes_t
   
   y_lower <- Y_pred_log_CI_lower[n,]
   y_upper <- Y_pred_log_CI_upper[n,]
@@ -466,7 +465,7 @@ for (n in 1:N) {
        type="l",
        col = "white",
        main = paste("Predicted dependent variable on log scale for n =", n),
-       xlab = "x",
+       xlab = "t",
        ylab = "y_log")
   
   grid(nx = NA, ny = NULL)
@@ -500,7 +499,7 @@ for (n in 1:N) {
        type="l",
        col = "white",
        main = paste("Predicted dependent variable for n =", n),
-       xlab = "x",
+       xlab = "t",
        ylab = "y")
   
   grid(nx = NA, ny = NULL)
