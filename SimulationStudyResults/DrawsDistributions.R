@@ -34,7 +34,7 @@ rstan_options(auto_write = TRUE)
 alpha <- c(1,1)
 
 # number of latent classes
-C <- lenght(alpha)
+C <- length(alpha)
 
 # load model
 sim_m <- stan_model("DrawsDirichletDistribution.stan")
