@@ -101,10 +101,6 @@ no_periods <- dim(Y_obs)[2]
 # indexes t
 indexes_t <- 1:no_periods
 
-# time periods
-time_periods <- 0:(no_periods-1)
-X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
-
 # simulated initial mixture proportions
 omega_sim <- c(0.3,0.7)
 
