@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Dataset17_Yobslog_Run5.xlsx, Dataset17_zsim_Run5.xlsx
 # and the corresponding model fit from the SimulationStudyResults/Model1 folder:
 # e.g., for the first pair of datasets listed above,
-# Model1TwoClasses_IdentErr_Dataset17_Yobslog_Run1.rds
+# Model1TwoClasses_IdentErr_Dataset17_Yobslog_Run1_Fit.rds
 ```
 
 
@@ -126,7 +126,7 @@ paste_part_1 <- "SimulationStudyResults/Model1/"
 paste_part_2 <- "Model1TwoClasses_IdentErr_Dataset17_Yobslog_Run"
 
 # load model fit
-m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, ".rds", sep = ""))
+m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, "_Fit.rds", sep = ""))
 
 # extract estimated data
 m_fit_data <- rstan::extract(m_fit)
