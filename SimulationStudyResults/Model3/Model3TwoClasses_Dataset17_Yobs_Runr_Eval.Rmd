@@ -57,7 +57,7 @@ $\beta_{1,c} < \beta_{1,c+1}$
 
 * Number of sampling iterations per chain: $1000$
 
-* Initial values for $\beta_{0,c}$ and $\beta_{1,c}$: for every chain, the posterior means for $\beta_{0,c}$ and $\beta_{1,c}$ estimated via model 1 with identically distributed errors not only over individuals and time periods but also latent classes
+* Initial values for $\beta_{0,c}$ and $\beta_{1,c}$: for every chain, the posterior means for $\beta_{0,c}$ and $\beta_{1,c}$ estimated via model 1 with identically distributed errors not only over individuals and time periods but also latent classes; posterior means estimated in run 1
 
 * Initial values for all parameters except $\beta_{0,c}$ and $\beta_{1,c}$: random initial values
 
