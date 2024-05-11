@@ -7,7 +7,7 @@ Placeholder
 
 ### Statistical computation
 * The GMMs have been implemented and estimated using Stan and the No-U-Turn Sampler (or NUTS for short) via RStan — the R interface to Stan (Stan Development Team, n.d.; Stan Development Team, 2024)
-* The R Stats Package has been used to perform K-means clustering in the context of prior elicitation (R Core Team and contributors worldwide, 2022)
+* In the context of NUTS parameter initialization, the R Stats Package has been used to perform Hartigan and Wong's (1979) K-means clustering algorithm with maximum ten iterations and two random sets (R Core Team and contributors worldwide, 2022)
 
 ### Structure of repository
 * :file_folder: ModelImplementations
@@ -16,6 +16,7 @@ Placeholder
 * :page_facing_up: ModelSpecifications
 
 ### References
+* Hartigan, J. A. and Wong, M. A. (1979). Algorithm AS 136: A K-means clustering algorithm. *Applied Statistics*, *28*(1), 100-108.
 * Hoffman, M. D. and Gelman, A. (2014). The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo. *Journal of Machine Learning Research*, *15*, 1593-1623. 
 * R Core Team and contributors worldwide. (2022). *The R Stats Package* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (n.d.). *Stan Documentation Version 2.34*. Stan. https://mc-stan.org/docs/
