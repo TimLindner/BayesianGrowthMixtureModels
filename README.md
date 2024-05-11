@@ -16,6 +16,7 @@ Placeholder
 * :page_facing_up: ModelSpecifications
 
 ### References
+* Hoffman, M. D. and Gelman, A. (2014). The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo. *Journal of Machine Learning Research*, *15*, 1593-1623. 
 * R Core Team and contributors worldwide. (2022). *The R Stats Package* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (n.d.). *Stan Documentation Version 2.34*. Stan. https://mc-stan.org/docs/
 * Stan Development Team. (2024). *RStan — the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
