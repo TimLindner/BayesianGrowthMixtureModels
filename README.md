@@ -16,7 +16,7 @@ Placeholder
 * :page_facing_up: ModelSpecifications
 
 ### Future work
-Define a strategy for setting the following hyperparameters: $\sigma_{\beta_{0,c}}$, $\sigma_{\beta_{1,c}}$, and \sigma_{\sigma_c}  
+Define a strategy for setting the following hyperparameters: $\sigma_{\beta_{0,c}}$, $\sigma_{\beta_{1,c}}$, and $\sigma_{\sigma_c}$  
 
 ### References
 * Hartigan, J. A. and Wong, M. A. (1979). Algorithm AS 136: A K-means clustering algorithm. *Applied Statistics*, *28*(1), 100-108.
