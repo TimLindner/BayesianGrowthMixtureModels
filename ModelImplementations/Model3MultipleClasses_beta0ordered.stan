@@ -82,10 +82,8 @@ transformed parameters {
   for (n in 1:N) {
     L[n] = log_lambda;
     for (c in 1:C) {
-      // log rates for Y_obs PoissonLog distributions
-      row_vector[T] theta;
+      row_vector[T] theta;  // log rates for Y_obs PoissonLog distributions
       theta = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
-      
       L[n,c] += poisson_log_lpmf(Y_obs[n] | theta);  // vectorization over t
     }
   }
@@ -123,10 +121,8 @@ generated quantities {
   // predicted dependent variable
   array[N,T] int Y_pred;
   for (n in 1:N) {
-    // log rates for Y_pred PoissonLog distributions of n
-    row_vector[T] theta;
+    row_vector[T] theta;  // log rates for Y_pred PoissonLog distributions
     theta = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization over t
-    
     Y_pred[n] = poisson_log_rng(theta);  // vectorization over t
   }
   
