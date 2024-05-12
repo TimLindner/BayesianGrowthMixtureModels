@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 # General notation
-* Individual $n$, for $n = 1,...,N$, where $N = 50$ is the number of individuals
+* Individual $n$, for $n = 1,...,N$, where $N = 200$ is the number of individuals
 
 * Time period $t$, for $t = 1,...,T$, where $T = 10$ is the number of time periods
 
