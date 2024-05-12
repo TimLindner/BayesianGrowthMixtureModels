@@ -46,7 +46,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * $\boldsymbol{Y}^{pred}$ is a $N \times T$ matrix representing the predicted dependent variable
 
-* $\boldsymbol{z}_n$ is a column vector of size $N$ indicating the class memberships
+* $\boldsymbol{z}$ is a column vector of size $N$ indicating the class memberships
 
 * $\boldsymbol{\lambda}$ is a column vector of size $N$ representing the mixture proportions
 
