@@ -87,7 +87,7 @@ transformed parameters {
   for (n in 1:N) {
     L[n] = log_lambda;
     for (c in 1:C) {
-      // means for Y_obs Normal distributions of n
+      // means for Y_obs Normal distributions
       row_vector[T] mu;
       mu = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
       
@@ -131,7 +131,7 @@ generated quantities {
   // predicted dependent variable
   array[N,T] real Y_pred;
   for (n in 1:N) {
-    // means for Y_pred Normal distributions of n
+    // means for Y_pred Normal distributions
     row_vector[T] mu_n;
     mu_n = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization over t
     
