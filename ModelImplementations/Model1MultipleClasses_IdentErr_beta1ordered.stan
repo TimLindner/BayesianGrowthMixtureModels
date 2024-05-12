@@ -88,10 +88,10 @@ transformed parameters {
     L[n] = log_lambda;
     for (c in 1:C) {
       // means for Y_obs Normal distributions of n
-      row_vector[T] mu_n;
-      mu_n = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
+      row_vector[T] mu;
+      mu = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
       
-      L[n,c] += normal_lpdf(Y_obs[n] | mu_n, sigma);  // vectorization over t
+      L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma);  // vectorization over t
     }
   }
   
