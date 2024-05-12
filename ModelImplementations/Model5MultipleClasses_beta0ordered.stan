@@ -103,9 +103,9 @@ transformed parameters {
     for (t in 1:T) {
       L[n,t] = log_Lambda[t];
       for (c in 1:C) {
-        real mu_n_t; // mean for Y_obs Normal distribution of n at t
-        mu_n_t = beta_0[c] + beta_1[c] * X[n,t];
-        L[n,t,c] += normal_lpdf(Y_obs[n,t] | mu_n_t, sigma[c]);
+        real mu; // mean for Y_obs Normal distribution
+        mu = beta_0[c] + beta_1[c] * X[n,t];
+        L[n,t,c] += normal_lpdf(Y_obs[n,t] | mu, sigma[c]);
       }
     }
   }
@@ -159,9 +159,9 @@ generated quantities {
       beta_0_n[t] = beta_0[Z[n,t]];
       beta_1_n[t] = beta_1[Z[n,t]];
     }
-    row_vector[T] mu_n;  // means for Y_pred Normal distributions of n
-    mu_n = beta_0_n + beta_1_n .* X[n];  // vectorization over t
-    Y_pred[n] = normal_rng(mu_n, sigma[Z[n]]);  // vectorization over t
+    row_vector[T] mu;  // means for Y_pred Normal distributions
+    mu = beta_0_n + beta_1_n .* X[n];  // vectorization over t
+    Y_pred[n] = normal_rng(mu, sigma[Z[n]]);  // vectorization over t
   }
   
 }
