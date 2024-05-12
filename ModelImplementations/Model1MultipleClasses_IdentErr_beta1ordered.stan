@@ -131,10 +131,8 @@ generated quantities {
   // predicted dependent variable
   array[N,T] real Y_pred;
   for (n in 1:N) {
-    // means for Y_pred Normal distributions
-    row_vector[T] mu_n;
+    row_vector[T] mu_n;  // means for Y_pred Normal distributions
     mu_n = beta_0[z[n]] + beta_1[z[n]] * X[n];  // vectorization over t
-    
     Y_pred[n] = normal_rng(mu_n, sigma);  // vectorization over t
   }
   
