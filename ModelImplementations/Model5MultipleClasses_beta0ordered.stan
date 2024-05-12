@@ -153,8 +153,8 @@ generated quantities {
   // predicted dependent variable
   array[N,T] real Y_pred;
   for (n in 1:N) {
-    row_vector[T] beta_0_n; // constants for n
-    row_vector[T] beta_1_n; // linear trend components for n
+    row_vector[T] beta_0_n; // constants
+    row_vector[T] beta_1_n; // linear trend components
     for (t in 1:T) {
       beta_0_n[t] = beta_0[Z[n,t]];
       beta_1_n[t] = beta_1[Z[n,t]];
