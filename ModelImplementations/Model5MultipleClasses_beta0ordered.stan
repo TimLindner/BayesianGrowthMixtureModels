@@ -1,5 +1,5 @@
 // README
-// normal_rng(mu_n, sigma[Z[n]]) returns a one-dimensional array of reals. thus,
+// normal_rng(mu, sigma[Z[n]]) returns a one-dimensional array of reals. thus,
 // Y_pred is declared as a two-dimensional array of reals.
 
 // data structures are best traversed in the order in which they are stored; a
