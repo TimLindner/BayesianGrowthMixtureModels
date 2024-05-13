@@ -82,7 +82,7 @@ $\beta_{0,c} < \beta_{0,c+1}$
 
 * Number of sampling iterations per chain: $1000$
 
-* Initial values for $\beta_{0,c}$: for every chain, $\kappa_c$; where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the estimates of K-means clustering for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$
+* Initial values for $\beta_{0,c}$: for every chain, $\kappa_c$; where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the K-means clustering estimates for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$ so that the initial values satisfy the labeling restriction
 
 * Initial values for all parameters except $\beta_{0,c}$: random initial values
 
