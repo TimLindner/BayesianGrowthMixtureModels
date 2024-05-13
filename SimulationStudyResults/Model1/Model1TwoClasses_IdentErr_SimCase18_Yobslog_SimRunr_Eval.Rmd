@@ -22,8 +22,8 @@ knitr::opts_chunk$set(echo = FALSE)
 # SimCase18_Yobslog_SimRun3.xlsx, SimCase18_zsim_SimRun3.xlsx
 # SimCase18_Yobslog_SimRun4.xlsx, SimCase18_zsim_SimRun4.xlsx
 # SimCase18_Yobslog_SimRun5.xlsx, SimCase18_zsim_SimRun5.xlsx
-# and the corresponding model fit from the SimulationStudyResults/Model1 folder:
-# e.g., for the first pair of datasets listed above,
+# and the corresponding file from the SimulationStudyResults/Model1 folder:
+# e.g., for the first pair of files listed above,
 # Model1TwoClasses_IdentErr_SimCase18_Yobslog_SimRun1_Fit.rds
 ```
 
