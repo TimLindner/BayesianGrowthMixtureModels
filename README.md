@@ -1,6 +1,7 @@
 > Please note that this repository is work in progress
 ### To-do list
-* In the introduction, indicate what if the goal of this repository
+* In the introduction, indicate what is the goal of this repository
+* Include which version of R is used
 
 ### Introduction
 Hi there :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
