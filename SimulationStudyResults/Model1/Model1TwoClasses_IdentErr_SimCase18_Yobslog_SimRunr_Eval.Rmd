@@ -48,7 +48,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * $\boldsymbol{z}$ is a column vector of size $N$ indicating the class memberships
 
-* $\boldsymbol{\lambda}$ is a column vector of size $N$ representing the mixture proportions
+* $\boldsymbol{\lambda}$ is a row vector of size $C$ representing the mixture proportions
 
 * $\boldsymbol{\beta}_0$ is a row vector of size $C$ representing the constants
 
