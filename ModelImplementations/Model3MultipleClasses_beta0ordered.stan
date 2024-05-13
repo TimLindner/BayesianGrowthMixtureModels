@@ -1,6 +1,6 @@
 // README
-// poisson_log_rng(theta_n) returns a one-dimensional array of ints. thus,
-// Y_pred is declared as a two-dimensional array of ints.
+// poisson_log_rng(theta) returns a one-dimensional array of ints. thus, Y_pred
+// is declared as a two-dimensional array of ints.
 
 // data structures are best traversed in the order in which they are stored; a
 // two-dimensional array is stored in row-major order. thus, Y_pred is traversed
@@ -13,7 +13,7 @@
 
 // the result of a vectorized log probability mass function is equivalent to the
 // sum of the evaluations on each element. thus,
-// poisson_log_lpmf(Y_obs[n] | theta_n) returns a real.
+// poisson_log_lpmf(Y_obs[n] | theta) returns a real.
 
 
 data {
