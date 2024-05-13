@@ -1,0 +1,575 @@
+---
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: TRUE
+---
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r, include = FALSE}
+# README
+# required files:
+# one of the following pairs of files from the SimulationStudyData/Model5
+# folder:
+# SimCase29_Yobs_SimRun1.xlsx, SimCase29_Zsim_SimRun1.xlsx 
+# SimCase29_Yobs_SimRun2.xlsx, SimCase29_Zsim_SimRun2.xlsx
+# SimCase29_Yobs_SimRun3.xlsx, SimCase29_Zsim_SimRun3.xlsx
+# SimCase29_Yobs_SimRun4.xlsx, SimCase29_Zsim_SimRun4.xlsx
+# SimCase29_Yobs_SimRun5.xlsx, SimCase29_Zsim_SimRun5.xlsx
+# and the corresponding file from the SimulationStudyResults/Model5 folder:
+# e.g., for the first pair of files listed above,
+# Model5TwoClasses_SimCase29_Yobs_SimRun1.1.rds
+```
+
+
+# Color coding
+* <span style="color: blueviolet;">blueviolet</span> for estimated parameters, also <span style="color: deepskyblue;">deepskyblue</span>
+* <span style="color: deeppink;">deeppink</span> for simulated parameters
+* <span style="color: darkturquoise;">darkturquoise</span> for predicted dependent variable
+* <span style="color: orange;">orange</span> for observed dependent variable
+
+
+# General notation
+* Latent class $c$, for $c = 1,...,C$, where $C = 2$ is the number of classes
+
+* Individual $n$, for $n = 1,...,N$, where $N = 200$ is the number of individuals
+
+* Time period $t$, for $t = 1,...,T$, where $T = 10$ is the number of time periods
+
+* $\boldsymbol{Y}^{obs}$ is a $N \times T$ matrix representing the observed dependent variable
+
+* $\boldsymbol{Y}^{pred}$ is a $N \times T$ matrix representing the predicted dependent variable
+
+* $\boldsymbol{Z}$ is a $N \times T$ matrix indicating the class memberships
+
+* $\boldsymbol{\omega}$ is a row vector of size $C$ representing the initial mixture proportions
+
+* $\boldsymbol{\Psi}$ is the $C \times C$ transition matrix 
+
+* $\boldsymbol{\beta}_0$ is a row vector of size $C$ representing the constants
+
+* $\boldsymbol{\beta}_1$ is a row vector of size $C$ representing the linear trend components
+
+* $\boldsymbol{\sigma}$ represents the standard deviations for the $\boldsymbol{Y}$ Normal distributions
+
+
+# Labeling restriction
+$\beta_{0,c} < \beta_{0,c+1}$
+
+
+# Hyperparameters
+* $\boldsymbol{\alpha}_{\boldsymbol{\psi}_c} = (1,1)$
+
+* $\mu_{\beta_{0,c}} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
+
+* $\sigma_{\beta_{0,c}} = 10$
+
+* $\mu_{\beta_{1,c}} = 0$
+
+* $\sigma_{\beta_{1,c}} = 1$
+
+* $\sigma_{\sigma_c} = 1$
+
+
+# NUTS parameters
+* Number of chains: $4$
+
+* Number of iterations per chain: $2000$
+
+* Number of warmup iterations per chain: $1000$
+
+* Number of sampling iterations per chain: $1000$
+
+* Initial values for $\beta_{0,c}$: for every chain, $\kappa_c$; where $\boldsymbol{\kappa}$ is a row vector of size $C$ storing the K-means clustering estimates for $\boldsymbol{y}^{obs}_{t=1}$, with $\kappa_c \leq \kappa_{c+1}$ so that the initial values satisfy the labeling restriction
+
+* Initial values for all parameters except $\beta_{0,c}$: random initial values
+
+
+```{r, include = FALSE}
+# preparation ####
+# set working directory
+setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs")
+
+# set decimals to digits instead of scientific
+options(scipen = 999)
+
+# load packages
+library(readxl)
+library(rstan)
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
+
+
+# simulated data ####
+# number of latent classes
+C <- 2
+
+# load observed dependent variable
+Y_obs <- data.frame(read_excel(
+    paste("SimulationStudyData/Model5/Simcase29_Yobs_SimRun",
+          r,
+          ".xlsx",
+          sep = ""),
+    sheet = "Sheet 1"))
+
+# number of individuals
+N <- dim(Y_obs)[1]
+
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+
+# indexes t
+indexes_t <- 1:no_periods
+
+# simulated initial mixture proportions
+omega_sim <- c(0.3,0.7)
+
+# simulated transition matrix
+Psi_sim <- matrix(data = 0, nrow = C, ncol = C)
+Psi_sim[1,] <- c(0.99,0.01)
+Psi_sim[2,] <- c(0.05,0.95)
+
+# load simulated class memberships
+Z_sim <- data.frame(read_excel(
+  paste(
+    "SimulationStudyData/Model5/Simcase29_Zsim_SimRun", r, ".xlsx", sep = ""),
+  sheet = "Sheet 1"))
+
+# simulated constants
+beta_0_sim <- c(-5,10)
+
+# simulated linear trend components
+beta_1_sim <- c(-0.5,1)
+
+# simulated standard deviations for Y_obs Normal distributions
+sigma_sim <- c(0.25,0.75)
+
+
+# estimated data ####
+# used to load model fit
+paste_part_1 <- "SimulationStudyResults/Model5/"
+paste_part_2 <- "Model5TwoClasses_Simcase29_Yobs_SimRun"
+
+# load model fit
+m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, ".rds", sep = ""))
+
+# extract estimated data
+m_fit_data <- rstan::extract(m_fit)
+
+# posterior for class memberships
+Z_posterior_n <- matrix(data = 0, nrow = C, ncol = no_periods)
+Z_posterior_n_rownames <- c()
+for (c in 1:C) {
+  Z_posterior_n_rownames[c] <- paste("c =", c)
+}
+rownames(Z_posterior_n) <- Z_posterior_n_rownames
+Z_posterior <- list()
+for (n in 1:N) {
+  for (t in 1:no_periods) {
+    prop_table <- prop.table(table(factor(m_fit_data$Z[,n,t], levels = 1:C)))
+    Z_posterior_n[,t] <- prop_table
+  }
+  Z_posterior[[n]] <- Z_posterior_n
+}
+
+# predicted dependent variable
+Y_pred <- m_fit_data$Y_pred
+
+# middle 90% credible intervals for Y_pred
+Y_pred_CI_lower <- matrix(data = 0, nrow = N, ncol = no_periods)
+Y_pred_CI_upper <- matrix(data = 0, nrow = N, ncol = no_periods)
+for (t in 1:no_periods) {
+  for (n in 1:N) {
+    Y_pred_CI_lower[n,t] <- quantile(Y_pred[,n,t], prob = 0.05)
+    Y_pred_CI_upper[n,t] <- quantile(Y_pred[,n,t], prob = 0.95)
+  }
+}
+
+
+# colors ####
+darkturquoise_transp <- rgb(red = 0,
+                            green = 206,
+                            blue = 209,
+                            max = 209,
+                            alpha = 50,
+                            names = "darkturquoise")
+```
+
+
+# Convergence
+```{r, include = FALSE}
+# Rhat, Bulk ESS, and Tail ESS for parameters of STAN model
+params <- c("omega[1]","omega[2]",
+            "Psi[1,1]","Psi[1,2]","Psi[2,1]","Psi[2,2]",
+            "beta_0[1]","beta_0[2]",
+            "beta_1[1]","beta_1[2]",
+            "sigma[1]","sigma[2]")
+diagnostics <- c("Rhat","Bulk_ESS","Tail_ESS")
+Rhat_ESS <-
+  as.data.frame(monitor(extract(m_fit, permuted = FALSE)))[params,diagnostics]
+```
+
+
+```{r}
+Rhat_ESS
+```
+
+
+```{r}
+# trace plots for initial mixture proportions
+for (c in 1:C) {
+  plot(m_fit_data$omega[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  plot(m_fit_data$omega[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Initial mixture proportion for c =", c),
+       xlab = "Sampling iteration",
+       ylab = "omega")
+  
+  box()
+}
+```
+
+
+```{r}
+# trace plots for transition matrix
+for (c in 1:C) {
+  for (k in 1:C) {
+    plot(m_fit_data$Psi[,c,k],
+         type = "l",
+         col = "blueviolet",
+         main = "",
+         xlab = "",
+         ylab = "")
+    
+    grid(nx = NA, ny = NULL)
+    par(new = TRUE)
+    
+    plot(m_fit_data$Psi[,c,k],
+         type = "l",
+         col = "blueviolet",
+         main = paste("element ", c, ",", k, " of transition matrix", sep = ""),
+         xlab = "Sampling iteration",
+         ylab = "psi")
+    
+    box()
+  }
+}
+```
+
+
+```{r}
+# trace plots for constants
+for (c in 1:C) {
+  plot(m_fit_data$beta_0[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  plot(m_fit_data$beta_0[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Constant for c =", c),
+       xlab = "Sampling iteration",
+       ylab = "beta_0")
+  
+  box()
+}
+```
+
+
+```{r}
+# trace plots for linear trend components
+for (c in 1:C) {
+  plot(m_fit_data$beta_1[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  plot(m_fit_data$beta_1[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Linear trend component for c =", c),
+       xlab = "Sampling iteration",
+       ylab = "beta_1")
+  
+  box()
+}
+```
+
+
+```{r}
+# trace plots for standard deviations of Y Normal distributions
+for (c in 1:C) {
+  plot(m_fit_data$sigma[,c],
+       type = "l",
+       col = "blueviolet",
+       main = "",
+       xlab = "",
+       ylab = "")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+
+  plot(m_fit_data$sigma[,c],
+       type = "l",
+       col = "blueviolet",
+       main = paste("Standard deviation of Y Normal distributions for c =", c),
+       xlab = "Sampling iteration",
+       ylab = "sigma")
+  
+  box()
+}
+```
+
+
+# Posterior
+```{r}
+# initial mixture proportions
+for (c in 1:C) {
+  hist(m_fit_data$omega[,c],
+       xlim = c(min(m_fit_data$omega[,c],omega_sim[c]),
+                max(m_fit_data$omega[,c],omega_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+
+  hist(m_fit_data$omega[,c],
+       xlim = c(min(m_fit_data$omega[,c],omega_sim[c]),
+                max(m_fit_data$omega[,c],omega_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Initial mixture proportion for c =", c),
+       xlab = "omega")
+  
+  
+  abline(v = omega_sim[c],
+         lwd = 2,
+         col = "deeppink")
+  
+  
+  box()
+}
+```
+
+
+```{r}
+# transition matrix
+for (c in 1:C) {
+  for (k in 1:C) {
+    hist(m_fit_data$Psi[,c,k],
+         xlim = c(min(m_fit_data$Psi[,c,k],Psi_sim[c,k]),
+                max(m_fit_data$Psi[,c,k],Psi_sim[c,k])),
+         col = "blueviolet",
+         border = FALSE,
+         main = "",
+         xlab = "")
+    
+    grid(nx = NA, ny = NULL)
+    par(new = TRUE)
+    
+    hist(m_fit_data$Psi[,c,k],
+         xlim = c(min(m_fit_data$Psi[,c,k],Psi_sim[c,k]),
+                max(m_fit_data$Psi[,c,k],Psi_sim[c,k])),
+         col = "blueviolet",
+         border = FALSE,
+         main = paste("element ", c, ",", k, " of transition matrix", sep = ""),
+         xlab = "psi")
+    
+    abline(v = Psi_sim[c,k],
+         lwd = 2,
+         col = "deeppink")
+    
+    box()
+  }
+}
+```
+
+
+```{r}
+# constants
+for (c in 1:C) {
+  hist(m_fit_data$beta_0[,c],
+       xlim = c(min(m_fit_data$beta_0[,c],beta_0_sim[c]),
+                max(m_fit_data$beta_0[,c],beta_0_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+  
+  hist(m_fit_data$beta_0[,c],
+       xlim = c(min(m_fit_data$beta_0[,c],beta_0_sim[c]),
+                max(m_fit_data$beta_0[,c],beta_0_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Constant for c =", c),
+       xlab = "beta_0")
+  
+  abline(v = beta_0_sim[c],
+         lwd = 2,
+         col = "deeppink")
+  
+  box()
+}
+```
+
+
+```{r}
+# linear trend components
+for (c in 1:C) {
+  hist(m_fit_data$beta_1[,c],
+       xlim = c(min(m_fit_data$beta_1[,c],beta_1_sim[c]),
+                max(m_fit_data$beta_1[,c],beta_1_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+  
+  hist(m_fit_data$beta_1[,c],
+       xlim = c(min(m_fit_data$beta_1[,c],beta_1_sim[c]),
+                max(m_fit_data$beta_1[,c],beta_1_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Linear trend component for c =", c),
+       xlab = "beta_1")
+  
+  abline(v = beta_1_sim[c],
+         lwd = 2,
+         col = "deeppink")
+  
+  box()
+}
+```
+
+
+```{r}
+# standard deviations of Y Normal distributions
+for (c in 1:C) {
+  hist(m_fit_data$sigma[,c],
+       xlim = c(min(m_fit_data$sigma[,c],sigma_sim[c]),
+                max(m_fit_data$sigma[,c],sigma_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = "",
+       xlab = "")
+  
+  grid()
+  par(new = TRUE)
+
+  hist(m_fit_data$sigma[,c],
+       xlim = c(min(m_fit_data$sigma[,c],sigma_sim[c]),
+                max(m_fit_data$sigma[,c],sigma_sim[c])),
+       col = "blueviolet",
+       border = FALSE,
+       main = paste("Standard deviation of Y Normal distributions for c =", c),
+       xlab = "sigma")
+  
+  abline(v = sigma_sim[c],
+         lwd = 2,
+         col = "deeppink")
+
+  box()
+}
+```
+
+
+```{r}
+# Z_posterior
+for (n in 1:N) {
+  barplot <- barplot(Z_posterior[[n]],
+                     beside = FALSE,
+                     col = c("deepskyblue","blueviolet"),
+                     border = FALSE,
+                     main = paste("Latent class memberships for n =", n),
+                     names.arg = indexes_t,
+                     xlab = "t",
+                     ylab = "Pr( z = c )",
+                     legend.text = rownames(Z_posterior[[n]]))
+  
+  for (t in 1:no_periods) {
+    text(x = barplot, y = 0.5, labels = Z_sim[n,], col = "deeppink")
+  }
+  
+  box()
+}
+```
+
+
+# Posterior predictive check
+```{r}
+# middle 90% credible intervals for Y_pred
+for (n in 1:N) {
+  x <- indexes_t
+  
+  y_lower <- Y_pred_CI_lower[n,]
+  y_upper <- Y_pred_CI_upper[n,]
+  
+  plot(x = x,
+       y = c(min(y_lower),
+             max(y_upper) + 5,
+             min(Y_obs[n,]),
+             max(Y_obs[n,]),
+             rep(min(y_lower), times = no_periods - 4)),
+       type="l",
+       col = "white",
+       main = paste("Predicted dependent variable for n =", n),
+       xlab = "t",
+       ylab = "y")
+  
+  grid(nx = NA, ny = NULL)
+  par(new = TRUE)
+  
+  polygon(x = c(x,rev(x)),
+          y = c(y_lower,rev(y_upper)),
+          col = darkturquoise_transp,
+          lty = 0)
+  
+  lines(x = x,
+        y = Y_obs[n,],
+        lwd = 2,
+        col = "orange")
+  
+  legend("top",
+         legend = "middle 90% credible intervals",
+         text.col = "darkturquoise")
+  
+  box()
+}
+```
+
+
