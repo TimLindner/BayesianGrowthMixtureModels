@@ -21,7 +21,7 @@ data {
   // number of time periods
   int<lower=2> T;
   
-  // observed dependent variable (simulated or actual data)
+  // observed dependent variable
   array[N,T] real Y_obs;
   
   // explanatory variable
