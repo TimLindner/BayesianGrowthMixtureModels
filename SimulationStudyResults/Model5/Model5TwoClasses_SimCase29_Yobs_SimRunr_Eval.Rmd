@@ -112,7 +112,7 @@ C <- 2
 
 # load observed dependent variable
 Y_obs <- data.frame(read_excel(
-    paste("SimulationStudyData/Model5/Simcase29_Yobs_SimRun",
+    paste("SimulationStudyData/Model5/SimCase29_Yobs_SimRun",
           r,
           ".xlsx",
           sep = ""),
@@ -138,7 +138,7 @@ Psi_sim[2,] <- c(0.05,0.95)
 # load simulated class memberships
 Z_sim <- data.frame(read_excel(
   paste(
-    "SimulationStudyData/Model5/Simcase29_Zsim_SimRun", r, ".xlsx", sep = ""),
+    "SimulationStudyData/Model5/SimCase29_Zsim_SimRun", r, ".xlsx", sep = ""),
   sheet = "Sheet 1"))
 
 # simulated constants
@@ -154,10 +154,10 @@ sigma_sim <- c(0.25,0.75)
 # estimated data ####
 # used to load model fit
 paste_part_1 <- "SimulationStudyResults/Model5/"
-paste_part_2 <- "Model5TwoClasses_Simcase29_Yobs_SimRun"
+paste_part_2 <- "Model5TwoClasses_SimCase29_Yobs_SimRun"
 
 # load model fit
-m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, ".rds", sep = ""))
+m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, "_Fit.rds", sep = ""))
 
 # extract estimated data
 m_fit_data <- rstan::extract(m_fit)
