@@ -54,7 +54,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * $\boldsymbol{\beta}_1$ is a row vector of size $C$ representing the linear trend components
 
-* $\boldsymbol{\sigma}$ is a row vector of size $C$ representing the standard deviations for the $\boldsymbol{Y}$ Normal distributions
+* $\sigma$ represents the standard deviation for the $\boldsymbol{Y}$ Normal distributions
 
 
 # Labeling restriction
