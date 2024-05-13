@@ -184,7 +184,7 @@ darkturquoise_transp <- rgb(red = 0,
 
 # Convergence
 ```{r, include = FALSE}
-# Rhat, Bulk ESS, and Tail ESS for parameters
+# Rhat, Bulk ESS, and Tail ESS for parameters of Stan model
 params <- c("lambda[1]","lambda[2]",
             "beta_0[1]","beta_0[2]",
             "beta_1[1]","beta_1[2]")
