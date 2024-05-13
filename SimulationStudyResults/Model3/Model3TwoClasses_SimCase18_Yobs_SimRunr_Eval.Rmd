@@ -104,7 +104,9 @@ C <- 2
 
 # load observed dependent variable
 Y_obs <- data.frame(read_excel(
-    paste("SimulationStudyData/Model3/Dataset18_Yobs_Run", r, ".xlsx",
+    paste("SimulationStudyData/Model3/SimCase18_Yobs_SimRun",
+          r,
+          ".xlsx",
           sep = ""),
     sheet = "Sheet 1"))
 
@@ -122,7 +124,8 @@ lambda_sim <- c(0.3,0.7)
 
 # load simulated class memberships
 z_sim <- data.frame(read_excel(
-  paste("SimulationStudyData/Model3/Dataset18_zsim_Run", r, ".xlsx", sep = ""),
+  paste(
+    "SimulationStudyData/Model3/SimCase18_zsim_SimRun", r, ".xlsx", sep = ""),
   sheet = "Sheet 1"))
 
 # simulated constants
@@ -135,7 +138,7 @@ beta_1_sim <- c(0.4,-0.2)
 # estimated data ####
 # used to load model fit
 paste_part_1 <- "SimulationStudyResults/Model3/"
-paste_part_2 <- "Model3TwoClasses_Dataset18_Yobs_Run"
+paste_part_2 <- "Model3TwoClasses_SimCase18_Yobs_SimRun"
 
 # load model fit
 m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, "_Fit.rds", sep = ""))
