@@ -1,9 +1,9 @@
 // README
-// poisson_log_rng(theta_n) returns a one-dimensional array of ints. thus, Y_obs
-// is declared as a two-dimensional array of ints.
+// poisson_log_rng(theta_sim) returns a one-dimensional array of ints. thus,
+// Y_obs is declared as a two-dimensional array of ints.
 
 // data structures are best traversed in the order in which they are stored; a
-// two-dimensional array is stored in row-major order. thus, Y_pred is traversed
+// two-dimensional array is stored in row-major order. thus, Y_obs is traversed
 // in row-major order.
 
 // if indexing of row vectors is needed, it is best to declare an array of row
