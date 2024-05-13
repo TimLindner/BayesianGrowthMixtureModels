@@ -12,7 +12,7 @@
 
 // the result of a vectorized log probability mass function is equivalent to the
 // sum of the evaluations on each element. thus,
-// normal_lpdf(Y_obs[n] | mu_n, sigma) returns a real.
+// normal_lpdf(Y_obs[n] | mu, sigma) returns a real.
 
 
 data {
