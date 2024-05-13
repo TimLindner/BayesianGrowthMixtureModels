@@ -183,7 +183,7 @@ darkturquoise_transp <- rgb(red = 0,
 
 # Convergence
 ```{r, include = FALSE}
-# diagnostics: Rhat, Bulk ESS, and Tail ESS for parameters
+# Rhat, Bulk ESS, and Tail ESS for parameters
 params <- c("lambda[1]","lambda[2]",
             "beta_0[1]","beta_0[2]",
             "beta_1[1]","beta_1[2]")
@@ -199,7 +199,7 @@ Rhat_ESS
 
 
 ```{r}
-# diagnostics: trace plots for mixture proportions
+# trace plots for mixture proportions
 for (c in 1:C) {
   plot(m_fit_data$lambda[,c],
        type = "l",
@@ -224,7 +224,7 @@ for (c in 1:C) {
 
 
 ```{r}
-# diagnostics: trace plots for constants
+# trace plots for constants
 for (c in 1:C) {
   plot(m_fit_data$beta_0[,c],
        type = "l",
@@ -249,7 +249,7 @@ for (c in 1:C) {
 
 
 ```{r}
-# diagnostics: trace plots for linear trend components
+# trace plots for linear trend components
 for (c in 1:C) {
   plot(m_fit_data$beta_1[,c],
        type = "l",
