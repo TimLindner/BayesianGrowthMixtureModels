@@ -16,6 +16,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 Placeholder
 
 ### Statistical computation
+* R was used as a programming language
 * The GMMs have been implemented and estimated using Stan and the No-U-Turn Sampler (or NUTS for short) via RStan — the R interface to Stan (Hoffman & Gelman, 2014; Stan Development Team, n.d.; Stan Development Team, 2024)
 * In the context of parameter initializations for the NUTS, the R Stats Package has been used to apply Hartigan and Wong's (1979) K-means clustering algorithm with maximum ten iterations and two random sets (R Core Team and contributors worldwide, 2022)
 
