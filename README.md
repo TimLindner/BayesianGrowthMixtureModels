@@ -26,11 +26,7 @@ Placeholder
 * :page_facing_up: ModelSpecifications
 
 ### Future work
-Define a strategy for setting the following hyperparameters so that label switching is prevented:
-* $\boldsymbol{\sigma}_{\beta}$,
-* $\boldsymbol{\sigma}_{\beta}$, and
-* $\boldsymbol{\sigma}_{\sigma}$.
-However, the hyperparameters are not allowed to be informative regarding classes.
+Define a strategy for setting hyperparameters so that label switching is prevented. However, the hyperparameters are not allowed to be informative regarding classes.
 
 ### References
 * Hartigan, J. A. and Wong, M. A. (1979). Algorithm AS 136: A K-means clustering algorithm. *Applied Statistics*, *28*(1), 100-108.
