@@ -29,7 +29,7 @@ Placeholder
 Define a strategy for setting the hyperparameters listed below so that label switching is prevented. However, the hyperparameters are not allowed to be informative regarding classes.
 * SD hyperparameters for Normal prior of constants
 * SD hyperparameters for Normal prior of linear trend components
-* SD hyperparameters for Normal prior of SDs for dependent variable Normal distributions
+* SD hyperparameters for Normal prior of SDs for Normal distributions of dependent variable
 
 ### References
 * Hartigan, J. A. and Wong, M. A. (1979). Algorithm AS 136: A K-means clustering algorithm. *Applied Statistics*, *28*(1), 100-108.
