@@ -1,4 +1,4 @@
-> Please note that this repository is work in progress !
+> Please note that this repository is work in progress
 
 ### To-do list
 - [ ] In the introduction, indicate what is the goal of this repository
