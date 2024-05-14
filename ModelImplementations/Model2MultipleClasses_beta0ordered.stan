@@ -58,7 +58,7 @@ data {
 
 transformed data {
   
-  // X squared
+  // square X
   array[N] row_vector[T] X_squared;
   for (n in 1:N) {
     X_squared[n] = square(X[n]);  // vectorization over t
