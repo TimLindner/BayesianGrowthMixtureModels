@@ -7,7 +7,7 @@
 // in row-major order.
 
 // if indexing of row vectors is needed, it is best to declare an array of row
-// vectors. thus, Y_obs and X are declared as an one-dimensional array of row
+// vectors. thus, Y_obs and X are declared as one-dimensional arrays of row
 // vectors.
 
 // the result of a vectorized log probability mass function is equivalent to the
