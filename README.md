@@ -28,7 +28,7 @@ Placeholder
 * :file_folder: SimulationStudyResults
 
 ### Future work
-Define a strategy for setting the hyperparameters listed below so that label switching is prevented. However, the hyperparameters are not allowed to be informative regarding classes.
+Define and implement a strategy for setting the hyperparameters listed below so that label switching is prevented. However, the hyperparameters are not allowed to be informative regarding classes.
 * SD hyperparameters for Normal prior of constants
 * SD hyperparameters for Normal prior of linear trend components
 * SD hyperparameters for Normal prior of SDs for Normal distributions of dependent variable
