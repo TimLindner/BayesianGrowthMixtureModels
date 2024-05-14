@@ -22,10 +22,10 @@ Placeholder
 * In the context of parameter initializations for the NUTS, the R Stats Package has been used to apply Hartigan and Wong's (1979) K-means clustering algorithm with maximum ten iterations and two random sets (R Core Team and contributors worldwide, 2022)
 
 ### Structure of repository
+* :page_facing_up: ModelSpecifications
 * :file_folder: ModelImplementations
 * :file_folder: SimulationStudyData
 * :file_folder: SimulationStudyResults
-* :page_facing_up: ModelSpecifications
 
 ### Future work
 Define a strategy for setting the hyperparameters listed below so that label switching is prevented. However, the hyperparameters are not allowed to be informative regarding classes.
