@@ -103,7 +103,7 @@ transformed parameters {
     L[n] = log_lambda;
     for (c in 1:C) {
       row_vector[T] mu;  // means for Y_obs Normal distributions
-      mu = beta_0[c] + beta_1[c] * X[n] + beta_1[c] * X_squared[n];
+      mu = beta_0[c] + beta_1[c] * X[n] + beta_2[c] * X_squared[n];
       // vectorization over t
       
       L[n,c] += normal_lpdf(Y_obs[n] | mu, sigma[c]);  // vectorization over t
