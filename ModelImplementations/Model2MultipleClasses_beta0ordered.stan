@@ -83,7 +83,7 @@ parameters {
   row_vector[C] beta_1;
   
   // quadratic trend components
-  row_vector[C] beta_1;
+  row_vector[C] beta_2;
   
   // standard deviations for Y Normal distributions
   row_vector<lower=0>[C] sigma;
