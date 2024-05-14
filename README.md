@@ -27,8 +27,8 @@ Placeholder
 
 ### Future work
 Define a strategy for setting the following hyperparameters so that label switching is prevented:
-* $\boldsymbol{\sigma}_{\beta_{0}}$,
-* $\boldsymbol{\sigma}_{\beta_{1}}$, and
+* $\boldsymbol{\sigma}_{\beta}$,
+* $\boldsymbol{\sigma}_{\beta}$, and
 * $\boldsymbol{\sigma}_{\sigma}$.
 However, the hyperparameters are not allowed to be informative regarding classes.
 
