@@ -1,4 +1,4 @@
-> Please note that this repository is work in progress
+> <code style="red : red">Please note that this repository is work in progress</code>
 ### To-do list
 - [ ] In the introduction, indicate what is the goal of this repository
 - [ ] Include which version of R is used
