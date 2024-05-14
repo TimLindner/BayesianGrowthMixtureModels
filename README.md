@@ -5,7 +5,7 @@
 - [ ] Include which version of R is used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
 - [ ] Rework model 1 - simulation cases 2, 3, 4, 5, 6, and 7
-- [ ] Normal vs Poisson
+- [ ] Normal vs Poisson (model comparison: Bayes factor, RMSE 90% CI)
 - [ ] Quadratic trend components
 - [ ] Softmax regressions (PCAs might be required before)
 
