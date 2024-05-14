@@ -7,7 +7,8 @@
 // in row-major order.
 
 // if indexing of row vectors is needed, it is best to declare an array of row
-// vectors. thus, X is declared as an one-dimensional array of row vectors.
+// vectors. thus, X and A_Psi are declared as one-dimensional arrays of row and
+// column vectors respectively.
 
 
 data {
