@@ -1,12 +1,12 @@
 > Please note that this repository is work in progress
 ### To-do list
-* In the introduction, indicate what is the goal of this repository
-* Include which version of R is used
-* Create a test to check for newer versions of packages and bonus to have it in a CI
-* Rework model 1 - simulation cases 2, 3, 4, 5, 6, and 7
-* Normal vs Poisson
-* Quadratic trend components
-* Softmax regressions (with PCAs before)
+- [x] In the introduction, indicate what is the goal of this repository
+- [ ] Include which version of R is used
+- [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
+- [ ] Rework model 1 - simulation cases 2, 3, 4, 5, 6, and 7
+- [ ] Normal vs Poisson
+- [ ] Quadratic trend components
+- [ ] Softmax regressions (with PCAs before)
 
 ### Introduction
 Hi there :sunglasses: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
