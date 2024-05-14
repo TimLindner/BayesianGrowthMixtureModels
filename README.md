@@ -2,6 +2,7 @@
 ### To-do list
 * In the introduction, indicate what is the goal of this repository
 * Include which version of R is used
+* Create a test to check for newer versions of packages and bonus to have it in a CI
 * Rework model 1 - simulation cases 2, 3, 4, 5, 6, and 7
 * Normal vs Poisson
 * Quadratic trend components
