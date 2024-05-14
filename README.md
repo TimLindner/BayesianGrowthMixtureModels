@@ -1,6 +1,6 @@
 > Please note that this repository is work in progress :hammer:
 
-### To-do list
+### To-do checklist
 - [ ] In the introduction, indicate what is the goal of this repository
 - [ ] Include R reference
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
