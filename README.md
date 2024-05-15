@@ -18,7 +18,7 @@ Hi there :sunglasses: My name is Tim, and this repository contains my work on Ba
 Placeholder
 
 ### Software used
-* Except for the implementations of the GMMs, all operations have been performed in R
+* Except for the implementations of the GMMs, all operations have been performed using R (R Core Team, 2022)
 * The GMMs have been implemented using Stan and estimated using the No-U-Turn Sampler (or NUTS for short) via RStan — the R interface to Stan (Hoffman & Gelman, 2014; Stan Development Team, n.d.; Stan Development Team, 2024)
 * In the context of parameter initializations for the NUTS, the R Stats Package has been used to apply Hartigan and Wong's (1979) K-means clustering algorithm with maximum ten iterations and two random sets (R Core Team and contributors worldwide, 2022)
 
@@ -35,6 +35,7 @@ Define and implement a strategy for setting the hyperparameters listed below so 
 * SD hyperparameters for Normal prior of SDs for Normal distributions of dependent variable
 
 ### Software references
+* R Core Team. (2022). *R: A Language and Environment for Statistical Computing* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * R Core Team and contributors worldwide. (2022). *The R Stats Package* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (2024). *RStan — the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
 
