@@ -56,7 +56,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 * $\boldsymbol{\beta}_1$ is a row vector of size $C$ representing the linear trend components
 
-* $\boldsymbol{\sigma}$ represents the standard deviations for the $\boldsymbol{Y}$ Normal distributions
+* $\boldsymbol{\sigma}$ is a row vector of size $C$ representing the standard deviations for the $\boldsymbol{Y}$ Normal distributions
 
 
 # Labeling restriction
@@ -543,7 +543,7 @@ for (n in 1:N) {
        y = c(min(y_lower),
              max(y_upper) + 5,
              min(Y_obs[n,]),
-             max(Y_obs[n,]),
+             max(Y_obs[n,]) + 5,
              rep(min(y_lower), times = no_periods - 4)),
        type="l",
        col = "white",
