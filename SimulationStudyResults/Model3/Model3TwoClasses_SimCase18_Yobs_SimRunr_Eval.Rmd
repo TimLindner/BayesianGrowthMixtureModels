@@ -62,7 +62,7 @@ $\beta_{0,c} < \beta_{0,c+1}$
 # Hyperparameters
 * $\mu_{\beta_{0,c}} = \log\Bigg(\frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}\Bigg)$
 
-* $\sigma_{\beta_{0,c}} = 5$
+* $\sigma_{\beta_{0,c}} = 10$
 
 * $\mu_{\beta_{1,c}} = 0$
 
@@ -186,7 +186,7 @@ darkturquoise_transp <- rgb(red = 0,
 
 # Convergence
 ```{r, include = FALSE}
-# Rhat, Bulk ESS, and Tail ESS for parameters
+# Rhat, Bulk ESS, and Tail ESS for parameters of Stan model
 params <- c("lambda[1]","lambda[2]",
             "beta_0[1]","beta_0[2]",
             "beta_1[1]","beta_1[2]")
