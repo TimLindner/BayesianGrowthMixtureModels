@@ -35,7 +35,7 @@ Define and implement a strategy for setting the hyperparameters listed below so 
 * SD hyperparameters for Normal prior of SDs for Normal distributions of dependent variable
 
 ### Software references
-* R Core Team. (2022). *R: A Language and Environment for Statistical Computing* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
+* R Core Team. (2022). *R: A Language and Environment for Statistical Computing* (Version 4.2.2) [Programming language]. The R Project for Statistical Computing.
 * R Core Team and contributors worldwide. (2022). *The R Stats Package* (Version 4.2.2) [R package]. The R Project for Statistical Computing.
 * Stan Development Team. (2024). *RStan — the R interface to Stan* (Version 2.32.6) [R package]. The R Project for Statistical Computing.
 
