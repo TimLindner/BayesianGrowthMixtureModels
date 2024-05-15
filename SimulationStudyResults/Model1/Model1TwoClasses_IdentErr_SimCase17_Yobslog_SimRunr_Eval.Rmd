@@ -64,7 +64,7 @@ $\beta_{1,c} < \beta_{1,c+1}$
 # Hyperparameters
 * $\mu_{\beta_{0,c}} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
 
-* $\sigma_{\beta_{0,c}} = 0.1$
+* $\sigma_{\beta_{0,c}} = 10$
 
 * $\mu_{\beta_{1,c}} = 0$
 
@@ -82,7 +82,9 @@ $\beta_{1,c} < \beta_{1,c+1}$
 
 * Number of sampling iterations per chain: $1000$
 
-* Initial values for parameters: random initial values
+* Initial values for $\beta_{0,c}$: for every chain, $\frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
+
+* Initial values for all parameters except $\beta_{0,c}$: random initial values
 
 
 ```{r, include = FALSE}
