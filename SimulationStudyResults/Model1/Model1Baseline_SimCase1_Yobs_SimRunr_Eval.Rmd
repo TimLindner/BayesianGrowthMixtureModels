@@ -53,7 +53,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Hyperparameters
 * $\mu_{\beta_0} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
 
-* $\sigma_{\beta_0} = 1$
+* $\sigma_{\beta_0} = 10$
 
 * $\mu_{\beta_1} = 0$
 
