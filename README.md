@@ -2,7 +2,7 @@
 
 ### To-do checklist
 - [ ] In the introduction, indicate what is the goal of this repository
-- [ ] Include R reference plus R packages used
+- [ ] Include all R packages used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
 - [ ] Rework model 1 - simulation cases 2, 3, 4, 5, 6, and 7
 - [ ] Rework model 3 - simulation case 16
