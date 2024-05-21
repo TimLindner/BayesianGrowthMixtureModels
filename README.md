@@ -12,7 +12,7 @@
 - [ ] Time-varying transition matrices
 
 ### Introduction
-Hi there :relaxed: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including discrete hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
+Hi there :relaxed: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
 
 ### Work developed
 Placeholder
