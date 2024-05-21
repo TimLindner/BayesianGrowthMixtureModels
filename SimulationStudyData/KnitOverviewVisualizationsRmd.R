@@ -1,6 +1,6 @@
 # README
 # required file from SimulationStudyData folder:
-# Overview.Rmd
+# OverviewVisualizations.Rmd
 
 # CTR + ALT + R runs the entire R script
 
@@ -22,3 +22,5 @@ library(rmarkdown)
 
 # knit Overview.Rmd
 rmarkdown::render("OverviewVisualizations.Rmd", envir = new.env())
+
+
