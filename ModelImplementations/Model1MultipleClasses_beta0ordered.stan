@@ -1,8 +1,18 @@
 // README
-// a note on the Stan code:
-// the result of a vectorized log probability density function
-// is equivalent to the sum of the evaluations on each element;
-// e.g., real normal_lpdf(reals y_obs | reals mu, real sigma).
+// normal_rng(mu, sigma[z[n]]) returns a one-dimensional array of reals. thus,
+// Y_pred is declared as a two-dimensional array of reals.
+
+// data structures are best traversed in the order in which they are stored; a
+// two-dimensional array is stored in row-major order. thus, Y_pred is traversed
+// in row-major order.
+
+// if indexing of row vectors is needed, it is best to declare an array of row
+// vectors. thus, Y_obs and X are declared as one-dimensional arrays of row
+// vectors.
+
+// the result of a vectorized log probability mass function is equivalent to the
+// sum of the evaluations on each element. thus,
+// normal_lpdf(Y_obs[n] | mu, sigma[c]) returns a real.
 
 
 data {
@@ -16,7 +26,7 @@ data {
   // number of time periods
   int<lower=2> T;
   
-  // observed dependent variable (simulated or actual data)
+  // observed dependent variable
   array[N] row_vector[T] Y_obs;
   
   // explanatory variable
@@ -44,7 +54,7 @@ transformed data {
   
   // hyperparameters for Dirichlet prior of mixture proportions
   vector<lower=0>[C] alpha_lambda;
-  alpha_lambda = rep_vector(1,C);
+  alpha_lambda = rep_vector(1, C);
   
 }
 
@@ -68,10 +78,14 @@ parameters {
 
 transformed parameters {
   
+  // log lambda
+  vector[C] log_lambda;
+  log_lambda = log(lambda);
+  
   // log likelihood
   array[N] vector[C] L;
   for (n in 1:N) {
-    L[n] = log(lambda);  // log transform lambda, vectorization over c
+    L[n] = log_lambda;
     for (c in 1:C) {
       row_vector[T] mu;  // means for Y_obs Normal distributions
       mu = beta_0[c] + beta_1[c] * X[n];  // vectorization over t
@@ -88,13 +102,13 @@ model {
   lambda ~ dirichlet(alpha_lambda);  // vectorization over c
   
   // prior for beta_0
-  beta_0 ~ normal(mu_beta_0,sigma_beta_0);  // vectorization over c
+  beta_0 ~ normal(mu_beta_0, sigma_beta_0);  // vectorization over c
   
   // prior for beta_1
-  beta_1 ~ normal(mu_beta_1,sigma_beta_1);  // vectorization over c
+  beta_1 ~ normal(mu_beta_1, sigma_beta_1);  // vectorization over c
   
   // prior for sigma
-  sigma ~ normal(0,sigma_sigma);  // vectorization over c
+  sigma ~ normal(0, sigma_sigma);  // vectorization over c
   
   // log likelihood
   for (n in 1:N) {
