@@ -4,10 +4,10 @@
 - [ ] In the introduction, indicate what is the goal of this repository
 - [ ] Include all R packages used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
-- [ ] Rework model 1 - simulation cases 2, 3, 4, 5, 6, and 7
-- [ ] Rework model 3 - simulation case 16
-- [ ] Normal vs Poisson (model comparison: Bayes factor, RMSE 90% CI)
-- [ ] Quadratic trend components
+- [ ] Simulation data (simulation cases 16, 17, and 17v2) for Normal vs Poisson
+- [ ] Comparison strategy for Normal vs Poisson (model comparison: Bayes factor, RMSE 90% CI)
+- [ ] Quadratic trend components for Normal model with three classes (simulation case 12)
+- [ ] Poisson model with three classes (simulation case 19)
 - [ ] Softmax regressions (PCAs might be required before)
 - [ ] Time-varying transition matrices
 
