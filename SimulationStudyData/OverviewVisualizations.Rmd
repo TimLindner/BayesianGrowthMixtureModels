@@ -16,17 +16,29 @@ knitr::opts_chunk$set(echo = FALSE)
 # README
 # required files from SimulationStudyData/Model1 folder:
 # SimCase1_Yobs_SimRun1.xlsx
+# SimCase2_Yobs_SimRun1.xlsx
+# SimCase5_Yobs_SimRun1.xlsx
+
+# required files from SimulationStudyData/Model2 folder:
+# SimCase8_Yobs_SimRun1.xlsx
+# SimCase9_Yobs_SimRun1.xlsx
 
 # required files from SimulationStudyData/Model3 folder:
+# SimCase15_Yobs_SimRun1.xlsx
+# SimCase16_Yobs_SimRun1.xlsx
+# SimCase16_Yobslog_SimRun1.xlsx
 # SimCase17_Yobs_SimRun1.xlsx
 # SimCase17_Yobslog_SimRun1.xlsx
-
-# required files from SimulationStudyData/Model3 folder:
+# SimCase17v2_Yobs_SimRun1.xlsx
+# SimCase17v2_Yobslog_SimRun1.xlsx
 # SimCase18_Yobs_SimRun1.xlsx
 # SimCase18_Yobslog_SimRun1.xlsx
+# SimCase19_Yobs_SimRun1.xlsx
+# SimCase19_Yobslog_SimRun1.xlsx
 
 # required files from SimulationStudyData/Model5 folder:
 # SimCase29_Yobs_SimRun1.xlsx
+# SimCase32_Yobs_SimRun1.xlsx
 ```
 
 
@@ -43,83 +55,36 @@ library(readxl)
 ```
 
 
-# Overview
+# Overview model 1
 ```{r}
 # simulation case
 sim_case <- c("1",
               "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "15",
-              "16",
-              "17",
-              "18",
-              "29")
-
-# model
-m <- c("1",
-       "1",
-       "1",
-       "1",
-       "1",
-       "1",
-       "3",
-       "3",
-       "3",
-       "3",
-       "5")
+              "5")
 
 # number of latent classes
 C <- c("baseline",
        "2",
-       "2",
-       "2",
-       "3",
-       "3",
-       "2",
-       "2",
-       "2",
-       "2",
-       "2")
+       "3")
 
-# characteristic
+# description
 descrip <- c("-",
              "classes do not overlap",
-             "overlapping constants",
-             "intersecting trends",
-             "classes do not overlap",
-             "overlapping constants",
-             "-",
-             "classes do not overlap",
-             "overlapping constants",
-             "intersecting trends",
              "classes do not overlap")
 
 # number of simulation runs
 R <- c(5,
        5,
-       5,
-       5,
-       5,
-       5,
-       5,
-       5,
-       5,
-       5,
        5)
 
 # table
 df <- data.frame(sim_case,
-                 m,
                  C,
                  descrip,
                  R)
 
 # column names for table
 names(df) <- c("Simulation case",
-               "Model",
                "Number latent classes",
                "Description",
                "Number simulation runs")
@@ -129,13 +94,146 @@ flextable(df)
 ```
 
 
-# Visualizations
+# Overview model 2
+```{r}
+# simulation case
+sim_case <- c("8",
+              "9")
+
+# number of latent classes
+C <- c("baseline",
+       "2")
+
+# description
+descrip <- c("",
+             "classes do not overlap")
+
+# number of simulation runs
+R <- c(5,
+       5)
+
+# table
+df <- data.frame(sim_case,
+                 C,
+                 descrip,
+                 R)
+
+# column names for table
+names(df) <- c("Simulation case",
+               "Number latent classes",
+               "Description",
+               "Number simulation runs")
+
+# print table
+flextable(df)
+```
+
+
+# Overview model 3
+```{r}
+# simulation case
+sim_case <- c("15",
+              "16",
+              "17",
+              "17 v2",
+              "18",
+              "19")
+
+# number of latent classes
+C <- c("baseline",
+       "2",
+       "2",
+       "2",
+       "2",
+       "3")
+
+# description
+descrip <- c("-",
+             "classes do not overlap",
+             "overlapping constants",
+             "overlapping constants",
+             "intersecting trends",
+             "classes do not overlap")
+
+# number of simulation runs
+R <- c(5,
+       100,
+       100,
+       100,
+       5,
+       5)
+
+# table
+df <- data.frame(sim_case,
+                 C,
+                 descrip,
+                 R)
+
+# column names for table
+names(df) <- c("Simulation case",
+               "Number latent classes",
+               "Description",
+               "Number simulation runs")
+
+# print table
+flextable(df)
+```
+
+
+# Overview model 5
+```{r}
+# simulation case
+sim_case <- c("29",
+              "32")
+
+# number of latent classes
+C <- c("2",
+       "3")
+
+# description
+descrip <- c("classes do not overlap",
+             "classes do not overlap")
+
+# number of simulation runs
+R <- c(5,
+       5)
+
+# table
+df <- data.frame(sim_case,
+                 C,
+                 descrip,
+                 R)
+
+# column names for table
+names(df) <- c("Simulation case",
+               "Number latent classes",
+               "Description",
+               "Number simulation runs")
+
+# print table
+flextable(df)
+```
+
+
+# General notation
+* Latent class $c$, for $c = 1,...,C$, where $C$ is the number of classes
+
+* Individual $n$, for $n = 1,...,N$, where $N$ is the number of individuals
+
+* Time period $t$, for $t = 1,...,T$, where $T$ is the number of time periods
+
+* $\boldsymbol{Y}^{obs}$ is a $N \times T$ matrix representing an observed dependent variable
+
+* $\boldsymbol{X}$ is a matrix of size $N \times T$ representing an explanatory variable
+
+
+# Visualizations model 1
 ## Simulation case 1
 Within each simulation run, for $n$ in $1,...,50$ and $t$ in $1,...,10$,
 
-$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)\text{;}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75)\text{;}$</p>
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
@@ -179,28 +277,31 @@ box()
 ## Simulation case 2
 Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z^{sim}_n = 1$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2\text{, and}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
 
-* $z_n \sim Categorical(0.3,0.7)\text{;}$
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.7)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1/Dataset2_Yobs.xlsx", sheet = "Sheet 1"))
-
+Y_obs <- data.frame(read_excel("Model1/SimCase2_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
 # number of individuals
 N <- dim(Y_obs)[1]
-
+  
 # number of time periods
 no_periods <- dim(Y_obs)[2]
-
+  
 # indexes t
 indexes_t <- 1:no_periods
-
+  
 # plot Y_obs
 plot(x = indexes_t,
      y = c(min(Y_obs),
@@ -208,7 +309,7 @@ plot(x = indexes_t,
            rep(min(Y_obs), times = no_periods-2)),
      type = "l",
      col = "white",
-     main = "Observed dependent variable",
+     main = "Observed dependent variable for simulation run 1",
      xlab = "t",
      ylab = "y_obs")
   
@@ -220,105 +321,7 @@ for (n in 1:N) {
         y = Y_obs[n,],
         col = "orange")
 }
-
-box()
-```
-
-
-## Simulation case 3
-Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
-
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(2 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1\text{,}$
-
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(3 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2\text{, and}$
-
-* $z_n \sim Categorical(0.3,0.7)\text{;}$
-
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
-
-
-```{r}
-# load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1/Dataset3_Yobs.xlsx", sheet = "Sheet 1"))
-
-# number of individuals
-N <- dim(Y_obs)[1]
-
-# number of time periods
-no_periods <- dim(Y_obs)[2]
-
-# indexes t
-indexes_t <- 1:no_periods
-
-# plot Y_obs
-plot(x = indexes_t,
-     y = c(min(Y_obs),
-           max(Y_obs),
-           rep(min(Y_obs), times = no_periods-2)),
-     type = "l",
-     col = "white",
-     main = "Observed dependent variable",
-     xlab = "t",
-     ylab = "y_obs")
   
-grid(nx = NA, ny = NULL)
-par(new = TRUE)
-  
-for (n in 1:N) {
-  lines(x = indexes_t,
-        y = Y_obs[n,],
-        col = "orange")
-}
-
-box()
-```
-
-
-## Simulation case 4
-Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
-
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 + 1 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1\text{,}$
-
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 - 2 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2\text{, and}$
-
-* $z_n \sim Categorical(0.3,0.7)\text{;}$
-
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
-
-
-```{r}
-# load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1/Dataset4_Yobs.xlsx", sheet = "Sheet 1"))
-
-# number of individuals
-N <- dim(Y_obs)[1]
-
-# number of time periods
-no_periods <- dim(Y_obs)[2]
-
-# indexes t
-indexes_t <- 1:no_periods
-
-# plot Y_obs
-plot(x = indexes_t,
-     y = c(min(Y_obs),
-           max(Y_obs),
-           rep(min(Y_obs), times = no_periods-2)),
-     type = "l",
-     col = "white",
-     main = "Observed dependent variable",
-     xlab = "t",
-     ylab = "y_obs")
-  
-grid(nx = NA, ny = NULL)
-par(new = TRUE)
-  
-for (n in 1:N) {
-  lines(x = indexes_t,
-        y = Y_obs[n,],
-        col = "orange")
-}
-
 box()
 ```
 
@@ -326,30 +329,33 @@ box()
 ## Simulation case 5
 Within each simulation run, for $n$ in $1,...,250$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z^{sim}_n = 1$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(2.5 + 0.5 \, \boldsymbol{x}_{n},0.5) \quad \text{if } z_n = 2\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(2.5 + 0.5 \, \boldsymbol{x}_{n},0.5) \quad \text{if } z^{sim}_n = 2$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 3\text{, and}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z^{sim}_n = 3\text{.}$</p>
 
-* $z_n \sim Categorical(0.3,0.2,0.5)\text{;}$
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.2,0.5)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1/Dataset5_Yobs.xlsx", sheet = "Sheet 1"))
-
+Y_obs <- data.frame(read_excel("Model1/SimCase5_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
 # number of individuals
 N <- dim(Y_obs)[1]
-
+  
 # number of time periods
 no_periods <- dim(Y_obs)[2]
-
+  
 # indexes t
 indexes_t <- 1:no_periods
-
+  
 # plot Y_obs
 plot(x = indexes_t,
      y = c(min(Y_obs),
@@ -357,7 +363,7 @@ plot(x = indexes_t,
            rep(min(Y_obs), times = no_periods-2)),
      type = "l",
      col = "white",
-     main = "Observed dependent variable",
+     main = "Observed dependent variable for simulation run 1",
      xlab = "t",
      ylab = "y_obs")
   
@@ -369,38 +375,34 @@ for (n in 1:N) {
         y = Y_obs[n,],
         col = "orange")
 }
-
+  
 box()
 ```
 
 
-## Simulation case 6
-Within each simulation run, for $n$ in $1,...,250$ and $t$ in $1,...,10$,
+# Visualizations model 2
+## Simulation case 8
+Within each simulation run, for $n$ in $1,...,50$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(1.5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n} - 0.1 \, \boldsymbol{x}^2_{n},0.75)\text{;}$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(2.5 + 0.5 \, \boldsymbol{x}_{n},0.5) \quad \text{if } z_n = 2\text{,}$
-
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(3.5 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 3\text{, and}$
-
-* $z_n \sim Categorical(0.3,0.2,0.5)\text{;}$
-
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model1/Dataset6_Yobs.xlsx", sheet = "Sheet 1"))
-
+Y_obs <- data.frame(read_excel("Model2/SimCase8_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
 # number of individuals
 N <- dim(Y_obs)[1]
-
+  
 # number of time periods
 no_periods <- dim(Y_obs)[2]
-
+  
 # indexes t
 indexes_t <- 1:no_periods
-
+  
 # plot Y_obs
 plot(x = indexes_t,
      y = c(min(Y_obs),
@@ -408,7 +410,7 @@ plot(x = indexes_t,
            rep(min(Y_obs), times = no_periods-2)),
      type = "l",
      col = "white",
-     main = "Observed dependent variable",
+     main = "Observed dependent variable for simulation run 1",
      xlab = "t",
      ylab = "y_obs")
   
@@ -420,32 +422,86 @@ for (n in 1:N) {
         y = Y_obs[n,],
         col = "orange")
 }
-
+  
 box()
 ```
 
 
+## Simulation case 9
+Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n} + 0.2 \, \boldsymbol{x}^2_{n},0.25) \quad \text{if } z^{sim}_n = 1$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n} - 0.1 \, \boldsymbol{x}^2_{n},0.75) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
+
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
+
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.7)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model2/SimCase9_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
+# number of individuals
+N <- dim(Y_obs)[1]
+  
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+  
+# indexes t
+indexes_t <- 1:no_periods
+  
+# plot Y_obs
+plot(x = indexes_t,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs[n,],
+        col = "orange")
+}
+  
+box()
+```
+
+
+# Visualizations model 3
 ## Simulation case 15
 Within each simulation run, for $n$ in $1,...,50$ and $t$ in $1,...,10$,
 
-$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n})\text{;}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n})\text{;}$</p>
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model3/Dataset15_Yobs.xlsx", sheet = "Sheet 1"))
-
+Y_obs <- data.frame(read_excel("Model3/SimCase15_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
 # number of individuals
 N <- dim(Y_obs)[1]
-
+  
 # number of time periods
 no_periods <- dim(Y_obs)[2]
-
+  
 # indexes t
 indexes_t <- 1:no_periods
-
+  
 # plot Y_obs
 plot(x = indexes_t,
      y = c(min(Y_obs),
@@ -453,7 +509,7 @@ plot(x = indexes_t,
            rep(min(Y_obs), times = no_periods-2)),
      type = "l",
      col = "white",
-     main = "Observed dependent variable",
+     main = "Observed dependent variable for simulation run 1",
      xlab = "t",
      ylab = "y_obs")
   
@@ -465,7 +521,7 @@ for (n in 1:N) {
         y = Y_obs[n,],
         col = "orange")
 }
-
+  
 box()
 ```
 
@@ -473,29 +529,33 @@ box()
 ## Simulation case 16
 Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 1$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 2\text{, and}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
 
-* $z_n \sim Categorical(0.3,0.7)\text{;}$
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.7)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
 # load observed dependent variable
-Y_obs <- data.frame(read_excel("Model3/Dataset16_Yobs.xlsx", sheet = "Sheet 1"))
-Y_obs_log <- data.frame(read_excel("Model3/Dataset16_Yobslog.xlsx", sheet = "Sheet 1"))
-
+Y_obs <- data.frame(read_excel("Model3/SimCase16_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+Y_obs_log <- data.frame(read_excel("Model3/SimCase16_Yobslog_SimRun1.xlsx",
+                                   sheet = "Sheet 1"))
+  
 # number of individuals
 N <- dim(Y_obs)[1]
-
+  
 # number of time periods
 no_periods <- dim(Y_obs)[2]
-
+  
 # indexes t
 indexes_t <- 1:no_periods
-
+  
 # plot Y_obs
 plot(x = indexes_t,
      y = c(min(Y_obs),
@@ -503,7 +563,7 @@ plot(x = indexes_t,
            rep(min(Y_obs), times = no_periods-2)),
      type = "l",
      col = "white",
-     main = "Observed dependent variable",
+     main = "Observed dependent variable for simulation run 1",
      xlab = "t",
      ylab = "y_obs")
   
@@ -515,9 +575,9 @@ for (n in 1:N) {
         y = Y_obs[n,],
         col = "orange")
 }
-
+  
 box()
-
+  
 # plot Y_obs_log
 plot(x = indexes_t,
      y = c(min(Y_obs_log),
@@ -525,10 +585,10 @@ plot(x = indexes_t,
            rep(min(Y_obs_log), times = no_periods-2)),
      type = "l",
      col = "white",
-     main = "Observed dependent variable on log scale",
+     main = "Observed dependent variable on log scale for simulation run 1",
      xlab = "t",
      ylab = "y_obs_log")
-  
+
 grid(nx = NA, ny = NULL)
 par(new = TRUE)
   
@@ -537,7 +597,7 @@ for (n in 1:N) {
         y = Y_obs_log[n,],
         col = "orange")
 }
-
+  
 box()
 ```
 
@@ -545,13 +605,15 @@ box()
 ## Simulation case 17
 Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(4.75 + 0.05 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(4.75 + 0.05 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 1$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 2\text{, and}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
 
-* $z_n \sim Categorical(0.3,0.7)\text{;}$
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.7)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
@@ -616,16 +678,94 @@ box()
 ```
 
 
+## Simulation case 17 version 2
+Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.05 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 1$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(4.75 + 0.075 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
+
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
+
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.7)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model3/SimCase17v2_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+Y_obs_log <- data.frame(read_excel("Model3/SimCase17v2_Yobslog_SimRun1.xlsx",
+                                   sheet = "Sheet 1"))
+  
+# number of individuals
+N <- dim(Y_obs)[1]
+  
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+  
+# indexes t
+indexes_t <- 1:no_periods
+  
+# plot Y_obs
+plot(x = indexes_t,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs[n,],
+        col = "orange")
+}
+  
+box()
+  
+# plot Y_obs_log
+plot(x = indexes_t,
+     y = c(min(Y_obs_log),
+           max(Y_obs_log),
+           rep(min(Y_obs_log), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable on log scale for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs_log")
+
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs_log[n,],
+        col = "orange")
+}
+  
+box()
+```
+
+
 ## Simulation case 18
 Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 1$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 - 0.2 \, \boldsymbol{x}_{n}) \quad \text{if } z_n = 2\text{, and}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 - 0.2 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
 
-* $z_n \sim Categorical(0.3,0.7)\text{;}$
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.7)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
@@ -690,23 +830,160 @@ box()
 ```
 
 
+## Simulation case 19
+Within each simulation run, for $n$ in $1,...,250$ and $t$ in $1,...,10$,
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(1 + 0.4 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 1$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(3 + 0.25 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 2$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim PoissonLog(5 + 0.1 \, \boldsymbol{x}_{n}) \quad \text{if } z^{sim}_n = 3\text{.}$</p>
+
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
+
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.2,0.5)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model3/SimCase19_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+Y_obs_log <- data.frame(read_excel("Model3/SimCase19_Yobslog_SimRun1.xlsx",
+                                   sheet = "Sheet 1"))
+  
+# number of individuals
+N <- dim(Y_obs)[1]
+  
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+  
+# indexes t
+indexes_t <- 1:no_periods
+  
+# plot Y_obs
+plot(x = indexes_t,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs[n,],
+        col = "orange")
+}
+  
+box()
+  
+# plot Y_obs_log
+plot(x = indexes_t,
+     y = c(min(Y_obs_log),
+           max(Y_obs_log),
+           rep(min(Y_obs_log), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable on log scale for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs_log")
+
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs_log[n,],
+        col = "orange")
+}
+  
+box()
+```
+
+
+# Visualizations model 5
 ## Simulation case 29
 Within each simulation run, for $n$ in $1,...,200$ and $t$ in $1,...,10$,
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z_n = 1\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n,t} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z^{sim}_{n,t} = 1$</p>
 
-* $\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z_n = 2\text{,}$
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n,t} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z^{sim}_{n,t} = 2\text{.}$</p>
 
-* $z_{n,t} \sim Categorical(0.3,0.7) \quad \text{for } t = 1\text{, and}$
+$\boldsymbol{Z}^{sim}$ is a $N \times T$ matrix indicating the simulated class memberships, with
 
-* $z_{n,t} \sim Categorical(\boldsymbol{\psi}_{z_{n,t-1}}) \quad \text{for } t > 1\text{;}$
+<p style="text-align: center;">$z^{sim}_{n,t} \sim Categorical(0.3,0.7) \quad \text{for } t = 1$</p>
 
-where $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$, $\boldsymbol{\psi}_1 = (0.99,0.01)$, and $\boldsymbol{\psi}_2 = (0.05,0.95)$
+<p style="text-align: center;">$z^{sim}_{n,t} \sim Categorical(\boldsymbol{\psi}^{sim}_{z_{n,t-1}}) \quad \text{for } t > 1\text{.}$</p>
+
+$\boldsymbol{\Psi}^{sim}$ is a simulated $C \times C$ transition matrix, with $\boldsymbol{\psi}^{sim}_1 = (0.99,0.01)$ and $\boldsymbol{\psi}^{sim}_2 = (0.05,0.95)$. Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 
 
 ```{r}
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("Model5/SimCase29_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
+# number of individuals
+N <- dim(Y_obs)[1]
+  
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+  
+# indexes t
+indexes_t <- 1:no_periods
+  
+# plot Y_obs
+plot(x = indexes_t,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs[n,],
+        col = "orange")
+}
+  
+box()
+```
+
+
+## Simulation case 32
+Within each simulation run, for $n$ in $1,...,250$ and $t$ in $1,...,10$,
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n,t} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n},0.25) \quad \text{if } z^{sim}_{n,t} = 1$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n,t} \sim Normal(2.5 + 0.5 \, \boldsymbol{x}_{n},0.5) \quad \text{if } z^{sim}_{n,t} = 2$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n,t} \sim Normal(10 + 1 \, \boldsymbol{x}_{n},0.75) \quad \text{if } z^{sim}_{n,t} = 3\text{.}$</p>
+
+$\boldsymbol{Z}^{sim}$ is a $N \times T$ matrix indicating the simulated class memberships, with
+
+<p style="text-align: center;">$z^{sim}_{n,t} \sim Categorical(0.3,0.2,0.5) \quad \text{for } t = 1$</p>
+
+<p style="text-align: center;">$z^{sim}_{n,t} \sim Categorical(\boldsymbol{\psi}^{sim}_{z_{n,t-1}}) \quad \text{for } t > 1\text{.}$</p>
+
+$\boldsymbol{\Psi}^{sim}$ is a simulated $C \times C$ transition matrix, with $\boldsymbol{\psi}^{sim}_1 = (0.96,0.01,0.03)$, $\boldsymbol{\psi}^{sim}_2 = (0.01,0.97,0.02)$, and $\boldsymbol{\psi}^{sim}_3 = (0.02,0.03,0.95)$. Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model5/SimCase32_Yobs_SimRun1.xlsx",
                                sheet = "Sheet 1"))
   
 # number of individuals
