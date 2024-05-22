@@ -136,12 +136,12 @@ beta_1_sim <- c(0.4,-0.2)
 
 
 # estimated data ####
-# used to load model fit
-paste_part_1 <- "SimulationStudyResults/Model3/"
-paste_part_2 <- "Model3TwoClasses_SimCase18_Yobs_SimRun"
-
 # load model fit
-m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, "_Fit.rds", sep = ""))
+m_fit <- readRDS(paste(
+  "SimulationStudyResults/Model3/Model3TwoClasses_SimCase18_Yobs_SimRun",
+  r,
+  "_Fit.rds",
+  sep = ""))
 
 # extract estimated data
 m_fit_data <- rstan::extract(m_fit)
