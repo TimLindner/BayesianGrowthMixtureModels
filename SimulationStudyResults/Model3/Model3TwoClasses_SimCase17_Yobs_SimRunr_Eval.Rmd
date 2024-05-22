@@ -78,7 +78,7 @@ $\beta_{1,c} < \beta_{1,c+1}$
 
 * Number of sampling iterations per chain: $1000$
 
-* Initial values for $\beta_{0,c}$ and $\beta_{1,c}$: for every chain, the posterior means for $\beta_{0,c}$ and $\beta_{1,c}$ estimated via model 1 with identically distributed errors; using the simulation run 1 data; the posterior means for $\boldsymbol{\beta}_1$ are sorted in ascending order so that the initial values satisfy the labeling restriction; thus, the order of the posterior means for $\boldsymbol{\beta}_0$ is adjusted accordingly
+* Initial values for $\beta_{0,c}$ and $\beta_{1,c}$: for every chain, the posterior means for $\beta_{0,c}$ and $\beta_{1,c}$ estimated via model 1 with identically distributed errors; using the simulation run 4 data; the posterior means for $\boldsymbol{\beta}_1$ are sorted in ascending order so that the initial values satisfy the labeling restriction; thus, the order of the posterior means for $\boldsymbol{\beta}_0$ is adjusted accordingly
 
 * Initial values for all parameters except $\beta_{0,c}$ and $\beta_{1,c}$: random initial values
 
