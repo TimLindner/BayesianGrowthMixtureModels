@@ -64,13 +64,13 @@ $\beta_{1,c} < \beta_{1,c+1}$
 # Hyperparameters
 * $\mu_{\beta_{0,c}} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
 
-* $\sigma_{\beta_{0,c}} = 10$
+* $\sigma_{\beta_{0,c}} = 5$
 
 * $\mu_{\beta_{1,c}} = 0$
 
-* $\sigma_{\beta_{1,c}} = 0.1$
+* $\sigma_{\beta_{1,c}} = 0.05$
 
-* $\sigma_{\sigma_c} = 0.1$
+* $\sigma_{\sigma_c} = 0.05$
 
 
 # NUTS parameters
@@ -149,11 +149,12 @@ beta_1_sim <- c(0.05,0.1)
 
 # estimated data ####
 # used to load model fit
-paste_part_1 <- "SimulationStudyResults/Model1/"
-paste_part_2 <- "Model1TwoClasses_IdentErr_SimCase17_Yobslog_SimRun"
+load_paste_part_1 <- "SimulationStudyResults/Model1/"
+load_paste_part_2 <- "Model1TwoClasses_IdentErr_SimCase17_Yobslog_SimRun"
 
 # load model fit
-m_fit <- readRDS(paste(paste_part_1, paste_part_2, r, "_Fit.rds", sep = ""))
+m_fit <- readRDS(paste(
+  load_paste_part_1, load_paste_part_2, r, "_Fit.rds", sep = ""))
 
 # extract estimated data
 m_fit_data <- rstan::extract(m_fit)
