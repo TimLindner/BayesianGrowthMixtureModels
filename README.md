@@ -4,7 +4,7 @@
 - [ ] In the introduction, indicate what is the goal of this repository
 - [ ] Include all R packages used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
-- [ ] Simulation data (simulation cases 16, 17, and 17v2) for Normal vs Poisson
+- [ ] Simulation data (simulation cases 16, 17, and 17 v2) for Normal vs Poisson
 - [ ] Comparison strategy for Normal vs Poisson (model comparison: Bayes factor, RMSE 90% CI)
 - [ ] Quadratic trend components for Normal model with three classes (simulation case 12)
 - [ ] Poisson model with three classes (simulation case 19)
