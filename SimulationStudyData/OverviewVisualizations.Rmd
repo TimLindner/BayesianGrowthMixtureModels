@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # required files from SimulationStudyData/Model2 folder:
 # SimCase8_Yobs_SimRun1.xlsx
 # SimCase9_Yobs_SimRun1.xlsx
+# SimCase12_Yobs_SimRun1.xlsx
 
 # required files from SimulationStudyData/Model3 folder:
 # SimCase15_Yobs_SimRun1.xlsx
@@ -98,18 +99,22 @@ flextable(df)
 ```{r}
 # simulation case
 sim_case <- c("8",
-              "9")
+              "9",
+              "12")
 
 # number of latent classes
 C <- c("baseline",
-       "2")
+       "2",
+       "3")
 
 # description
-descrip <- c("",
+descrip <- c("-",
+             "classes do not overlap",
              "classes do not overlap")
 
 # number of simulation runs
 R <- c(5,
+       5,
        5)
 
 # table
@@ -444,6 +449,60 @@ Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
 ```{r}
 # load observed dependent variable
 Y_obs <- data.frame(read_excel("Model2/SimCase9_Yobs_SimRun1.xlsx",
+                               sheet = "Sheet 1"))
+  
+# number of individuals
+N <- dim(Y_obs)[1]
+  
+# number of time periods
+no_periods <- dim(Y_obs)[2]
+  
+# indexes t
+indexes_t <- 1:no_periods
+  
+# plot Y_obs
+plot(x = indexes_t,
+     y = c(min(Y_obs),
+           max(Y_obs),
+           rep(min(Y_obs), times = no_periods-2)),
+     type = "l",
+     col = "white",
+     main = "Observed dependent variable for simulation run 1",
+     xlab = "t",
+     ylab = "y_obs")
+  
+grid(nx = NA, ny = NULL)
+par(new = TRUE)
+  
+for (n in 1:N) {
+  lines(x = indexes_t,
+        y = Y_obs[n,],
+        col = "orange")
+}
+  
+box()
+```
+
+
+## Simulation case 12
+Within each simulation run, for $n$ in $1,...,250$ and $t$ in $1,...,10$,
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(-5 - 0.5 \, \boldsymbol{x}_{n} + 0.2 \, \boldsymbol{x}^2_{n},0.25) \quad \text{if } z^{sim}_n = 1$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(2.5 + 0.5 \, \boldsymbol{x}_{n} - 0.2 \, \boldsymbol{x}^2_{n},0.5) \quad \text{if } z^{sim}_n = 1$</p>
+
+<p style="text-align: center;">$\boldsymbol{y}^{obs}_{n} \sim Normal(10 + 1 \, \boldsymbol{x}_{n} - 0.1 \, \boldsymbol{x}^2_{n},0.75) \quad \text{if } z^{sim}_n = 2\text{.}$</p>
+
+$\boldsymbol{z}^{sim}$ is a column vector of size $N$ indicating the simulated class memberships, with
+
+<p style="text-align: center;">$z^{sim}_n \sim Categorical(0.3,0.2,0.5)\text{.}$</p>
+
+Furthermore, $\boldsymbol{x}_{n} = (0,1,2,3,4,5,6,7,8,9)$.
+
+
+```{r}
+# load observed dependent variable
+Y_obs <- data.frame(read_excel("Model2/SimCase12_Yobs_SimRun1.xlsx",
                                sheet = "Sheet 1"))
   
 # number of individuals
