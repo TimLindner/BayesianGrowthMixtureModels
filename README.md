@@ -5,11 +5,11 @@
 - [ ] Include all R packages used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
 - [ ] Simulation data (simulation cases 16, 17, and 17 v2) for Normal vs Poisson
-- [ ] Comparison strategy for Normal vs Poisson (model comparison: Bayes factor, RMSE 90% CI)
-- [ ] Quadratic trend components for Normal model with three classes (simulation case 12)
-- [ ] Poisson model with three classes (simulation case 19)
+- [ ] Comparison strategy for Normal vs Poisson (model comparison metrics: Bayes factor, RMSE 90% CI)
+- [ ] Quadratic trend components for Poisson model with three latent classes
+- [ ] HMM with three latent classes
 - [ ] Softmax regressions (PCAs might be required before)
-- [ ] Time-varying transition matrices
+- [ ] Time-varying transition matrices for hidden Markov chains
 
 ### Introduction
 Hi there :relaxed: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
