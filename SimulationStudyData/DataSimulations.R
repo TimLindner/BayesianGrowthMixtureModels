@@ -254,7 +254,7 @@ no_periods <- 10
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# X squared
+# square X
 X_squared <- X^2  # vectorization over n and t
 
 # simulated constant
@@ -309,7 +309,7 @@ no_periods <- 10
 time_periods <- 0:(no_periods-1)
 X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
 
-# X squared
+# square X
 X_squared <- X^2  # vectorization over n and t
 
 # simulated mixture proportions
@@ -360,6 +360,72 @@ for (r in 1:R) {
   # save Y_obs (transform to data frame beforehand)
   write.xlsx(data.frame(Y_obs),
              paste("Model2/SimCase9_Yobs_SimRun", r, ".xlsx", sep = ""))
+  
+}
+
+
+# simulation case 12 ####
+# number of individuals
+N <- 250
+
+# number of time periods
+no_periods <- 10
+
+# explanatory variables
+time_periods <- 0:(no_periods-1)
+X <- matrix(data = time_periods, nrow = N, ncol = no_periods, byrow = TRUE)
+
+# square X
+X_squared <- X^2  # vectorization over n and t
+
+# simulated mixture proportions
+lambda_sim <- c(0.3,0.2,0.5)
+
+# simulated constants
+beta_0_sim <- c(-5,-2.5,10)
+
+# simulated linear trend components
+beta_1_sim <- c(-0.5,0.5,1)
+
+# simulated quadratic trend components
+beta_2_sim <- c(0.15,0.05,-0.1)
+
+# simulated standard deviations for Y_obs Normal distributions
+sigma_sim <- c(0.25,0.5,0.75)
+
+# simulated means for Y_obs Normal distributions
+M_sim <- matrix(data = 0, nrow = N, ncol = no_periods)
+
+# observed dependent variable
+Y_obs <- matrix(data = 0, nrow = N, ncol = no_periods)
+
+# number of simulation runs
+R <- 5
+
+# simulation runs
+for (r in 1:R) {
+  
+  # simulated class memberships
+  z_sim <- rcat(n = N, prob = lambda_sim)  # vectorization over n
+  
+  # save Z_sim (transform to data frame beforehand)
+  write.xlsx(data.frame(z_sim),
+             paste("Model2/SimCase12_zsim_SimRun", r, ".xlsx", sep = ""))
+  
+  # M_sim
+  M_sim <-
+    beta_0_sim[z_sim] + beta_1_sim[z_sim] * X + beta_2_sim[z_sim] * X_squared
+  # vectorization over n and t
+  
+  # Y_obs
+  for (t in 1:no_periods) {
+    Y_obs[,t] <- rnorm(n = N, mean = M_sim[,t], sd = sigma_sim[z_sim])
+    # vectorization over n
+  }
+  
+  # save Y_obs (transform to data frame beforehand)
+  write.xlsx(data.frame(Y_obs),
+             paste("Model2/SimCase12_Yobs_SimRun", r, ".xlsx", sep = ""))
   
 }
 
