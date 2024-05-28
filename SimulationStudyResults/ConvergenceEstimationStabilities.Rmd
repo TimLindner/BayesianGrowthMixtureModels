@@ -68,8 +68,8 @@ Y_obs <- c("Yobs",
 # convergence stability
 conv_stab <- c("5 / 5",
                "4 / 5",  # convergence warnings for simulation run 3
-               "1 / 5",
-               # convergence warnings for simulation runs 1, 2, 4, and 5
+               "2 / 5",
+               # convergence warnings for simulation runs 1, 2, and 3
                
                "2 / 5",  # convergence warnings for simulation runs 3, 4, and 5
                "1 / 5",
@@ -83,7 +83,7 @@ conv_stab <- c("5 / 5",
 # estimation stability 
 est_stab <- c("5 / 5",
               "4 / 5",
-              "1 / 5",
+              "2 / 5",
               "2 / 5",
               "1 / 5",
               "5 / 5",
