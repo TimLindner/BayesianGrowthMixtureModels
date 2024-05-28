@@ -5,7 +5,7 @@
 - [ ] Include all R packages used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
 - [ ] Simulation data (simulation cases 16, 17, and 17 v2) for Normal vs Poisson
-- [ ] Comparison strategy for Normal vs Poisson (model comparison metrics: Bayes factor, RMSE 90% CI)
+- [ ] Comparison strategy for Normal vs Poisson (model comparison metrics: Bayes factor, overall RMSE 90% credible interval incl. mean, and time-dependent RMSE 90% CI incl. mean)
 - [ ] Quadratic trend components for Poisson model with three latent classes
 - [ ] HMM with three latent classes
 - [ ] Softmax regressions (PCAs might be required before)
