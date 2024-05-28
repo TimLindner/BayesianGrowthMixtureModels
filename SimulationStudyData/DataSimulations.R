@@ -180,7 +180,7 @@ for (r in 1:R) {
 
 # simulation case 5 ####
 # number of individuals
-N <- 200
+N <- 250
 
 # number of time periods
 no_periods <- 10
