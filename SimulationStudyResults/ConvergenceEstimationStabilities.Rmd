@@ -13,7 +13,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ```{r, include = FALSE}
-# preparation ####
 # set working directory
 setwd("C:/Users/Diiim/Documents/GitHub/BayesianGMMs")
 
@@ -33,77 +32,135 @@ Convergence and estimation stability are measured by the number of successful NU
 # model
 m <- c("baseline",
        "two classes",
+       "three classes",
        "two classes",
        "two classes",
-       "three classes",
-       "three classes",
-       "three classes",
-       "two classes")
+       "two classes",
+       "three classes")
 
 # model_modification
-m_modification <- c("",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "ident. err.",
-                    "",
-                    "")
+m_mod <- c("-",
+           "-",
+           "-",
+           "identically distributed errors",
+           "identically distributed errors",
+           "identically distributed errors",
+           "identically distributed errors")
 
-# dataset
-ds <- c("1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "6",
-        "16")
+# simulation case
+sim_case <- c("1",
+              "2",
+              "5",
+              "16",
+              "17",
+              "18",
+              "19")
 
 # observed_dependent_variable
 Y_obs <- c("Yobs",
            "Yobs",
            "Yobs",
-           "Yobs",
-           "Yobs",
-           "Yobs",
-           "Yobs",
+           "Yobslog",
+           "Yobslog",
+           "Yobslog",
            "Yobslog")
 
 # convergence stability
-conv_stability <- c("5 / 5",
-                    "4 / 5",
-                    "2 / 5",
-                    "4 / 5",
-                    "2 / 5",
-                    "4 / 5",
-                    "5 / 5",
-                    "5 / 5")
+conv_stab <- c("5 / 5",
+               "4 / 5",  # convergence warnings for simulation run 3
+               "1 / 5",
+               # convergence warnings for simulation runs 1, 2, 4, and 5
+               
+               "2 / 5",  # convergence warnings for simulation runs 3, 4, and 5
+               "1 / 5",
+               # convergence warnings for simulation runs 1, 2, 3, and 5
+               
+               "5 / 5",
+               "1 / 5"
+               # convergence warnings for simulation runs 1, 2, 4, and 5
+               )
 
 # estimation stability 
-est_stability <- c("5 / 5",
-                   "4 / 5",
-                   "2 / 5",
-                   "4 / 5",
-                   "2 / 5",
-                   "4 / 5",
-                   "5 / 5",
-                   "5 / 5")
+est_stab <- c("5 / 5",
+              "4 / 5",
+              "1 / 5",
+              "2 / 5",
+              "1 / 5",
+              "5 / 5",
+              "1 / 5")
 
+# table
 df <- data.frame(m,
-                 m_modification,
-                 ds,
+                 m_mod,
+                 sim_case,
                  Y_obs,
-                 conv_stability,
-                 est_stability)
+                 conv_stab,
+                 est_stab)
 
+# column names for table
 names(df) <- c("Model",
                "Model modification",
-               "Dataset",
+               "Simulation case",
                "Observed dependent variable",
                "Convergence stability",
                "Estimation stability")
 
+# print table
+flextable(df)
+```
+
+
+# Model 2
+```{r}
+# model
+m <- c("baseline",
+       "two classes",
+       "three classes")
+
+# model_modification
+m_mod <- c("-",
+           "-",
+           "-")
+
+# dataset
+sim_case <- c("8",
+              "9",
+              "12")
+
+# observed_dependent_variable
+Y_obs <- c("Yobs",
+           "Yobs",
+           "Yobs")
+
+# convergence stability
+conv_stab <- c("5 / 5",
+               "4 / 5",  # convergence warnings for simulation run 1
+               "2 / 5"
+               # convergence warnings for simulation runs 2, 3, and 4
+               )
+
+# estimation stability
+est_stab <- c("5 / 5",
+              "4 / 5",
+              "2 / 5")
+
+# table
+df <- data.frame(m,
+                 m_mod,
+                 sim_case,
+                 Y_obs,
+                 conv_stab,
+                 est_stab)
+
+# column names for table
+names(df) <- c("Model",
+               "Model modification",
+               "Simulation case",
+               "Observed dependent variable",
+               "Convergence stability",
+               "Estimation stability")
+
+# print table
 flextable(df)
 ```
 
@@ -112,42 +169,110 @@ flextable(df)
 ```{r}
 # model
 m <- c("baseline",
-       "two classes")
+       "two classes",
+       "two classes",
+       "two classes",
+       "three classes")
 
 # model_modification
-m_modification <- c("",
-                    "")
+m_mod <- c("-",
+           "-",
+           "-",
+           "-",
+           "-")
 
 # dataset
-ds <- c("15",
-        "16")
+sim_case <- c("15",
+              "16",
+              "17",
+              "18",
+              "19")
+
+# observed_dependent_variable
+Y_obs <- c("Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobs",
+           "Yobs")
+
+# convergence stability
+conv_stab <- c("5 / 5",
+               "5 / 5",
+               "5 / 5",
+               "5 / 5",
+               "5 / 5")
+
+# estimation stability
+est_stab <- c("5 / 5",
+              "5 / 5",
+              "5 / 5",
+              "5 / 5",
+              "5 / 5")
+
+# table
+df <- data.frame(m,
+                 m_mod,
+                 sim_case,
+                 Y_obs,
+                 conv_stab,
+                 est_stab)
+
+# column names for table
+names(df) <- c("Model",
+               "Model modification",
+               "Simulation case",
+               "Observed dependent variable",
+               "Convergence stability",
+               "Estimation stability")
+
+# print table
+flextable(df)
+```
+
+
+# Model 5
+```{r}
+# model
+m <- c("two classes",
+       "three classes")
+
+# model_modification
+m_mod <- c("-",
+           "-")
+
+# dataset
+sim_case <- c("29",
+              "32")
 
 # observed_dependent_variable
 Y_obs <- c("Yobs",
            "Yobs")
 
 # convergence stability
-conv_stability <- c("5 / 5",
-                    "2 / 2")
+conv_stab <- c("5 / 5",
+               "... / ...")
 
 # estimation stability
-est_stability <- c("5 / 5",
-                   "2 / 2")
+est_stab <- c("5 / 5",
+              "... / ...")
 
+# table
 df <- data.frame(m,
-                 m_modification,
-                 ds,
+                 m_mod,
+                 sim_case,
                  Y_obs,
-                 conv_stability,
-                 est_stability)
+                 conv_stab,
+                 est_stab)
 
+# column names for table
 names(df) <- c("Model",
                "Model modification",
-               "Dataset",
+               "Simulation case",
                "Observed dependent variable",
                "Convergence stability",
                "Estimation stability")
 
+# print table
 flextable(df)
 ```
 
