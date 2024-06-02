@@ -1,3 +1,6 @@
+### Introduction
+Hi there :relaxed: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
+
 > Please note that this repository is work in progress :hammer:
 
 ### To-do checklist
@@ -8,9 +11,6 @@
 - [ ] Comparison strategy for Normal vs Poisson (model comparison metrics per simulation run: Bayes factor (using bridgesampling R package) and root mean squared error (over all sampling iterations))
 - [ ] Quadratic trend components for Poisson model with three latent classes
 - [ ] Four latent classes
-
-### Introduction
-Hi there :relaxed: My name is Tim, and this repository contains my work on Bayesian growth mixture models (or GMMs for short) including hidden Markov chains and softmax regressions for representing latent class memberships. The work has been developed in cooperation with Dr. Nalan Basturk as part of my research assistantance in econometrics at Maastricht University.
 
 ### Work developed
 Placeholder
