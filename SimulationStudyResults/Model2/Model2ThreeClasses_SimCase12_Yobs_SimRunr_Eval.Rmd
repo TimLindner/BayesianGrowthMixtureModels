@@ -66,17 +66,17 @@ $\beta_{0,c} < \beta_{0,c+1}$
 # Hyperparameters
 * $\mu_{\beta_{0,c}} = \frac{1}{N} \displaystyle\sum_{n=1}^{N} y^{obs}_{n,t=1}$
 
-* $\sigma_{\beta_{0,c}} = 10$
+* $\sigma_{\beta_{0,c}} = 5$
 
 * $\mu_{\beta_{1,c}} = 0$
 
-* $\sigma_{\beta_{1,c}} = 1$
+* $\sigma_{\beta_{1,c}} = 0.5$
 
 * $\mu_{\beta_{2,c}} = 0$
 
-* $\sigma_{\beta_{2,c}} = 1$
+* $\sigma_{\beta_{2,c}} = 0.5$
 
-* $\sigma_{\sigma_c} = 1$
+* $\sigma_{\sigma_c} = 0.5$
 
 
 # NUTS parameters
