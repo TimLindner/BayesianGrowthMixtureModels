@@ -7,8 +7,10 @@ Hi there :relaxed: My name is Tim, and this repository contains my work on Bayes
 - [ ] In the introduction, indicate what is the goal of this repository
 - [ ] Include all R packages used
 - [ ] Create a test to check for newer versions of packages and bonus to have it in a CI
-- [ ] Normal vs Poisson simulation cases 16, 17, and 17 v2
-- [ ] Quadratic trend components for Poisson model with three latent classes
+- [ ] Normal vs Poisson
+- [ ] Quadratic trend components for Poisson model
+- [ ] Quadratic trend components for hidden Markov chains
+- [ ] Softmax regressions
 - [ ] Four latent classes
 
 ### Work developed
