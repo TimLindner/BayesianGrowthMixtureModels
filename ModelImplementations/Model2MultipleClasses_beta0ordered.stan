@@ -116,7 +116,7 @@ transformed parameters {
 model {
   
   // prior for lambda
-  lambda ~ dirichlet(alpha_lambda);  // vectorization over c
+  lambda ~ dirichlet(alpha_lambda);
   
   // prior for beta_0
   beta_0 ~ normal(mu_beta_0, sigma_beta_0);  // vectorization over c
