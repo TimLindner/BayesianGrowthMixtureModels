@@ -1,4 +1,4 @@
-### Please note that this repository is work in progress :hammer:
+### Please note that this repository is work in progress :exclamation:
 
 ### To-do checklist
 - [ ] In the introduction, indicate what is the goal of this repository
